@@ -1,27 +1,39 @@
-import { StickyContainer, Sticky } from 'react-sticky';
+import theme from '../components/theme'
 
 export default () => {
 
     return (
-        <StickyContainer style={{backgroundColor: 'red',}}>
+        <div>
+            <div >
+                SELABasdfasdfa
+            </div>
+            <style jsx>{`
+                div{
+                    background: linear-gradient(to right, #000 28%,#000 0%,#fff 0%,#fff 72%);
+                    color:green
+               }
+            `}
+            </style>
+            <style global jsx>{`
+                body {
+                    background-color: red;
+                }
+            `}</style>
+        </div>
 
-            <Sticky >
-                {({
-                    style,
-                    // the following are also available but unused in this example
-                    isSticky,
-                    wasSticky,
-                    distanceFromTop,
-                    distanceFromBottom,
-                    calculatedHeight
-                }) => (
-                        <header style={style}>
-                            <h1>hello</h1>
-                        </header>
-                    )}
-            </Sticky>
-           <p>asdfasdfasdf</p>
-           <p>asdfasdfasdf</p>
-        </StickyContainer>
-    );
+    )
 }
+
+
+// <div style={{ width: "100%", height: 85, position: 'relative', flexDirection: 'row' }}>
+
+//             <div style={{ height: "0%", width: "100%", backgroundColor: 'red', }}>
+//             </div>
+//             <div style={{ height: "100%"   , width: "100%", backgroundColor: 'blue', }}>
+//             </div>
+
+
+//         <div style={{ position: 'absolute', top: 0 }}>
+//             <h1>asdfsadfasdf</h1>
+//         </div>
+//     </div>

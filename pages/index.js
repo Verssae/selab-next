@@ -7,16 +7,17 @@ const TestElement = ({ title, content, backgroundColor, callback }) => {
 
     const elementRef = useRef()
     useScrollPosition(({ currPos }) => {
-        
+
         if (currPos.y <= 85 && currPos.y >= 0) {
             console.log(title)
+            callback(backgroundColor, currPos.y / 85 * 100)
         }
-        callback(backgroundColor, currPos.y / 85 * 100)
+
     }, [], elementRef)
 
     return (
 
-        <div ref={elementRef} style={{ ...styles.element, backgroundColor, }}>
+        <div className="asdfsafd" ref={elementRef} style={{ ...styles.element, backgroundColor, }}>
 
             <p style={{ flex: 1 }}>{title}</p>
             <p style={{ flex: 1 }}>{content}</p>
@@ -28,29 +29,35 @@ const TestElement = ({ title, content, backgroundColor, callback }) => {
 
 const Index = (props) => {
     const { texts } = props
-    const [colorConfig, setColorConfig] = useState({
+    const [backgroundState, setBackgroundState] = useState({
+        lastColor: theme.COLORS.BG1,
         currentColor: theme.COLORS.BG1,
-        nextColor: theme.COLORS.BG1,
-        amount: 0,
+        amount: "100%",
     })
+    
 
 
 
-    const changeBackgroundColor = ({ nextColor, amount }) => {
-        console.log(nextColor)
-        if (amount <= 0) {
-            setColorConfig(nextColor)
-        }
+    const changeBackgroundColor = (bgcolor, amount) => {
+        console.log(`${bgcolor}, ${amount}`)
+        const {currentColor, lastColor} = backgroundState
+        setBackgroundState({
+            lastColor: currentColor,
+            currentColor: bgcolor,
+            amount,
+        })
     }
 
     
-    const {currentColor, nextColor, amount} = colorConfig
-    const background = `linear-gradient(${currentColor} ${amount}%, ${nextColor} ${100 - amount}%)`
+
+
+    const {currentColor, lastColor, amount} = backgroundState
+    const background = `linear-gradient(${lastColor} ${amount}%,${lastColor} 0%,${currentColor} 0%, ${currentColor} ${100 - amount}%)`
 
     return (
         <div style={styles.container}>
-            <Header  background={background}/>
-            {texts.map((text, index) => <TestElement key={index} {...text} callback={changeBackgroundColor}/>)}
+            <Header background={background} />
+            {texts.map((text, index) => <TestElement key={index} {...text} callback={changeBackgroundColor} />)}
             <style global jsx>{`
             body {
                 margin: 0;
@@ -60,8 +67,7 @@ const Index = (props) => {
         </div>
     )
 }
-
-const Header = ({background}) => {
+const Header = ({ background }) => {
     return (
         <header style={{ ...styles.header, background }}>
             <h1>SELab</h1>
@@ -100,6 +106,11 @@ Index.getInitialProps = async ({ req }) => {
     const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
     console.log(userAgent)
     const texts = [
+        { title: "This is Test1", content: "Hello World!", backgroundColor: theme.COLORS.BG1 },
+        { title: "This is Test2", content: "Hello World!", backgroundColor: theme.COLORS.BG2 },
+        { title: "This is Test3", content: "Hello World!", backgroundColor: theme.COLORS.BG1 },
+        { title: "This is Test4", content: "Hello World!", backgroundColor: theme.COLORS.BG2 },
+        { title: "This is Test5", content: "Hello World!", backgroundColor: theme.COLORS.BG1 },
         { title: "This is Test1", content: "Hello World!", backgroundColor: theme.COLORS.BG1 },
         { title: "This is Test2", content: "Hello World!", backgroundColor: theme.COLORS.BG2 },
         { title: "This is Test3", content: "Hello World!", backgroundColor: theme.COLORS.BG1 },
