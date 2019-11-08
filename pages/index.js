@@ -1,23 +1,23 @@
 import Link from 'next/link'
 import theme from '../components/theme'
 import React, { useState, useRef, useEffect, forwardRef, useLayoutEffect } from 'react'
-import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+import { useScrollPosition } from '../components/useScrollPosition'
 
 const TestElement = ({ title, content, backgroundColor, callback }) => {
 
     const elementRef = useRef()
     useScrollPosition(({ currPos }) => {
-
-        if (currPos.y <= 85 && currPos.y >= 0) {
+        const ratio = currPos.y / 80 * 100
+        if (ratio >= 0 && ratio <= 100) {
             console.log(title)
-            callback(backgroundColor, currPos.y / 85 * 100)
+            callback(backgroundColor, ratio)
         }
 
     }, [], elementRef)
 
     return (
 
-        <div className="asdfsafd" ref={elementRef} style={{ ...styles.element, backgroundColor, }}>
+        <div ref={elementRef} style={{ ...styles.element, backgroundColor, }}>
 
             <p style={{ flex: 1 }}>{title}</p>
             <p style={{ flex: 1 }}>{content}</p>
@@ -35,6 +35,11 @@ const Index = (props) => {
         amount: "100%",
     })
     
+    useScrollPosition(({prevPos, currPos}) => {
+        // console.log(`${prevPos.y}->${currPos.y}`)
+        const isDown = prevPos.y - currPos.y > 0
+        console.log(isDown)
+    })
 
 
 
@@ -56,22 +61,36 @@ const Index = (props) => {
 
     return (
         <div style={styles.container}>
-            <Header background={background} />
+            <Header background={background} amount={amount} />
             {texts.map((text, index) => <TestElement key={index} {...text} callback={changeBackgroundColor} />)}
             <style global jsx>{`
             body {
                 margin: 0;
                 padding: 0;
+                background-color: black;
             }
+
             `}</style>
         </div>
     )
 }
-const Header = ({ background }) => {
+const Header = ({ background, amount }) => {
+
     return (
-        <header style={{ ...styles.header, background }}>
-            <h1>SELab</h1>
-            <p>{`This is SELAB's main page`}</p>
+        <header style={{ ...styles.header }}>
+            <h1 style={{margin: 0}}>SELab</h1>
+            <p>This is SELAB's main page</p>
+            {/* <style jsx>{`
+                p{
+                    background: linear-gradient( #000 ${amount}%,#000 0%,#fff 0%,#fff ${100-amount}%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    whites-space: nowrap;
+                    font-size: 16px;
+                    
+               }
+            `}
+            </style> */}
         </header>
     )
 }
@@ -82,10 +101,12 @@ const styles = {
         backgroundColor: theme.COLORS.BG1,
         ...theme.FONTS,
         color: "white",
+        margin: 0,
+        padding: 0,
     },
     element: {
         flex: 1,
-        height: '30vh',
+        height: '50vh',
         backgroundColor: 'white',
         color: 'black',
         textAlign: "center",
@@ -96,9 +117,8 @@ const styles = {
         position: 'sticky',
         top: 0,
         width: "100%",
-        background: 'linear-gradient( #FFC0CB 50%, #00FFFF 50%)',
-        margin: 0,
-
+        marginTop: 0,
+        overflow: 'hidden'
     }
 }
 

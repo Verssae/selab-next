@@ -4,19 +4,22 @@ export default () => {
 
     return (
         <div>
-            <div >
+            <p >
                 SELABasdfasdfa
-            </div>
+            </p>
             <style jsx>{`
-                div{
-                    background: linear-gradient(to right, #000 28%,#000 0%,#fff 0%,#fff 72%);
-                    color:green
+                p{
+                    background: linear-gradient( #000 40%,#000 0%,#fff 0%,#fff 60%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    whites-space: nowrap;
+                    
                }
             `}
             </style>
             <style global jsx>{`
                 body {
-                    background-color: red;
+                    background-color: grey;
                 }
             `}</style>
         </div>

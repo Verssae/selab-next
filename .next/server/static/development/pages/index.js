@@ -116,6 +116,107 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./components/useIsomorphicLayoutEffect.jsx":
+/*!**************************************************!*\
+  !*** ./components/useIsomorphicLayoutEffect.jsx ***!
+  \**************************************************/
+/*! exports provided: useIsomorphicLayoutEffect */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useIsomorphicLayoutEffect", function() { return useIsomorphicLayoutEffect; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const useIsomorphicLayoutEffect = false ? undefined : react__WEBPACK_IMPORTED_MODULE_0__["useEffect"];
+
+/***/ }),
+
+/***/ "./components/useScrollPosition.jsx":
+/*!******************************************!*\
+  !*** ./components/useScrollPosition.jsx ***!
+  \******************************************/
+/*! exports provided: useScrollPosition */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useScrollPosition", function() { return useScrollPosition; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useIsomorphicLayoutEffect */ "./components/useIsomorphicLayoutEffect.jsx");
+/* eslint-disable react-hooks/exhaustive-deps */
+
+
+const isBrowser = false;
+
+function getScrollPosition({
+  element,
+  useWindow
+}) {
+  if (!isBrowser) return {
+    x: 0,
+    y: 0
+  };
+  const target = element ? element.current : document.body;
+  const position = target.getBoundingClientRect();
+  return useWindow ? {
+    x: window.scrollX,
+    y: window.scrollY
+  } : {
+    x: position.left,
+    y: position.top
+  };
+}
+
+function useScrollPosition(effect, deps, element, useWindow, wait) {
+  const position = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(getScrollPosition({
+    useWindow
+  }));
+  let throttleTimeout = null;
+
+  const callBack = () => {
+    const currPos = getScrollPosition({
+      element,
+      useWindow
+    });
+    effect({
+      prevPos: position.current,
+      currPos
+    });
+    position.current = currPos;
+    throttleTimeout = null;
+  };
+
+  Object(_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_1__["useIsomorphicLayoutEffect"])(() => {
+    if (!isBrowser) {
+      return;
+    }
+
+    const handleScroll = () => {
+      if (wait) {
+        if (throttleTimeout === null) {
+          throttleTimeout = setTimeout(callBack, wait);
+        }
+      } else {
+        callBack();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, deps);
+}
+useScrollPosition.defaultProps = {
+  deps: [],
+  element: false,
+  useWindow: false,
+  wait: null
+};
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/map.js":
 /*!************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/map.js ***!
@@ -2230,8 +2331,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/theme */ "./components/theme.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _n8tb1t_use_scroll_position__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @n8tb1t/use-scroll-position */ "@n8tb1t/use-scroll-position");
-/* harmony import */ var _n8tb1t_use_scroll_position__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_n8tb1t_use_scroll_position__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _components_useScrollPosition__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/useScrollPosition */ "./components/useScrollPosition.jsx");
 
 
 
@@ -2260,14 +2360,15 @@ const TestElement = ({
   callback
 }) => {
   const elementRef = Object(react__WEBPACK_IMPORTED_MODULE_11__["useRef"])();
-  Object(_n8tb1t_use_scroll_position__WEBPACK_IMPORTED_MODULE_12__["useScrollPosition"])(({
+  Object(_components_useScrollPosition__WEBPACK_IMPORTED_MODULE_12__["useScrollPosition"])(({
     currPos
   }) => {
-    if (currPos.y <= 85 && currPos.y >= 0) {
-      console.log(title);
-    }
+    const ratio = currPos.y / 80 * 100;
 
-    callback(backgroundColor, currPos.y / 85 * 100);
+    if (ratio >= 0 && ratio <= 100) {
+      console.log(title);
+      callback(backgroundColor, ratio);
+    }
   }, [], elementRef);
   return __jsx("div", {
     ref: elementRef,
@@ -2276,7 +2377,7 @@ const TestElement = ({
     }),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 20
     },
     __self: undefined
   }, __jsx("p", {
@@ -2285,7 +2386,7 @@ const TestElement = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 21
+      lineNumber: 22
     },
     __self: undefined
   }, title), __jsx("p", {
@@ -2294,7 +2395,7 @@ const TestElement = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22
+      lineNumber: 23
     },
     __self: undefined
   }, content));
@@ -2305,44 +2406,55 @@ const Index = props => {
     texts
   } = props;
   const {
-    0: colorConfig,
-    1: setColorConfig
+    0: backgroundState,
+    1: setBackgroundState
   } = Object(react__WEBPACK_IMPORTED_MODULE_11__["useState"])({
+    lastColor: _components_theme__WEBPACK_IMPORTED_MODULE_10__["default"].COLORS.BG1,
     currentColor: _components_theme__WEBPACK_IMPORTED_MODULE_10__["default"].COLORS.BG1,
-    nextColor: _components_theme__WEBPACK_IMPORTED_MODULE_10__["default"].COLORS.BG1,
-    amount: 0
+    amount: "100%"
+  });
+  Object(_components_useScrollPosition__WEBPACK_IMPORTED_MODULE_12__["useScrollPosition"])(({
+    prevPos,
+    currPos
+  }) => {
+    // console.log(`${prevPos.y}->${currPos.y}`)
+    const isDown = prevPos.y - currPos.y > 0;
+    console.log(isDown);
   });
 
-  const changeBackgroundColor = ({
-    nextColor,
-    amount
-  }) => {
-    console.log(nextColor);
-
-    if (amount <= 0) {
-      setColorConfig(nextColor);
-    }
+  const changeBackgroundColor = (bgcolor, amount) => {
+    console.log(`${bgcolor}, ${amount}`);
+    const {
+      currentColor,
+      lastColor
+    } = backgroundState;
+    setBackgroundState({
+      lastColor: currentColor,
+      currentColor: bgcolor,
+      amount
+    });
   };
 
   const {
     currentColor,
-    nextColor,
+    lastColor,
     amount
-  } = colorConfig;
-  const background = `linear-gradient(${currentColor} ${amount}%, ${nextColor} ${100 - amount}%)`;
+  } = backgroundState;
+  const background = `linear-gradient(${lastColor} ${amount}%,${lastColor} 0%,${currentColor} 0%, ${currentColor} ${100 - amount}%)`;
   return __jsx("div", {
     style: styles.container,
-    className: "jsx-2822436972",
+    className: "jsx-542315401",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 63
     },
     __self: undefined
   }, __jsx(Header, {
     background: background,
+    amount: amount,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 64
     },
     __self: undefined
   }), texts.map((text, index) => __jsx(TestElement, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_6__["default"])({
@@ -2351,40 +2463,42 @@ const Index = props => {
     callback: changeBackgroundColor,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 65
     },
     __self: undefined
   }))), __jsx(styled_jsx_style__WEBPACK_IMPORTED_MODULE_8___default.a, {
-    id: "2822436972",
+    id: "542315401",
     __self: undefined
-  }, "body{margin:0;padding:0;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkQ6XFxzZWxhYi1uZXh0XFxwYWdlc1xcaW5kZXguanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBcUQrQixBQUcwQixTQUNDLFVBQ2QiLCJmaWxlIjoiRDpcXHNlbGFiLW5leHRcXHBhZ2VzXFxpbmRleC5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBMaW5rIGZyb20gJ25leHQvbGluaydcclxuaW1wb3J0IHRoZW1lIGZyb20gJy4uL2NvbXBvbmVudHMvdGhlbWUnXHJcbmltcG9ydCBSZWFjdCwgeyB1c2VTdGF0ZSwgdXNlUmVmLCB1c2VFZmZlY3QsIGZvcndhcmRSZWYsIHVzZUxheW91dEVmZmVjdCB9IGZyb20gJ3JlYWN0J1xyXG5pbXBvcnQgeyB1c2VTY3JvbGxQb3NpdGlvbiB9IGZyb20gJ0BuOHRiMXQvdXNlLXNjcm9sbC1wb3NpdGlvbidcclxuXHJcbmNvbnN0IFRlc3RFbGVtZW50ID0gKHsgdGl0bGUsIGNvbnRlbnQsIGJhY2tncm91bmRDb2xvciwgY2FsbGJhY2sgfSkgPT4ge1xyXG5cclxuICAgIGNvbnN0IGVsZW1lbnRSZWYgPSB1c2VSZWYoKVxyXG4gICAgdXNlU2Nyb2xsUG9zaXRpb24oKHsgY3VyclBvcyB9KSA9PiB7XHJcbiAgICAgICAgXHJcbiAgICAgICAgaWYgKGN1cnJQb3MueSA8PSA4NSAmJiBjdXJyUG9zLnkgPj0gMCkge1xyXG4gICAgICAgICAgICBjb25zb2xlLmxvZyh0aXRsZSlcclxuICAgICAgICB9XHJcbiAgICAgICAgY2FsbGJhY2soYmFja2dyb3VuZENvbG9yLCBjdXJyUG9zLnkgLyA4NSAqIDEwMClcclxuICAgIH0sIFtdLCBlbGVtZW50UmVmKVxyXG5cclxuICAgIHJldHVybiAoXHJcblxyXG4gICAgICAgIDxkaXYgcmVmPXtlbGVtZW50UmVmfSBzdHlsZT17eyAuLi5zdHlsZXMuZWxlbWVudCwgYmFja2dyb3VuZENvbG9yLCB9fT5cclxuXHJcbiAgICAgICAgICAgIDxwIHN0eWxlPXt7IGZsZXg6IDEgfX0+e3RpdGxlfTwvcD5cclxuICAgICAgICAgICAgPHAgc3R5bGU9e3sgZmxleDogMSB9fT57Y29udGVudH08L3A+XHJcbiAgICAgICAgPC9kaXY+XHJcblxyXG5cclxuICAgIClcclxufVxyXG5cclxuY29uc3QgSW5kZXggPSAocHJvcHMpID0+IHtcclxuICAgIGNvbnN0IHsgdGV4dHMgfSA9IHByb3BzXHJcbiAgICBjb25zdCBbY29sb3JDb25maWcsIHNldENvbG9yQ29uZmlnXSA9IHVzZVN0YXRlKHtcclxuICAgICAgICBjdXJyZW50Q29sb3I6IHRoZW1lLkNPTE9SUy5CRzEsXHJcbiAgICAgICAgbmV4dENvbG9yOiB0aGVtZS5DT0xPUlMuQkcxLFxyXG4gICAgICAgIGFtb3VudDogMCxcclxuICAgIH0pXHJcblxyXG5cclxuXHJcbiAgICBjb25zdCBjaGFuZ2VCYWNrZ3JvdW5kQ29sb3IgPSAoeyBuZXh0Q29sb3IsIGFtb3VudCB9KSA9PiB7XHJcbiAgICAgICAgY29uc29sZS5sb2cobmV4dENvbG9yKVxyXG4gICAgICAgIGlmIChhbW91bnQgPD0gMCkge1xyXG4gICAgICAgICAgICBzZXRDb2xvckNvbmZpZyhuZXh0Q29sb3IpXHJcbiAgICAgICAgfVxyXG4gICAgfVxyXG5cclxuICAgIFxyXG4gICAgY29uc3Qge2N1cnJlbnRDb2xvciwgbmV4dENvbG9yLCBhbW91bnR9ID0gY29sb3JDb25maWdcclxuICAgIGNvbnN0IGJhY2tncm91bmQgPSBgbGluZWFyLWdyYWRpZW50KCR7Y3VycmVudENvbG9yfSAke2Ftb3VudH0lLCAke25leHRDb2xvcn0gJHsxMDAgLSBhbW91bnR9JSlgXHJcblxyXG4gICAgcmV0dXJuIChcclxuICAgICAgICA8ZGl2IHN0eWxlPXtzdHlsZXMuY29udGFpbmVyfT5cclxuICAgICAgICAgICAgPEhlYWRlciAgYmFja2dyb3VuZD17YmFja2dyb3VuZH0vPlxyXG4gICAgICAgICAgICB7dGV4dHMubWFwKCh0ZXh0LCBpbmRleCkgPT4gPFRlc3RFbGVtZW50IGtleT17aW5kZXh9IHsuLi50ZXh0fSBjYWxsYmFjaz17Y2hhbmdlQmFja2dyb3VuZENvbG9yfS8+KX1cclxuICAgICAgICAgICAgPHN0eWxlIGdsb2JhbCBqc3g+e2BcclxuICAgICAgICAgICAgYm9keSB7XHJcbiAgICAgICAgICAgICAgICBtYXJnaW46IDA7XHJcbiAgICAgICAgICAgICAgICBwYWRkaW5nOiAwO1xyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgICAgIGB9PC9zdHlsZT5cclxuICAgICAgICA8L2Rpdj5cclxuICAgIClcclxufVxyXG5cclxuY29uc3QgSGVhZGVyID0gKHtiYWNrZ3JvdW5kfSkgPT4ge1xyXG4gICAgcmV0dXJuIChcclxuICAgICAgICA8aGVhZGVyIHN0eWxlPXt7IC4uLnN0eWxlcy5oZWFkZXIsIGJhY2tncm91bmQgfX0+XHJcbiAgICAgICAgICAgIDxoMT5TRUxhYjwvaDE+XHJcbiAgICAgICAgICAgIDxwPntgVGhpcyBpcyBTRUxBQidzIG1haW4gcGFnZWB9PC9wPlxyXG4gICAgICAgIDwvaGVhZGVyPlxyXG4gICAgKVxyXG59XHJcblxyXG5jb25zdCBzdHlsZXMgPSB7XHJcbiAgICBjb250YWluZXI6IHtcclxuICAgICAgICBmbGV4OiAxLFxyXG4gICAgICAgIGJhY2tncm91bmRDb2xvcjogdGhlbWUuQ09MT1JTLkJHMSxcclxuICAgICAgICAuLi50aGVtZS5GT05UUyxcclxuICAgICAgICBjb2xvcjogXCJ3aGl0ZVwiLFxyXG4gICAgfSxcclxuICAgIGVsZW1lbnQ6IHtcclxuICAgICAgICBmbGV4OiAxLFxyXG4gICAgICAgIGhlaWdodDogJzMwdmgnLFxyXG4gICAgICAgIGJhY2tncm91bmRDb2xvcjogJ3doaXRlJyxcclxuICAgICAgICBjb2xvcjogJ2JsYWNrJyxcclxuICAgICAgICB0ZXh0QWxpZ246IFwiY2VudGVyXCIsXHJcbiAgICAgICAgcGFkZGluZ1RvcDogJzEwdmgnLFxyXG4gICAgfSxcclxuICAgIGhlYWRlcjoge1xyXG4gICAgICAgIHBvc2l0aW9uOiAnLXdlYmtpdC1zdGlja3knLFxyXG4gICAgICAgIHBvc2l0aW9uOiAnc3RpY2t5JyxcclxuICAgICAgICB0b3A6IDAsXHJcbiAgICAgICAgd2lkdGg6IFwiMTAwJVwiLFxyXG4gICAgICAgIGJhY2tncm91bmQ6ICdsaW5lYXItZ3JhZGllbnQoICNGRkMwQ0IgNTAlLCAjMDBGRkZGIDUwJSknLFxyXG4gICAgICAgIG1hcmdpbjogMCxcclxuXHJcbiAgICB9XHJcbn1cclxuXHJcbkluZGV4LmdldEluaXRpYWxQcm9wcyA9IGFzeW5jICh7IHJlcSB9KSA9PiB7XHJcbiAgICBjb25zdCB1c2VyQWdlbnQgPSByZXEgPyByZXEuaGVhZGVyc1sndXNlci1hZ2VudCddIDogbmF2aWdhdG9yLnVzZXJBZ2VudFxyXG4gICAgY29uc29sZS5sb2codXNlckFnZW50KVxyXG4gICAgY29uc3QgdGV4dHMgPSBbXHJcbiAgICAgICAgeyB0aXRsZTogXCJUaGlzIGlzIFRlc3QxXCIsIGNvbnRlbnQ6IFwiSGVsbG8gV29ybGQhXCIsIGJhY2tncm91bmRDb2xvcjogdGhlbWUuQ09MT1JTLkJHMSB9LFxyXG4gICAgICAgIHsgdGl0bGU6IFwiVGhpcyBpcyBUZXN0MlwiLCBjb250ZW50OiBcIkhlbGxvIFdvcmxkIVwiLCBiYWNrZ3JvdW5kQ29sb3I6IHRoZW1lLkNPTE9SUy5CRzIgfSxcclxuICAgICAgICB7IHRpdGxlOiBcIlRoaXMgaXMgVGVzdDNcIiwgY29udGVudDogXCJIZWxsbyBXb3JsZCFcIiwgYmFja2dyb3VuZENvbG9yOiB0aGVtZS5DT0xPUlMuQkcxIH0sXHJcbiAgICAgICAgeyB0aXRsZTogXCJUaGlzIGlzIFRlc3Q0XCIsIGNvbnRlbnQ6IFwiSGVsbG8gV29ybGQhXCIsIGJhY2tncm91bmRDb2xvcjogdGhlbWUuQ09MT1JTLkJHMiB9LFxyXG4gICAgICAgIHsgdGl0bGU6IFwiVGhpcyBpcyBUZXN0NVwiLCBjb250ZW50OiBcIkhlbGxvIFdvcmxkIVwiLCBiYWNrZ3JvdW5kQ29sb3I6IHRoZW1lLkNPTE9SUy5CRzEgfSxcclxuICAgIF1cclxuICAgIHJldHVybiB7IHRleHRzIH1cclxufVxyXG5cclxuZXhwb3J0IGRlZmF1bHQgSW5kZXgiXX0= */\n/*@ sourceURL=D:\\selab-next\\pages\\index.js */"));
+  }, "body{margin:0;padding:0;background-color:black;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkQ6XFxzZWxhYi1uZXh0XFxwYWdlc1xcaW5kZXguanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBaUUrQixBQUcwQixTQUNDLFVBQ2EsdUJBQzNCIiwiZmlsZSI6IkQ6XFxzZWxhYi1uZXh0XFxwYWdlc1xcaW5kZXguanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgTGluayBmcm9tICduZXh0L2xpbmsnXHJcbmltcG9ydCB0aGVtZSBmcm9tICcuLi9jb21wb25lbnRzL3RoZW1lJ1xyXG5pbXBvcnQgUmVhY3QsIHsgdXNlU3RhdGUsIHVzZVJlZiwgdXNlRWZmZWN0LCBmb3J3YXJkUmVmLCB1c2VMYXlvdXRFZmZlY3QgfSBmcm9tICdyZWFjdCdcclxuaW1wb3J0IHsgdXNlU2Nyb2xsUG9zaXRpb24gfSBmcm9tICcuLi9jb21wb25lbnRzL3VzZVNjcm9sbFBvc2l0aW9uJ1xyXG5cclxuY29uc3QgVGVzdEVsZW1lbnQgPSAoeyB0aXRsZSwgY29udGVudCwgYmFja2dyb3VuZENvbG9yLCBjYWxsYmFjayB9KSA9PiB7XHJcblxyXG4gICAgY29uc3QgZWxlbWVudFJlZiA9IHVzZVJlZigpXHJcbiAgICB1c2VTY3JvbGxQb3NpdGlvbigoeyBjdXJyUG9zIH0pID0+IHtcclxuICAgICAgICBjb25zdCByYXRpbyA9IGN1cnJQb3MueSAvIDgwICogMTAwXHJcbiAgICAgICAgaWYgKHJhdGlvID49IDAgJiYgcmF0aW8gPD0gMTAwKSB7XHJcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKHRpdGxlKVxyXG4gICAgICAgICAgICBjYWxsYmFjayhiYWNrZ3JvdW5kQ29sb3IsIHJhdGlvKVxyXG4gICAgICAgIH1cclxuXHJcbiAgICB9LCBbXSwgZWxlbWVudFJlZilcclxuXHJcbiAgICByZXR1cm4gKFxyXG5cclxuICAgICAgICA8ZGl2IHJlZj17ZWxlbWVudFJlZn0gc3R5bGU9e3sgLi4uc3R5bGVzLmVsZW1lbnQsIGJhY2tncm91bmRDb2xvciwgfX0+XHJcblxyXG4gICAgICAgICAgICA8cCBzdHlsZT17eyBmbGV4OiAxIH19Pnt0aXRsZX08L3A+XHJcbiAgICAgICAgICAgIDxwIHN0eWxlPXt7IGZsZXg6IDEgfX0+e2NvbnRlbnR9PC9wPlxyXG4gICAgICAgIDwvZGl2PlxyXG5cclxuXHJcbiAgICApXHJcbn1cclxuXHJcbmNvbnN0IEluZGV4ID0gKHByb3BzKSA9PiB7XHJcbiAgICBjb25zdCB7IHRleHRzIH0gPSBwcm9wc1xyXG4gICAgY29uc3QgW2JhY2tncm91bmRTdGF0ZSwgc2V0QmFja2dyb3VuZFN0YXRlXSA9IHVzZVN0YXRlKHtcclxuICAgICAgICBsYXN0Q29sb3I6IHRoZW1lLkNPTE9SUy5CRzEsXHJcbiAgICAgICAgY3VycmVudENvbG9yOiB0aGVtZS5DT0xPUlMuQkcxLFxyXG4gICAgICAgIGFtb3VudDogXCIxMDAlXCIsXHJcbiAgICB9KVxyXG4gICAgXHJcbiAgICB1c2VTY3JvbGxQb3NpdGlvbigoe3ByZXZQb3MsIGN1cnJQb3N9KSA9PiB7XHJcbiAgICAgICAgLy8gY29uc29sZS5sb2coYCR7cHJldlBvcy55fS0+JHtjdXJyUG9zLnl9YClcclxuICAgICAgICBjb25zdCBpc0Rvd24gPSBwcmV2UG9zLnkgLSBjdXJyUG9zLnkgPiAwXHJcbiAgICAgICAgY29uc29sZS5sb2coaXNEb3duKVxyXG4gICAgfSlcclxuXHJcblxyXG5cclxuICAgIGNvbnN0IGNoYW5nZUJhY2tncm91bmRDb2xvciA9IChiZ2NvbG9yLCBhbW91bnQpID0+IHtcclxuICAgICAgICBjb25zb2xlLmxvZyhgJHtiZ2NvbG9yfSwgJHthbW91bnR9YClcclxuICAgICAgICBjb25zdCB7Y3VycmVudENvbG9yLCBsYXN0Q29sb3J9ID0gYmFja2dyb3VuZFN0YXRlXHJcbiAgICAgICAgc2V0QmFja2dyb3VuZFN0YXRlKHtcclxuICAgICAgICAgICAgbGFzdENvbG9yOiBjdXJyZW50Q29sb3IsXHJcbiAgICAgICAgICAgIGN1cnJlbnRDb2xvcjogYmdjb2xvcixcclxuICAgICAgICAgICAgYW1vdW50LFxyXG4gICAgICAgIH0pXHJcbiAgICB9XHJcblxyXG4gICAgXHJcblxyXG5cclxuICAgIGNvbnN0IHtjdXJyZW50Q29sb3IsIGxhc3RDb2xvciwgYW1vdW50fSA9IGJhY2tncm91bmRTdGF0ZVxyXG4gICAgY29uc3QgYmFja2dyb3VuZCA9IGBsaW5lYXItZ3JhZGllbnQoJHtsYXN0Q29sb3J9ICR7YW1vdW50fSUsJHtsYXN0Q29sb3J9IDAlLCR7Y3VycmVudENvbG9yfSAwJSwgJHtjdXJyZW50Q29sb3J9ICR7MTAwIC0gYW1vdW50fSUpYFxyXG5cclxuICAgIHJldHVybiAoXHJcbiAgICAgICAgPGRpdiBzdHlsZT17c3R5bGVzLmNvbnRhaW5lcn0+XHJcbiAgICAgICAgICAgIDxIZWFkZXIgYmFja2dyb3VuZD17YmFja2dyb3VuZH0gYW1vdW50PXthbW91bnR9IC8+XHJcbiAgICAgICAgICAgIHt0ZXh0cy5tYXAoKHRleHQsIGluZGV4KSA9PiA8VGVzdEVsZW1lbnQga2V5PXtpbmRleH0gey4uLnRleHR9IGNhbGxiYWNrPXtjaGFuZ2VCYWNrZ3JvdW5kQ29sb3J9IC8+KX1cclxuICAgICAgICAgICAgPHN0eWxlIGdsb2JhbCBqc3g+e2BcclxuICAgICAgICAgICAgYm9keSB7XHJcbiAgICAgICAgICAgICAgICBtYXJnaW46IDA7XHJcbiAgICAgICAgICAgICAgICBwYWRkaW5nOiAwO1xyXG4gICAgICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XHJcbiAgICAgICAgICAgIH1cclxuXHJcbiAgICAgICAgICAgIGB9PC9zdHlsZT5cclxuICAgICAgICA8L2Rpdj5cclxuICAgIClcclxufVxyXG5jb25zdCBIZWFkZXIgPSAoeyBiYWNrZ3JvdW5kLCBhbW91bnQgfSkgPT4ge1xyXG5cclxuICAgIHJldHVybiAoXHJcbiAgICAgICAgPGhlYWRlciBzdHlsZT17eyAuLi5zdHlsZXMuaGVhZGVyIH19PlxyXG4gICAgICAgICAgICA8aDEgc3R5bGU9e3ttYXJnaW46IDB9fT5TRUxhYjwvaDE+XHJcbiAgICAgICAgICAgIDxwPlRoaXMgaXMgU0VMQUIncyBtYWluIHBhZ2U8L3A+XHJcbiAgICAgICAgICAgIHsvKiA8c3R5bGUganN4PntgXHJcbiAgICAgICAgICAgICAgICBwe1xyXG4gICAgICAgICAgICAgICAgICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCggIzAwMCAke2Ftb3VudH0lLCMwMDAgMCUsI2ZmZiAwJSwjZmZmICR7MTAwLWFtb3VudH0lKTtcclxuICAgICAgICAgICAgICAgICAgICAtd2Via2l0LWJhY2tncm91bmQtY2xpcDogdGV4dDtcclxuICAgICAgICAgICAgICAgICAgICAtd2Via2l0LXRleHQtZmlsbC1jb2xvcjogdHJhbnNwYXJlbnQ7XHJcbiAgICAgICAgICAgICAgICAgICAgd2hpdGVzLXNwYWNlOiBub3dyYXA7XHJcbiAgICAgICAgICAgICAgICAgICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgICAgICAgICAgICAgICAgIFxyXG4gICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgIGB9XHJcbiAgICAgICAgICAgIDwvc3R5bGU+ICovfVxyXG4gICAgICAgIDwvaGVhZGVyPlxyXG4gICAgKVxyXG59XHJcblxyXG5jb25zdCBzdHlsZXMgPSB7XHJcbiAgICBjb250YWluZXI6IHtcclxuICAgICAgICBmbGV4OiAxLFxyXG4gICAgICAgIGJhY2tncm91bmRDb2xvcjogdGhlbWUuQ09MT1JTLkJHMSxcclxuICAgICAgICAuLi50aGVtZS5GT05UUyxcclxuICAgICAgICBjb2xvcjogXCJ3aGl0ZVwiLFxyXG4gICAgICAgIG1hcmdpbjogMCxcclxuICAgICAgICBwYWRkaW5nOiAwLFxyXG4gICAgfSxcclxuICAgIGVsZW1lbnQ6IHtcclxuICAgICAgICBmbGV4OiAxLFxyXG4gICAgICAgIGhlaWdodDogJzUwdmgnLFxyXG4gICAgICAgIGJhY2tncm91bmRDb2xvcjogJ3doaXRlJyxcclxuICAgICAgICBjb2xvcjogJ2JsYWNrJyxcclxuICAgICAgICB0ZXh0QWxpZ246IFwiY2VudGVyXCIsXHJcbiAgICAgICAgcGFkZGluZ1RvcDogJzEwdmgnLFxyXG4gICAgfSxcclxuICAgIGhlYWRlcjoge1xyXG4gICAgICAgIHBvc2l0aW9uOiAnLXdlYmtpdC1zdGlja3knLFxyXG4gICAgICAgIHBvc2l0aW9uOiAnc3RpY2t5JyxcclxuICAgICAgICB0b3A6IDAsXHJcbiAgICAgICAgd2lkdGg6IFwiMTAwJVwiLFxyXG4gICAgICAgIG1hcmdpblRvcDogMCxcclxuICAgICAgICBvdmVyZmxvdzogJ2hpZGRlbidcclxuICAgIH1cclxufVxyXG5cclxuSW5kZXguZ2V0SW5pdGlhbFByb3BzID0gYXN5bmMgKHsgcmVxIH0pID0+IHtcclxuICAgIGNvbnN0IHVzZXJBZ2VudCA9IHJlcSA/IHJlcS5oZWFkZXJzWyd1c2VyLWFnZW50J10gOiBuYXZpZ2F0b3IudXNlckFnZW50XHJcbiAgICBjb25zb2xlLmxvZyh1c2VyQWdlbnQpXHJcbiAgICBjb25zdCB0ZXh0cyA9IFtcclxuICAgICAgICB7IHRpdGxlOiBcIlRoaXMgaXMgVGVzdDFcIiwgY29udGVudDogXCJIZWxsbyBXb3JsZCFcIiwgYmFja2dyb3VuZENvbG9yOiB0aGVtZS5DT0xPUlMuQkcxIH0sXHJcbiAgICAgICAgeyB0aXRsZTogXCJUaGlzIGlzIFRlc3QyXCIsIGNvbnRlbnQ6IFwiSGVsbG8gV29ybGQhXCIsIGJhY2tncm91bmRDb2xvcjogdGhlbWUuQ09MT1JTLkJHMiB9LFxyXG4gICAgICAgIHsgdGl0bGU6IFwiVGhpcyBpcyBUZXN0M1wiLCBjb250ZW50OiBcIkhlbGxvIFdvcmxkIVwiLCBiYWNrZ3JvdW5kQ29sb3I6IHRoZW1lLkNPTE9SUy5CRzEgfSxcclxuICAgICAgICB7IHRpdGxlOiBcIlRoaXMgaXMgVGVzdDRcIiwgY29udGVudDogXCJIZWxsbyBXb3JsZCFcIiwgYmFja2dyb3VuZENvbG9yOiB0aGVtZS5DT0xPUlMuQkcyIH0sXHJcbiAgICAgICAgeyB0aXRsZTogXCJUaGlzIGlzIFRlc3Q1XCIsIGNvbnRlbnQ6IFwiSGVsbG8gV29ybGQhXCIsIGJhY2tncm91bmRDb2xvcjogdGhlbWUuQ09MT1JTLkJHMSB9LFxyXG4gICAgICAgIHsgdGl0bGU6IFwiVGhpcyBpcyBUZXN0MVwiLCBjb250ZW50OiBcIkhlbGxvIFdvcmxkIVwiLCBiYWNrZ3JvdW5kQ29sb3I6IHRoZW1lLkNPTE9SUy5CRzEgfSxcclxuICAgICAgICB7IHRpdGxlOiBcIlRoaXMgaXMgVGVzdDJcIiwgY29udGVudDogXCJIZWxsbyBXb3JsZCFcIiwgYmFja2dyb3VuZENvbG9yOiB0aGVtZS5DT0xPUlMuQkcyIH0sXHJcbiAgICAgICAgeyB0aXRsZTogXCJUaGlzIGlzIFRlc3QzXCIsIGNvbnRlbnQ6IFwiSGVsbG8gV29ybGQhXCIsIGJhY2tncm91bmRDb2xvcjogdGhlbWUuQ09MT1JTLkJHMSB9LFxyXG4gICAgICAgIHsgdGl0bGU6IFwiVGhpcyBpcyBUZXN0NFwiLCBjb250ZW50OiBcIkhlbGxvIFdvcmxkIVwiLCBiYWNrZ3JvdW5kQ29sb3I6IHRoZW1lLkNPTE9SUy5CRzIgfSxcclxuICAgICAgICB7IHRpdGxlOiBcIlRoaXMgaXMgVGVzdDVcIiwgY29udGVudDogXCJIZWxsbyBXb3JsZCFcIiwgYmFja2dyb3VuZENvbG9yOiB0aGVtZS5DT0xPUlMuQkcxIH0sXHJcbiAgICBdXHJcbiAgICByZXR1cm4geyB0ZXh0cyB9XHJcbn1cclxuXHJcbmV4cG9ydCBkZWZhdWx0IEluZGV4Il19 */\n/*@ sourceURL=D:\\selab-next\\pages\\index.js */"));
 };
 
 const Header = ({
-  background
+  background,
+  amount
 }) => {
   return __jsx("header", {
-    style: _objectSpread({}, styles.header, {
-      background
-    }),
+    style: _objectSpread({}, styles.header),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 80
     },
     __self: undefined
   }, __jsx("h1", {
+    style: {
+      margin: 0
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 81
     },
     __self: undefined
   }, "SELab"), __jsx("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 68
+      lineNumber: 82
     },
     __self: undefined
-  }, `This is SELAB's main page`));
+  }, "This is SELAB's main page"));
 };
 
 const styles = {
@@ -2392,11 +2506,13 @@ const styles = {
     flex: 1,
     backgroundColor: _components_theme__WEBPACK_IMPORTED_MODULE_10__["default"].COLORS.BG1
   }, _components_theme__WEBPACK_IMPORTED_MODULE_10__["default"].FONTS, {
-    color: "white"
+    color: "white",
+    margin: 0,
+    padding: 0
   }),
   element: {
     flex: 1,
-    height: '30vh',
+    height: '50vh',
     backgroundColor: 'white',
     color: 'black',
     textAlign: "center",
@@ -2407,8 +2523,8 @@ const styles = {
     position: 'sticky',
     top: 0,
     width: "100%",
-    background: 'linear-gradient( #FFC0CB 50%, #00FFFF 50%)',
-    margin: 0
+    marginTop: 0,
+    overflow: 'hidden'
   }
 };
 
@@ -2418,6 +2534,26 @@ Index.getInitialProps = async ({
   const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
   console.log(userAgent);
   const texts = [{
+    title: "This is Test1",
+    content: "Hello World!",
+    backgroundColor: _components_theme__WEBPACK_IMPORTED_MODULE_10__["default"].COLORS.BG1
+  }, {
+    title: "This is Test2",
+    content: "Hello World!",
+    backgroundColor: _components_theme__WEBPACK_IMPORTED_MODULE_10__["default"].COLORS.BG2
+  }, {
+    title: "This is Test3",
+    content: "Hello World!",
+    backgroundColor: _components_theme__WEBPACK_IMPORTED_MODULE_10__["default"].COLORS.BG1
+  }, {
+    title: "This is Test4",
+    content: "Hello World!",
+    backgroundColor: _components_theme__WEBPACK_IMPORTED_MODULE_10__["default"].COLORS.BG2
+  }, {
+    title: "This is Test5",
+    content: "Hello World!",
+    backgroundColor: _components_theme__WEBPACK_IMPORTED_MODULE_10__["default"].COLORS.BG1
+  }, {
     title: "This is Test1",
     content: "Hello World!",
     backgroundColor: _components_theme__WEBPACK_IMPORTED_MODULE_10__["default"].COLORS.BG1
@@ -2456,17 +2592,6 @@ Index.getInitialProps = async ({
 
 module.exports = __webpack_require__(/*! D:\selab-next\pages\index.js */"./pages/index.js");
 
-
-/***/ }),
-
-/***/ "@n8tb1t/use-scroll-position":
-/*!**********************************************!*\
-  !*** external "@n8tb1t/use-scroll-position" ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@n8tb1t/use-scroll-position");
 
 /***/ }),
 

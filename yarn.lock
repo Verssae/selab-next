@@ -4472,6 +4472,11 @@ react-is@^16.6.3, react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.11.0.tgz#b85dfecd48ad1ce469ff558a882ca8e8313928fa"
   integrity sha512-gbBVYR2p8mnriqAwWx9LbuUrShnAuSCNnuPGyc7GJrMVQtPDAh8iLpv7FRuMPFb56KkaVZIYSz1PrjI9q0QPCw==
 
+react-scroll-collision@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-scroll-collision/-/react-scroll-collision-1.0.5.tgz#fe8c6ce43b507fd003202511a01483f218f5bd53"
+  integrity sha512-YHhNjgFJdRpawgD/9RBnQ6HWNXorxDxL++ylRnRZ+95AeS00ci9Yhjs8b5KZNP3NbH9JW77deAaCDOJPAp1kIw==
+
 react-sticky@^6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/react-sticky/-/react-sticky-6.0.3.tgz#7a18b643e1863da113d7f7036118d2a75d9ecde4"
