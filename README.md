@@ -27,13 +27,9 @@ yarn run dev # or npm run dev (run in development)
 
 ## Used Packages
 
-* [React Waypoint]( https://github.com/civiccc/react-waypoint#children )
-
 
 
 ## Reference
-
-* [useRef]( https://velog.io/@public_danuel/trendy-react-useref )
 
 * [nextjs](https://nextjs.org)
 * [react]( https://ko.reactjs.org/ )

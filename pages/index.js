@@ -1,143 +1,117 @@
-import Link from 'next/link'
+import Header from '../components/Header'
 import theme from '../components/theme'
-import React, { useState, useRef, useEffect, forwardRef, useLayoutEffect } from 'react'
-import { useScrollPosition } from '../components/useScrollPosition'
+import { useRef, forwardRef } from 'react'
 
-const TestElement = ({ title, content, backgroundColor, callback }) => {
-
-    const elementRef = useRef()
-    useScrollPosition(({ currPos }) => {
-        const ratio = currPos.y / 80 * 100
-        if (ratio >= 0 && ratio <= 100) {
-            console.log(title)
-            callback(backgroundColor, ratio)
-        }
-
-    }, [], elementRef)
-
-    return (
-
-        <div ref={elementRef} style={{ ...styles.element, backgroundColor, }}>
-
-            <p style={{ flex: 1 }}>{title}</p>
-            <p style={{ flex: 1 }}>{content}</p>
-        </div>
-
-
-    )
-}
-
-const Index = (props) => {
-    const { texts } = props
-    const [backgroundState, setBackgroundState] = useState({
-        lastColor: theme.COLORS.BG1,
-        currentColor: theme.COLORS.BG1,
-        amount: "100%",
-    })
-    
-    useScrollPosition(({prevPos, currPos}) => {
-        // console.log(`${prevPos.y}->${currPos.y}`)
-        const isDown = prevPos.y - currPos.y > 0
-        console.log(isDown)
-    })
-
-
-
-    const changeBackgroundColor = (bgcolor, amount) => {
-        console.log(`${bgcolor}, ${amount}`)
-        const {currentColor, lastColor} = backgroundState
-        setBackgroundState({
-            lastColor: currentColor,
-            currentColor: bgcolor,
-            amount,
-        })
+const Index = () => {
+    const headerStyleStart = {
+        defaultBgColor: theme.COLORS.BG1,
+        defaultTextColor: 'white',
+        bgColor: theme.COLORS.BG2,
+        textColor: 'black',
     }
 
-    
+    const headerStyleEnd = {
+        defaultBgColor: theme.COLORS.BG2,
+        defaultTextColor: 'black',
+        bgColor: theme.COLORS.BG1,
+        textColor: 'white',
+    }
 
+    const vanilaStart1 = useRef(null)
+    const vanilaEnd1 = useRef(null)
+    const vanilaStart2 = useRef(null)
+    const vanilaEnd2 = useRef(null)
 
-    const {currentColor, lastColor, amount} = backgroundState
-    const background = `linear-gradient(${lastColor} ${amount}%,${lastColor} 0%,${currentColor} 0%, ${currentColor} ${100 - amount}%)`
-
+    const refs = [
+        {
+            ref: vanilaStart1,
+            ...headerStyleStart,
+        },
+        {
+            ref: vanilaEnd1,
+            ...headerStyleEnd,
+        },
+        {
+            ref: vanilaStart2,
+            ...headerStyleStart,
+        },
+        {
+            ref: vanilaEnd2,
+            ...headerStyleEnd,
+        },
+    ]
     return (
-        <div style={styles.container}>
-            <Header background={background} amount={amount} />
-            {texts.map((text, index) => <TestElement key={index} {...text} callback={changeBackgroundColor} />)}
+        <div className="container">
+            <Header refs={refs} >
+                <p className="title">lab[se]</p>
+                <p className="link"> Research</p>
+            </Header>
+            <div className="pages">
+                <Page style={{ backgroundColor: theme.COLORS.BG1, paddingTop: 90, color: 'white' }}>
+                    {`Hello, THis is first Page`}
+                </Page>
+                <Page ref={vanilaStart1} style={{ backgroundColor: theme.COLORS.BG2, }}>
+                    {`Hello, THis is second Page`}
+                </Page>
+                <Page ref={vanilaEnd1} style={{ backgroundColor: theme.COLORS.BG1, color: 'white' }}>
+                    {`Hello, THis is third Page`}
+                </Page>
+                <Page ref={vanilaStart2} style={{ backgroundColor: theme.COLORS.BG2, }}>
+                    {`Hello, THis is fourth Page`}
+                </Page>
+                <Page ref={vanilaEnd2} style={{ backgroundColor: theme.COLORS.BG1, color: 'white' }}>
+                    {`Hello, THis is fifth Page`}
+                </Page>
+            </div>
+
             <style global jsx>{`
-            body {
-                margin: 0;
-                padding: 0;
-                background-color: black;
-            }
-
-            `}</style>
-        </div>
-    )
-}
-const Header = ({ background, amount }) => {
-
-    return (
-        <header style={{ ...styles.header, background }}>
-            <h1 style={{margin: 0}}>SELab</h1>
-            <p>This is SELAB's main page</p>
-            {/* <style jsx>{`
-                p{
-                    background: linear-gradient( #000 ${amount}%,#000 0%,#fff 0%,#fff ${100-amount}%);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                    whites-space: nowrap;
-                    font-size: 16px;
+                body {
+                    margin: 0;
+                    padding: 0;
                     
-               }
-            `}
-            </style> */}
-        </header>
+                }
+
+                .title {
+                    font-size: 40px;
+                    font-weight: bold;
+                    margin: 0;
+                    margin-left: 10px;
+                    display: inline-block;
+                }
+
+                .link {
+                    font-size: 30px;
+                    font-weight: bold;
+                    margin: 0;
+                    margin-left: 10px;
+                    display: inline-block;
+                }
+
+                .container {
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                    overflow: hidden;
+                }
+            `}</style>
+        </div >
     )
 }
 
-const styles = {
-    container: {
-        flex: 1,
-        backgroundColor: theme.COLORS.BG1,
-        ...theme.FONTS,
-        color: "white",
+const Page = forwardRef(({ style, children }, ref) => (
+    <div ref={ref} style={{
+
+        width: '100%',
+        height: '100vh',
         margin: 0,
         padding: 0,
-    },
-    element: {
-        flex: 1,
-        height: '50vh',
-        backgroundColor: 'white',
-        color: 'black',
-        textAlign: "center",
-        paddingTop: '10vh',
-    },
-    header: {
-        position: '-webkit-sticky',
-        position: 'sticky',
-        top: 0,
-        width: "100%",
-        marginTop: 0,
-        overflow: 'hidden'
-    }
-}
+        fontSize: 20,
+        ...style,
+    }}>
+        {children}
+    </div>
+))
 
-Index.getInitialProps = async ({ req }) => {
-    const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
-    console.log(userAgent)
-    const texts = [
-        { title: "This is Test1", content: "Hello World!", backgroundColor: theme.COLORS.BG1 },
-        { title: "This is Test2", content: "Hello World!", backgroundColor: theme.COLORS.BG2 },
-        { title: "This is Test3", content: "Hello World!", backgroundColor: theme.COLORS.BG1 },
-        { title: "This is Test4", content: "Hello World!", backgroundColor: theme.COLORS.BG2 },
-        { title: "This is Test5", content: "Hello World!", backgroundColor: theme.COLORS.BG1 },
-        { title: "This is Test1", content: "Hello World!", backgroundColor: theme.COLORS.BG1 },
-        { title: "This is Test2", content: "Hello World!", backgroundColor: theme.COLORS.BG2 },
-        { title: "This is Test3", content: "Hello World!", backgroundColor: theme.COLORS.BG1 },
-        { title: "This is Test4", content: "Hello World!", backgroundColor: theme.COLORS.BG2 },
-        { title: "This is Test5", content: "Hello World!", backgroundColor: theme.COLORS.BG1 },
-    ]
-    return { texts }
-}
+
 
 export default Index

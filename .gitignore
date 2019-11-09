@@ -1,1 +1,28 @@
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
 node_modules
+bower_componets
+
+.next/*
+
+*.sublime*
+
+psd
+thumb
+sketch
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
