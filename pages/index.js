@@ -77,7 +77,7 @@ const Index = (props) => {
 const Header = ({ background, amount }) => {
 
     return (
-        <header style={{ ...styles.header }}>
+        <header style={{ ...styles.header, background }}>
             <h1 style={{margin: 0}}>SELab</h1>
             <p>This is SELAB's main page</p>
             {/* <style jsx>{`

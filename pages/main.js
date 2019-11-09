@@ -58,6 +58,10 @@ const App = () => (
               color: white;
               fill: white;
             }
+
+            .ColorTransparent {
+              color: 
+            }
             
             .ColorGray{
               background-color: lightgray;
