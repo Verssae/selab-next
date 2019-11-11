@@ -1,117 +1,147 @@
-import Header from '../components/Header'
-import theme from '../components/theme'
-import { useRef, forwardRef } from 'react'
+/** @jsx jsx */
+
+import { Fragment, useRef, forwardRef } from "react"
+import Link from "next/link"
+import { jsx, css, Global } from "@emotion/core"
+import Head from "next/head"
+
+import Header from "../components/Header"
+import theme from "../components/theme"
+import {
+  Container,
+  linkStyle,
+  pageStyle,
+  titleStyle,
+  Content
+} from "../components/CSS/index"
 
 const Index = () => {
-    const headerStyleStart = {
-        defaultBgColor: theme.COLORS.BG1,
-        defaultTextColor: 'white',
-        bgColor: theme.COLORS.BG2,
-        textColor: 'black',
+  const headerStyleStart = {
+    defaultBgColor: theme.COLORS.sapphire,
+    defaultTextColor: "white",
+    bgColor: theme.COLORS.vanila,
+    textColor: "black"
+  }
+
+  const headerStyleEnd = {
+    defaultBgColor: theme.COLORS.vanila,
+    defaultTextColor: "black",
+    bgColor: theme.COLORS.sapphire,
+    textColor: "white"
+  }
+
+  const vanilaStart1 = useRef(null)
+  const vanilaEnd1 = useRef(null)
+  const vanilaStart2 = useRef(null)
+  const vanilaEnd2 = useRef(null)
+
+  const refs = [
+    {
+      ref: vanilaStart1,
+      ...headerStyleStart
+    },
+    {
+      ref: vanilaEnd1,
+      ...headerStyleEnd
+    },
+    {
+      ref: vanilaStart2,
+      ...headerStyleStart
+    },
+    {
+      ref: vanilaEnd2,
+      ...headerStyleEnd
     }
-
-    const headerStyleEnd = {
-        defaultBgColor: theme.COLORS.BG2,
-        defaultTextColor: 'black',
-        bgColor: theme.COLORS.BG1,
-        textColor: 'white',
-    }
-
-    const vanilaStart1 = useRef(null)
-    const vanilaEnd1 = useRef(null)
-    const vanilaStart2 = useRef(null)
-    const vanilaEnd2 = useRef(null)
-
-    const refs = [
-        {
-            ref: vanilaStart1,
-            ...headerStyleStart,
-        },
-        {
-            ref: vanilaEnd1,
-            ...headerStyleEnd,
-        },
-        {
-            ref: vanilaStart2,
-            ...headerStyleStart,
-        },
-        {
-            ref: vanilaEnd2,
-            ...headerStyleEnd,
-        },
-    ]
-    return (
-        <div className="container">
-            <Header refs={refs} >
-                <p className="title">lab[se]</p>
-                <p className="link"> Research</p>
-            </Header>
-            <div className="pages">
-                <Page style={{ backgroundColor: theme.COLORS.BG1, paddingTop: 90, color: 'white' }}>
-                    {`Hello, THis is first Page`}
-                </Page>
-                <Page ref={vanilaStart1} style={{ backgroundColor: theme.COLORS.BG2, }}>
-                    {`Hello, THis is second Page`}
-                </Page>
-                <Page ref={vanilaEnd1} style={{ backgroundColor: theme.COLORS.BG1, color: 'white' }}>
-                    {`Hello, THis is third Page`}
-                </Page>
-                <Page ref={vanilaStart2} style={{ backgroundColor: theme.COLORS.BG2, }}>
-                    {`Hello, THis is fourth Page`}
-                </Page>
-                <Page ref={vanilaEnd2} style={{ backgroundColor: theme.COLORS.BG1, color: 'white' }}>
-                    {`Hello, THis is fifth Page`}
-                </Page>
+  ]
+  return (
+    <Fragment>
+      <Global
+        styles={css`
+          html,
+          body {
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 24px;
+          }
+        `}
+      />
+      <Head>
+        <title>{"Software Engineering Lab - Home"}</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
+      </Head>
+      <Container>
+        <Header refs={refs}>
+          <p css={titleStyle}>
+            lab[
+            <span
+              css={css`
+                color: #eb731e;
+              `}
+            >
+              se
+            </span>
+            ]
+          </p>
+          <PostLink id="Courses" />
+          <PostLink id="Publications" />
+        </Header>
+        <div>
+          <Page bgColor={theme.COLORS.sapphire} color={"white"}>
+            <div>
+              <p>{`SELab:`}</p>
+              <h1>{`Software Engineering Lab`}</h1>
+              <p>{`Hello, THis is first Page`}</p>
             </div>
-
-            <style global jsx>{`
-                body {
-                    margin: 0;
-                    padding: 0;
-                    
-                }
-
-                .title {
-                    font-size: 40px;
-                    font-weight: bold;
-                    margin: 0;
-                    margin-left: 10px;
-                    display: inline-block;
-                }
-
-                .link {
-                    font-size: 30px;
-                    font-weight: bold;
-                    margin: 0;
-                    margin-left: 10px;
-                    display: inline-block;
-                }
-
-                .container {
-                    margin: 0;
-                    padding: 0;
-                    width: 100%;
-                    overflow: hidden;
-                }
-            `}</style>
-        </div >
-    )
+          </Page>
+          <Page ref={vanilaStart1} bgColor={theme.COLORS.vanila}>
+            {`Hello, THis is second Page`}
+          </Page>
+          <Page
+            ref={vanilaEnd1}
+            bgColor={theme.COLORS.sapphire}
+            color={"white"}
+          >
+            {`Hello, THis is third Page`}
+          </Page>
+          <Page ref={vanilaStart2} bgColor={theme.COLORS.vanila}>
+            {`Hello, THis is fourth Page`}
+          </Page>
+          <Page
+            ref={vanilaEnd2}
+            bgColor={theme.COLORS.sapphire}
+            color={"white"}
+          >
+            {`Hello, THis is fifth Page`}
+          </Page>
+        </div>
+      </Container>
+    </Fragment>
+  )
 }
 
-const Page = forwardRef(({ style, children }, ref) => (
-    <div ref={ref} style={{
+const PostLink = (props) => (
+  <Link href="/slides/[id]" as={`/slides/${props.id}`}>
+    <p css={linkStyle} className="link">
+      {props.id}
+    </p>
+  </Link>
+)
 
-        width: '100%',
-        height: '100vh',
-        margin: 0,
-        padding: 0,
-        fontSize: 20,
-        ...style,
-    }}>
-        {children}
-    </div>
+const Page = forwardRef(({ bgColor, color, children }, ref) => (
+  <div
+    ref={ref}
+    css={css`
+      ${pageStyle};
+      background-color: ${bgColor};
+      color: ${color ? color : "black"};
+    `}
+  >
+    <Content>{children}</Content>
+  </div>
 ))
-
-
 
 export default Index

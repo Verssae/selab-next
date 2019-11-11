@@ -1,11 +1,11 @@
 export default {
-    COLORS: {
-        BG1: '#162e7c',
-        BG2: '#fbe8b1',
-        BTN1: '#2860f6',
-    },
-    FONTS: {
-        fontFamily: 'sans-serif',
-        fontSize: 16,
-    },
+  COLORS: {
+    sapphire: "#162e7c",
+    vanila: "#fbe8b1",
+    french: "#2860f6"
+  },
+  FONTS: {
+    fontFamily: "sans-serif",
+    fontSize: 16
+  }
 }
