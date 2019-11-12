@@ -69,8 +69,8 @@ const Block = styled.div`
   justify-content: flex-start;
   align-items: center;
   height: 99%;
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-left: 4vw;
+  padding-right: 4vw;
 `
 
 const BlockClone = styled(Block)`

@@ -10,8 +10,8 @@ export const Container = styled.div`
 
 export const linkStyle = css`
   font-size: 20px;
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: 2vw;
+  margin-right: 2vw;
 
   &:hover {
     text-decoration: underline solid;
@@ -32,7 +32,7 @@ export const titleStyle = css`
 export const pageStyle = css`
   width: 100%;
   height: 100vh;
-  padding-left: 120px;
+  padding-left: 6vw;
   display: flex;
   justify-content: center;
   align-items: center;

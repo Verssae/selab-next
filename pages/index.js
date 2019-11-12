@@ -94,28 +94,28 @@ const Index = () => {
             <div>
               <p>{`SELab:`}</p>
               <h1>{`Software Engineering Lab`}</h1>
-              <p>{`Hello, THis is first Page`}</p>
+              <p>{`Hello, This is first Page`}</p>
             </div>
           </Page>
           <Page ref={vanilaStart1} bgColor={theme.COLORS.vanila}>
-            {`Hello, THis is second Page`}
+            {`Hello, This is second Page`}
           </Page>
           <Page
             ref={vanilaEnd1}
             bgColor={theme.COLORS.sapphire}
             color={"white"}
           >
-            {`Hello, THis is third Page`}
+            {`Hello, This is third Page`}
           </Page>
           <Page ref={vanilaStart2} bgColor={theme.COLORS.vanila}>
-            {`Hello, THis is fourth Page`}
+            {`Hello, This is fourth Page`}
           </Page>
           <Page
             ref={vanilaEnd2}
             bgColor={theme.COLORS.sapphire}
             color={"white"}
           >
-            {`Hello, THis is fifth Page`}
+            {`Hello, This is fifth Page`}
           </Page>
         </div>
       </Container>
