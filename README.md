@@ -2,7 +2,7 @@
 
  https://selab.hanyang.ac.kr/ page  renewal team project
 
-[demo]( https://selab-next-topaz-ten.now.sh/ )
+[demo]( https://selab-next.tiger2714.now.sh/ )
 
 ## Members
 
