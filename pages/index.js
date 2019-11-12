@@ -1,9 +1,15 @@
 /** @jsx jsx */
+/*
+TODO:
+- [x] fix css styling style
+- [ ] fill out content with selab main page
+ */
 
 import { Fragment, useRef, forwardRef } from "react"
 import Link from "next/link"
 import { jsx, css, Global } from "@emotion/core"
 import Head from "next/head"
+import { Slide, LightSpeed } from "react-reveal"
 
 import Header from "../components/Header"
 import theme from "../components/theme"
@@ -12,7 +18,8 @@ import {
   linkStyle,
   pageStyle,
   titleStyle,
-  Content
+  Content,
+  headerContentStyle
 } from "../components/CSS/index"
 
 const Index = () => {
@@ -28,6 +35,10 @@ const Index = () => {
     defaultTextColor: "black",
     bgColor: theme.COLORS.sapphire,
     textColor: "white"
+  }
+
+  const scrollTo = (ref) => {
+    ref.current.scrollIntoView({ behavior: "smooth" })
   }
 
   const vanilaStart1 = useRef(null)
@@ -75,26 +86,36 @@ const Index = () => {
       </Head>
       <Container>
         <Header refs={refs}>
-          <p css={titleStyle}>
-            lab[
-            <span
-              css={css`
-                color: #eb731e;
-              `}
-            >
-              se
-            </span>
-            ]
-          </p>
-          <PostLink id="Courses" />
-          <PostLink id="Publications" />
+          <div css={headerContentStyle}>
+            <p css={titleStyle}>
+              lab[
+              <span
+                css={css`
+                  color: #eb731e;
+                `}
+              >
+                se
+              </span>
+              ];
+            </p>
+            <PostLink id="Courses" />
+            <PostLink id="Publications" />
+          </div>
         </Header>
         <div>
           <Page bgColor={theme.COLORS.sapphire} color={"white"}>
             <div>
-              <p>{`SELab:`}</p>
-              <h1>{`Software Engineering Lab`}</h1>
-              <p>{`Hello, This is first Page`}</p>
+              <Slide left>
+                <p>{`SELab:`}</p>
+                <h1>{`Software Engineering Lab`}</h1>
+                <p>{`Hello, This is first Page`}</p>
+                
+              </Slide>
+              <LightSpeed right>
+                  <p
+                    onClick={() => scrollTo(vanilaStart1)}
+                  >{`To next page`}</p>
+                </LightSpeed>
             </div>
           </Page>
           <Page ref={vanilaStart1} bgColor={theme.COLORS.vanila}>

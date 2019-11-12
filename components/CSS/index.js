@@ -10,8 +10,8 @@ export const Container = styled.div`
 
 export const linkStyle = css`
   font-size: 20px;
-  margin-left: 2vw;
-  margin-right: 2vw;
+  margin-left: 1vw;
+  margin-right: 1vw;
 
   &:hover {
     text-decoration: underline solid;
@@ -38,10 +38,21 @@ export const pageStyle = css`
   align-items: center;
   /* font-size: 20; */
 `
-
 export const Content = styled.div`
   ${(prpos) => prpos.css};
   width: 100%;
+  @media screen and (min-width: 1440px) {
+    width: 1440px;
+    margin: auto;
+  }
+`
+
+export const headerContentStyle = css`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
   @media screen and (min-width: 1440px) {
     width: 1440px;
     margin: auto;

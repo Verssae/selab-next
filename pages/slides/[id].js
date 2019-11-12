@@ -1,6 +1,12 @@
 import { useRouter } from "next/router"
 import Header from "../../components/Header"
+/*
+TODO:
+- [ ] choose slide library or not
+- [ ] make slide layout associative with header
+*/
 
+//FIXME:  this is temp component for slide
 const Slide = () => {
   const router = useRouter()
 

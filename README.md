@@ -156,7 +156,7 @@ yarn dev # or npm run dev (run in development)
 
 ## Used Packages
 
-
+* [react-reveal](https://www.react-reveal.com/) : cool animation library for react project
 
 ## Reference
 

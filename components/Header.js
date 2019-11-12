@@ -34,7 +34,7 @@ const Header = ({ refs, options, children }) => {
 
   return (
     <Container height={headerHeight}>
-      <Content>
+    
         <Block bgColor={styles.defaultBgColor} color={styles.defaultTextColor}>
           {children}
         </Block>
@@ -45,11 +45,10 @@ const Header = ({ refs, options, children }) => {
         >
           {children}
         </BlockClone>
-      </Content>
+      
     </Container>
   )
 }
-
 const Container = styled.div`
   position: fixed;
   top: 0;
@@ -71,6 +70,7 @@ const Block = styled.div`
   height: 99%;
   padding-left: 4vw;
   padding-right: 4vw;
+
 `
 
 const BlockClone = styled(Block)`
