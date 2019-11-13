@@ -5,19 +5,19 @@ TODO:
 - [ ] fill out content with selab main page
  */
 
-import { Fragment, useRef, forwardRef } from "react"
-import Link from "next/link"
-import { jsx, css, Global } from "@emotion/core"
+import { useRef, forwardRef } from "react"
+import { jsx, css } from "@emotion/core"
 import Head from "next/head"
 import { Slide, LightSpeed } from "react-reveal"
 
-import Header from "../components/Header"
 import theme from "../components/theme"
+import Header from "../components/Header"
+import Layout from "../components/Layout"
+import PostLink from "../components/PostLink"
+import HomeLink from "../components/HomeLink"
 import {
   Container,
-  linkStyle,
   pageStyle,
-  titleStyle,
   Content,
   headerContentStyle
 } from "../components/CSS/index"
@@ -65,18 +65,7 @@ const Index = () => {
     }
   ]
   return (
-    <Fragment>
-      <Global
-        styles={css`
-          html,
-          body {
-            margin: 0;
-            padding: 0;
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 24px;
-          }
-        `}
-      />
+    <Layout>
       <Head>
         <title>{"Software Engineering Lab - Home"}</title>
         <meta
@@ -87,17 +76,7 @@ const Index = () => {
       <Container>
         <Header refs={refs}>
           <div css={headerContentStyle}>
-            <p css={titleStyle}>
-              lab[
-              <span
-                css={css`
-                  color: #eb731e;
-                `}
-              >
-                se
-              </span>
-              ];
-            </p>
+            <HomeLink />
             <PostLink id="Courses" />
             <PostLink id="Publications" />
           </div>
@@ -109,13 +88,10 @@ const Index = () => {
                 <p>{`SELab:`}</p>
                 <h1>{`Software Engineering Lab`}</h1>
                 <p>{`Hello, This is first Page`}</p>
-                
               </Slide>
               <LightSpeed right>
-                  <p
-                    onClick={() => scrollTo(vanilaStart1)}
-                  >{`To next page`}</p>
-                </LightSpeed>
+                <p onClick={() => scrollTo(vanilaStart1)}>{`To next page`}</p>
+              </LightSpeed>
             </div>
           </Page>
           <Page ref={vanilaStart1} bgColor={theme.COLORS.vanila}>
@@ -140,17 +116,9 @@ const Index = () => {
           </Page>
         </div>
       </Container>
-    </Fragment>
+    </Layout>
   )
 }
-
-const PostLink = (props) => (
-  <Link href="/slides/[id]" as={`/slides/${props.id}`}>
-    <p css={linkStyle} className="link">
-      {props.id}
-    </p>
-  </Link>
-)
 
 const Page = forwardRef(({ bgColor, color, children }, ref) => (
   <div

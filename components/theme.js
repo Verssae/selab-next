@@ -1,4 +1,4 @@
-export default {
+const theme =  {
   COLORS: {
     sapphire: "#162e7c",
     vanila: "#fbe8b1",
@@ -9,3 +9,5 @@ export default {
     fontSize: 16
   }
 }
+
+export default theme;
