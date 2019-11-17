@@ -9,6 +9,7 @@ import { useRef, forwardRef } from "react"
 import { jsx, css } from "@emotion/core"
 import Head from "next/head"
 import { Slide, LightSpeed } from "react-reveal"
+import styled from "@emotion/styled"
 
 import theme from "../components/theme"
 import Header from "../components/Header"
@@ -21,6 +22,7 @@ import {
   Content,
   headerContentStyle
 } from "../components/CSS/index"
+import Research from "../components/Research"
 
 const Index = () => {
   const headerStyleStart = {
@@ -73,7 +75,7 @@ const Index = () => {
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </Head>
-      <Container>
+      <Container bgColor={theme.COLORS.sapphire}>
         <Header refs={refs}>
           <div css={headerContentStyle}>
             <HomeLink />
@@ -81,7 +83,7 @@ const Index = () => {
             <PostLink id="Publications" />
           </div>
         </Header>
-        <div>
+        <div >
           <Page bgColor={theme.COLORS.sapphire} color={"white"}>
             <div>
               <Slide left>
@@ -97,13 +99,17 @@ const Index = () => {
           <Page ref={vanilaStart1} bgColor={theme.COLORS.vanila}>
             {`Hello, This is second Page`}
           </Page>
-          <Page
+          {/* <Page
             ref={vanilaEnd1}
             bgColor={theme.COLORS.sapphire}
             color={"white"}
           >
-            {`Hello, This is third Page`}
-          </Page>
+            
+          </Page> */}
+          <Research  ref={vanilaEnd1}
+            bgColor={theme.COLORS.sapphire}
+            color={"white"}/>
+          
           <Page ref={vanilaStart2} bgColor={theme.COLORS.vanila}>
             {`Hello, This is fourth Page`}
           </Page>
@@ -132,5 +138,11 @@ const Page = forwardRef(({ bgColor, color, children }, ref) => (
     <Content>{children}</Content>
   </div>
 ))
+
+const Static = styled.div`
+    width: 100%;
+    height: 100vh;
+    background-color: green;
+`
 
 export default Index

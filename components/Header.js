@@ -56,6 +56,7 @@ const Container = styled.div`
   width: 100%;
   height: ${(props) => props.height}px;
   overflow: hidden;
+  z-index: 100;
 `
 
 const Block = styled.div`

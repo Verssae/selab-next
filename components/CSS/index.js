@@ -5,7 +5,7 @@ export const Container = styled.div`
   margin: 0;
   padding: 0;
   width: 100%;
-  overflow: hidden;
+  background-color: ${props => props.bgColor};
 `
 
 export const linkStyle = css`
