@@ -39,7 +39,7 @@ const Research = forwardRef(({ bgColor, color }, ref) => {
 
     return (
         <Container ref={ref}>
-            <h1>파일 저장 및 공유는 시작에 불과합니다.</h1>
+            <h1>Introducing our research interests</h1>
             <Wrapper bgColor={bgColor} color={color}>
                 <Sticky ref={infoRef}>
                     <ScrollBar y={y} />
@@ -126,7 +126,7 @@ const Sticky = styled.div`
         & {
             position: -webkit-sticky; /* 사파리 브라우저 지원 */
             position: sticky;
-            top: 10vh;
+            top: 100px;
             width: 40%;
             display: flex;
             flex-direction: row;

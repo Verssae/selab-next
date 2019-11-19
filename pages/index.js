@@ -79,7 +79,9 @@ const Index = () => {
         <Header refs={refs}>
           <div css={headerContentStyle}>
             <HomeLink />
-            <PostLink id="Courses" />
+            <PostLink id="Notices" />
+            <PostLink id="Gallery" />
+            <PostLink id="Members" />
             <PostLink id="Publications" />
           </div>
         </Header>
@@ -89,36 +91,29 @@ const Index = () => {
               <Slide left>
                 <p>{`SELab:`}</p>
                 <h1>{`Software Engineering Lab`}</h1>
-                <p>{`Hello, This is first Page`}</p>
+                <p>{`Welcome to our homepage!`}</p>
               </Slide>
               <LightSpeed right>
-                <p onClick={() => scrollTo(vanilaStart1)}>{`To next page`}</p>
+                <p onClick={() => scrollTo(vanilaStart1)}>{`⬇`}</p>
               </LightSpeed>
             </div>
           </Page>
           <Page ref={vanilaStart1} bgColor={theme.COLORS.vanila}>
-            {`Hello, This is second Page`}
+            {`[채울 내용 확정하기(notice shortcut, contact, ...)]`}
           </Page>
-          {/* <Page
-            ref={vanilaEnd1}
-            bgColor={theme.COLORS.sapphire}
-            color={"white"}
-          >
-            
-          </Page> */}
           <Research  ref={vanilaEnd1}
             bgColor={theme.COLORS.sapphire}
             color={"white"}/>
           
           <Page ref={vanilaStart2} bgColor={theme.COLORS.vanila}>
-            {`Hello, This is fourth Page`}
+            {`[Prof & members shortcut page]`}
           </Page>
           <Page
             ref={vanilaEnd2}
             bgColor={theme.COLORS.sapphire}
             color={"white"}
           >
-            {`Hello, This is fifth Page`}
+            {`[Courses page]`}
           </Page>
         </div>
       </Container>

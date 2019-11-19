@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, css, Global } from "@emotion/core"
 import { Fragment } from "react"
-
+import theme from "./theme"
 const Layout = ({ children }) => (
   <Fragment>
     <Global
@@ -12,6 +12,7 @@ const Layout = ({ children }) => (
           padding: 0;
           font-family: Helvetica, Arial, sans-serif;
           font-size: 24px;
+          background-color: ${theme.COLORS.sapphire};
         }
       `}
     />
