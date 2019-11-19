@@ -12,126 +12,116 @@ import { Slide, LightSpeed } from "react-reveal"
 import styled from "@emotion/styled"
 
 import theme from "../components/theme"
-import Header from "../components/Header"
+import CustomHeader from "../components/CustomHeader"
 import Layout from "../components/Layout"
-import PostLink from "../components/PostLink"
-import HomeLink from "../components/HomeLink"
-import {
-  Container,
-  pageStyle,
-  Content,
-  headerContentStyle
-} from "../components/CSS/index"
+import { Container, pageStyle, Content } from "../components/CSS/index"
 import Research from "../components/Research"
 
 const Index = () => {
-  const headerStyleStart = {
-    defaultBgColor: theme.COLORS.sapphire,
-    defaultTextColor: "white",
-    bgColor: theme.COLORS.vanila,
-    textColor: "black"
-  }
-
-  const headerStyleEnd = {
-    defaultBgColor: theme.COLORS.vanila,
-    defaultTextColor: "black",
-    bgColor: theme.COLORS.sapphire,
-    textColor: "white"
-  }
-
-  const scrollTo = (ref) => {
-    ref.current.scrollIntoView({ behavior: "smooth" })
-  }
-
-  const vanilaStart1 = useRef(null)
-  const vanilaEnd1 = useRef(null)
-  const vanilaStart2 = useRef(null)
-  const vanilaEnd2 = useRef(null)
-
-  const refs = [
-    {
-      ref: vanilaStart1,
-      ...headerStyleStart
-    },
-    {
-      ref: vanilaEnd1,
-      ...headerStyleEnd
-    },
-    {
-      ref: vanilaStart2,
-      ...headerStyleStart
-    },
-    {
-      ref: vanilaEnd2,
-      ...headerStyleEnd
+    const headerStyleStart = {
+        defaultBgColor: theme.COLORS.sapphire,
+        defaultTextColor: "white",
+        bgColor: theme.COLORS.vanila,
+        textColor: "black"
     }
-  ]
-  return (
-    <Layout>
-      <Head>
-        <title>{"Software Engineering Lab - Home"}</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-        ></meta>
-      </Head>
-      <Container bgColor={theme.COLORS.sapphire}>
-        <Header refs={refs}>
-          <div css={headerContentStyle}>
-            <HomeLink />
-            <PostLink id="Notices" />
-            <PostLink id="Gallery" />
-            <PostLink id="Members" />
-            <PostLink id="Publications" />
-          </div>
-        </Header>
-        <div >
-          <Page bgColor={theme.COLORS.sapphire} color={"white"}>
-            <div>
-              <Slide left>
-                <p>{`SELab:`}</p>
-                <h1>{`Software Engineering Lab`}</h1>
-                <p>{`Welcome to our homepage!`}</p>
-              </Slide>
-              <LightSpeed right>
-                <p onClick={() => scrollTo(vanilaStart1)}>{`⬇`}</p>
-              </LightSpeed>
-            </div>
-          </Page>
-          <Page ref={vanilaStart1} bgColor={theme.COLORS.vanila}>
-            {`[채울 내용 확정하기(notice shortcut, contact, ...)]`}
-          </Page>
-          <Research  ref={vanilaEnd1}
-            bgColor={theme.COLORS.sapphire}
-            color={"white"}/>
-          
-          <Page ref={vanilaStart2} bgColor={theme.COLORS.vanila}>
-            {`[Prof & members shortcut page]`}
-          </Page>
-          <Page
-            ref={vanilaEnd2}
-            bgColor={theme.COLORS.sapphire}
-            color={"white"}
-          >
-            {`[Courses page]`}
-          </Page>
-        </div>
-      </Container>
-    </Layout>
-  )
+
+    const headerStyleEnd = {
+        defaultBgColor: theme.COLORS.vanila,
+        defaultTextColor: "black",
+        bgColor: theme.COLORS.sapphire,
+        textColor: "white"
+    }
+
+    const scrollTo = (ref) => {
+        ref.current.scrollIntoView({ behavior: "smooth" })
+    }
+
+    const vanilaStart1 = useRef(null)
+    const vanilaEnd1 = useRef(null)
+    const vanilaStart2 = useRef(null)
+    const vanilaEnd2 = useRef(null)
+
+    const refs = [
+        {
+            ref: vanilaStart1,
+            ...headerStyleStart
+        },
+        {
+            ref: vanilaEnd1,
+            ...headerStyleEnd
+        },
+        {
+            ref: vanilaStart2,
+            ...headerStyleStart
+        },
+        {
+            ref: vanilaEnd2,
+            ...headerStyleEnd
+        }
+    ]
+    return (
+        <Layout>
+            <Head>
+                <title>{"Software Engineering Lab - Home"}</title>
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0"
+                ></meta>
+            </Head>
+            <Container bgColor={theme.COLORS.sapphire}>
+                <CustomHeader refs={refs} />
+
+                <div>
+                    <Page bgColor={theme.COLORS.sapphire} color={"white"}>
+                        <div>
+                            <Slide left>
+                                <p>{`SELab:`}</p>
+                                <h1>{`Software Engineering Lab`}</h1>
+                                <p>{`Welcome to our homepage!`}</p>
+                            </Slide>
+                            <LightSpeed right>
+                                <p
+                                    onClick={() => scrollTo(vanilaStart1)}
+                                >{`⬇`}</p>
+                            </LightSpeed>
+                        </div>
+                    </Page>
+                    <Page ref={vanilaStart1} bgColor={theme.COLORS.vanila}>
+                        {`[채울 내용 확정하기(notice shortcut, contact, ...)]`}
+                    </Page>
+                    <Research
+                        ref={vanilaEnd1}
+                        bgColor={theme.COLORS.sapphire}
+                        color={"white"}
+                    />
+
+                    <Page ref={vanilaStart2} bgColor={theme.COLORS.vanila}>
+                        {`[Prof & members shortcut page]`}
+                    </Page>
+                    <Page
+                        ref={vanilaEnd2}
+                        bgColor={theme.COLORS.sapphire}
+                        color={"white"}
+                    >
+                        {`[Courses page]`}
+                    </Page>
+                </div>
+            </Container>
+        </Layout>
+    )
 }
 
 const Page = forwardRef(({ bgColor, color, children }, ref) => (
-  <div
-    ref={ref}
-    css={css`
-      ${pageStyle};
-      background-color: ${bgColor};
-      color: ${color ? color : "black"};
-    `}
-  >
-    <Content>{children}</Content>
-  </div>
+    <div
+        ref={ref}
+        css={css`
+            ${pageStyle};
+            background-color: ${bgColor};
+            color: ${color ? color : "black"};
+        `}
+    >
+        <Content>{children}</Content>
+    </div>
 ))
 
 const Static = styled.div`
