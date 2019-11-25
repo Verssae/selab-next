@@ -21,7 +21,7 @@ export const HomeLink = () => (
 )
 
 export const PostLink = (props) => (
-  <Link href="/slides/[id]" as={`/slides/${props.id}`}>
+  <Link href="/example" as={`/example/${props.id}`}>
     <a css={linkStyle}>{props.id}</a>
   </Link>
 )

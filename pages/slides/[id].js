@@ -1,75 +1,98 @@
-/** @jsx jsx */
-/*
-TODO:
-- [ ] choose slide library or not
-- [ ] make slide layout associative with header
-*/
-
-//FIXME:  this is temp component for slide
-
-import { Fragment, useRef, forwardRef } from "react"
-import { useRouter } from "next/router"
+/**@jsx jsx */
 import { jsx, css, Global } from "@emotion/core"
+import styled from "@emotion/styled"
+import Markdown from "../../components/Markdown"
+import slidesContents from "../../slides/"
+import { useRouter } from "next/router"
 import Head from "next/head"
-import Link from "next/link"
-import CustomHeader from "../../components/CustomHeader"
+import { useState, useEffect } from "react"
 import theme from "../../components/theme"
+import Footer from "../../components/Footer"
+import SlideHeader from "../../components/SlideHeader"
 
-import { Container, pageStyle, Content } from "../../components/CSS/index"
-import Layout from "../../components/Layout"
+const Slide = ({ id }) => {
+  const [page, setPage] = useState(0)
+  const slides = slidesContents[id].contents.split("---")
+  const chapters = slidesContents.map(({title}) => (title))
+  
 
-const Presentation = () => {
-    const router = useRouter()
-    const headerStyle = {
-        defaultBgColor: theme.COLORS.sapphire,
-        defaultTextColor: "white",
-        bgColor: theme.COLORS.sapphire,
-        textColor: "white"
+  const goNext = () =>
+    setPage((page) => (page < slides.length - 1 ? page + 1 : page))
+
+  const goPrev = () => setPage((page) => (page > 0 ? page - 1 : page))
+
+  const options = slides.map((text) =>
+    text
+      .trim()
+      .split("\n")[0]
+      .replace(/^# /, "")
+  )
+
+
+  useEffect(() => {
+    const keyDownHandler = ({ key }) => {
+      if (key === "ArrowLeft") {
+        goPrev()
+      } else if (key === "ArrowRight") {
+        goNext()
+      }
     }
+    window.addEventListener("keydown", keyDownHandler)
+    return () => {
+      window.removeEventListener("keydown", keyDownHandler)
+    }
+  }, [])
 
-    const slideContent = useRef(null)
-
-    const refs = [
-        {
-            ref: slideContent,
-            ...headerStyle
-        }
-    ]
-    return (
-        <Layout>
-            <Head>
-                <title>{`Software Engineering Lab - Slide ${router.query.id}`}</title>
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1.0"
-                ></meta>
-            </Head>
-            <Container>
-                <CustomHeader />
-                <div>
-                    <Page
-                        ref={slideContent}
-                        bgColor={theme.COLORS.sapphire}
-                        color={"white"}
-                    ></Page>
-                </div>
-            </Container>
-        </Layout>
-    )
+  return (
+    <Layout>
+      <Head>
+        <title>{`Software Engineering Lab - Slide ${id} `}</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
+      </Head>
+      <SlideHeader options={options} callback={setPage} page={page}>
+        {options[page]}
+      </SlideHeader>
+      <div>{slides ? <Markdown value={slides[page]} isHeading={true}/> : "Loading"}</div>
+      <Footer
+        goPrev={goPrev}
+        goNext={goNext}
+        page={page}
+        chapters={chapters}
+        max={slides.length}
+        chapter={id}
+        
+      >
+        <h1>{"CSE326: Web Application Development"}</h1>
+        <h2>{slidesContents[id].title}</h2>
+      </Footer>
+    </Layout>
+  )
 }
 
-const Page = forwardRef(({ bgColor, color, children }, ref) => (
-    <div
-        ref={ref}
-        css={css`
-            ${pageStyle};
-            height: 100vh;
-            background-color: ${bgColor};
-            color: ${color ? color : "black"};
-        `}
-    >
-        <Content>{children}</Content>
-    </div>
-))
+Slide.getInitialProps = async ({ query }) => {
+  const { id } = query
+  return { id }
+}
 
-export default Presentation
+const Layout = ({ children }) => (
+  <div>
+    <Global
+      styles={css`
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: Helvetica, Arial, sans-serif;
+        }
+      `}
+    />
+    {children}
+  </div>
+)
+
+
+
+export default Slide

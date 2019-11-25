@@ -15,9 +15,12 @@
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
     "next": "^9.1.2",
-    "now": "^16.5.0",
+    "now": "^16.6.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-reveal": "^1.2.2"
+    "react-dropdown": "^1.6.4",
+    "react-markdown": "^4.2.2",
+    "react-reveal": "^1.2.2",
+    "react-syntax-highlighter": "^11.0.2"
   }
 }
