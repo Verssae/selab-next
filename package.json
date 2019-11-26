@@ -17,6 +17,7 @@
     "next": "^9.1.2",
     "now": "^16.6.0",
     "react": "^16.11.0",
+    "react-content-loader": "^4.3.2",
     "react-dom": "^16.11.0",
     "react-dropdown": "^1.6.4",
     "react-markdown": "^4.2.2",

@@ -15,7 +15,7 @@ import Link from "next/link"
 import CustomHeader from "../components/CustomHeader"
 import theme from "../components/theme"
 
-import { Container, pageStyle, Content } from "../components/CSS/index"
+import { Container, pageStyle, Content } from "../components/pages/index"
 import Layout from "../components/Layout"
 
 const Presentation = () => {

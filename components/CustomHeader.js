@@ -1,13 +1,18 @@
 import Header from "./Header"
-import { HomeLink, PostLink } from "./Links"
+import { HomeLink, PostLink, StyleLink } from "./Links"
+import Link from "next/link"
 
 const CustomHeader = ({ refs, options }) => (
     <Header refs={refs} options={options}>
         <HomeLink />
         <PostLink id="Notices" />
-        <PostLink id="Gallery" />
+        <Link href="/gallery">
+            <StyleLink>Gallery</StyleLink>
+        </Link>
         <PostLink id="Members" />
-        <PostLink id="Publications" />
+        <Link href="/publications">
+            <StyleLink>Publications</StyleLink>
+        </Link>
     </Header>
 )
 
