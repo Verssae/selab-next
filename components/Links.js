@@ -10,7 +10,6 @@ const linkStyle = css`
   margin-left: 1vw;
   margin-right: 1vw;
   font-weight: bold;
-  color: white;
 
   &:hover {
     color: ${theme.COLORS.vanila};
