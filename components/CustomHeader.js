@@ -6,6 +6,9 @@ const CustomHeader = ({ refs, options }) => (
     <Header refs={refs} options={options}>
         <HomeLink />
         <PostLink id="Notices" />
+        <Link href="/courses">
+          <StyleLink>Courses</StyleLink>
+        </Link>
         <Link href="/gallery">
             <StyleLink>Gallery</StyleLink>
         </Link>
