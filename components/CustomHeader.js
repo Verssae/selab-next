@@ -5,6 +5,9 @@ import Link from "next/link"
 const CustomHeader = ({ refs, options }) => (
     <Header refs={refs} options={options}>
         <HomeLink />
+        <Link href="/courses">
+          <StyleLink>Courses</StyleLink>
+        </Link>
         <Link href="/notices">
             <StyleLink>Notices</StyleLink>
         </Link>
