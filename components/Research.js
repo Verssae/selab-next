@@ -77,9 +77,9 @@ const Research = forwardRef(({ bgColor, color }, ref) => {
                 </Sticky>
 
                 <Right ref={imgRef}>
-                    <img src="web_securitymodified.png" alt="web_security" />
-                    <img src="formalmethod.png" alt="formalmethod" />
-                    <img src="RE.png" alt="RE" />
+                    <img src="research/web_securitymodified.png" alt="web_security" />
+                    <img src="research/formalmethod.png" alt="formalmethod" />
+                    <img src="research/RE.png" alt="RE" />
                 </Right>
             </Wrapper>
             <div></div>
