@@ -18,6 +18,11 @@ import Layout from "../components/Layout"
 import { Container, pageStyle, Content } from "../components/pages/index"
 import Research from "../components/Research"
 
+import {nav_elim} from "./nav_elim"
+
+console.log(nav_elim)
+console.log(nav_elim)
+
 const Index = () => {
   const headerStyleStart = {
     defaultBgColor: theme.COLORS.sapphire,
@@ -61,7 +66,8 @@ const Index = () => {
     }
   ]
   return (
-    <Layout>
+    <Layout names = {"quiz"} links={""}>
+    
       <Head>
         <title>{"Software Engineering Lab - Home"}</title>
         <meta
@@ -69,52 +75,53 @@ const Index = () => {
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </Head>
-      <Container bgColor={theme.COLORS.sapphire}>
-        <CustomHeader refs={refs} />
+        <Container bgColor={theme.COLORS.sapphire}>
+          <CustomHeader refs={refs} />
 
-        <div>
-          <Page bgColor={theme.COLORS.sapphire} color={"white"}>
-            <div>
-              <Slide left>
-                <p>{`SELab:`}</p>
-                <h1>{`Software Engineering Lab`}</h1>
-                <p>{`Welcome to our homepage!`}</p>
-              </Slide>
-              <LightSpeed right>
-                <p onClick={() => scrollTo(vanilaStart1)}>{`⬇`}</p>
-              </LightSpeed>
-            </div>
-          </Page>
-          <Page ref={vanilaStart1} bgColor={theme.COLORS.vanila}>
-            <div>
-              {`[채울 내용 확정하기(notice shortcut, contact, ...)]`}
-              {`slide test`}
-              <Link href="/slides/0">
-                <a>Slide 0</a>
-              </Link>
-              <Link href="/slides/1">
-                <a>Slide 1</a>
-              </Link>
-            </div>
-          </Page>
-          <Research
-            ref={vanilaEnd1}
-            bgColor={theme.COLORS.sapphire}
-            color={"white"}
-          />
+          <div>
+            <Page bgColor={theme.COLORS.sapphire} color={"white"}>
+              <div>
+                <Slide left>
+                  <p>{`SELab:`}</p>
+                  <h1>{`Software Engineering Lab`}</h1>
+                  <p>{`Welcome to our homepage!`}</p>
+                </Slide>
+                <LightSpeed right>
+                  <p onClick={() => scrollTo(vanilaStart1)}>{`⬇`}</p>
+                </LightSpeed>
+              </div>
+            </Page>
+            <Page ref={vanilaStart1} bgColor={theme.COLORS.vanila}>
+              <div>
+                {`[채울 내용 확정하기(notice shortcut, contact, ...)]`}
+                {`slide test`}
+                <Link href="/slides/0">
+                  <a>Slide 0</a>
+                </Link>
+                <Link href="/slides/1">
+                  <a>Slide 1</a>
+                </Link>
+              </div>
+            </Page>
+            <Research
+              ref={vanilaEnd1}
+              bgColor={theme.COLORS.sapphire}
+              color={"white"}
+            />
 
-          <Page ref={vanilaStart2} bgColor={theme.COLORS.vanila}>
-            {`[Prof & members shortcut page]`}
-          </Page>
-          <Page
-            ref={vanilaEnd2}
-            bgColor={theme.COLORS.sapphire}
-            color={"white"}
-          >
-            {`[Courses page]`}
-          </Page>
-        </div>
-      </Container>
+            <Page ref={vanilaStart2} bgColor={theme.COLORS.vanila}>
+              {`[Prof & members shortcut page]`}
+            </Page>
+            <Page
+              ref={vanilaEnd2}
+              bgColor={theme.COLORS.sapphire}
+              color={"white"}
+            >
+              {`[Courses page]`}
+            </Page>
+          </div>
+          
+        </Container>
     </Layout>
   )
 }

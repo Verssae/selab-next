@@ -13,12 +13,12 @@ export const All = styled.div`
 
 export const ImageBox = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   padding: 10px;
-  width: 1050px;
-  height: 630px;
+  width: 100%;
+  height: 90vh;
   overflow: scroll;
   border-left: ${theme.COLORS.vanila} solid;
   padding-left: 50px;
