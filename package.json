@@ -25,6 +25,7 @@
     "next": "^9.1.2",
     "now": "^16.6.0",
     "react": "^16.11.0",
+    "react-burger-menu": "^2.6.13",
     "react-content-loader": "^4.3.2",
     "react-dom": "^16.11.0",
     "react-dropdown": "^1.6.4",

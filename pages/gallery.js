@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { All, ImageBox, Image, Nav, NavAnchor } from "../components/pages/gallery"
+import { All, ImageBox, Image, Nav, NavAnchor } from "../components/pages/publication_gallery"
 import CustomHeader from "../components/CustomHeader"
 import Layout from "../components/Layout"
 
