@@ -30,6 +30,7 @@ const CustomHeader = ({ refs, options }) => (
     </Link>
     <Burger />
   </Header>
+
 )
 
 const Burger = () => {

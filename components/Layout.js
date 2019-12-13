@@ -2,8 +2,23 @@
 import { jsx, css, Global } from "@emotion/core"
 import { Fragment } from "react"
 import theme from "./theme"
-const Layout = ({ children }) => (
-  <Fragment  id="outer-container">
+
+import Sidebar from "./Sidebar"
+
+const sidebarstyle ={
+    position: "fixed",
+    textAlign: "center",
+    fontSize: "0.7em",
+    //color: "#AAAABB",
+    width: "200px",
+    height : "1000px",
+    right : "0px",
+    rop: "0px",
+    zIndex: "25"
+}
+
+const Layout = ({ children, names, links }) => (
+  <Fragment>
     <Global
       styles={css`
         html,
@@ -21,6 +36,7 @@ const Layout = ({ children }) => (
       `}
     />
     {children}
+    <Sidebar names={names} links={links}></Sidebar>
   </Fragment>
 )
 

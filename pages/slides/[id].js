@@ -10,6 +10,8 @@ import theme from "../../components/theme"
 import Footer from "../../components/Footer"
 import SlideHeader from "../../components/SlideHeader"
 
+import Sidebar from "../../components/Sidebar"
+
 const Slide = ({ id }) => {
   const [page, setPage] = useState(0)
   const slides = slidesContents[id].contents.split("---")
@@ -90,6 +92,7 @@ const Layout = ({ children }) => (
       `}
     />
     {children}
+    <Sidebar names = {"quiz"} links = {""}></Sidebar>
   </div>
 )
 
