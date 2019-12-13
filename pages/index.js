@@ -75,9 +75,9 @@ const Index = () => {
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </Head>
-        <Container bgColor={theme.COLORS.sapphire}>
-          <CustomHeader refs={refs} />
 
+      <Container id="page-wrap" bgColor={theme.COLORS.sapphire}>
+        <CustomHeader refs={refs} />
           <div>
             <Page bgColor={theme.COLORS.sapphire} color={"white"}>
               <div>
@@ -128,14 +128,14 @@ const Index = () => {
 
 const Page = forwardRef(({ bgColor, color, children }, ref) => (
   <div
-    ref={ref}
     css={css`
-      ${pageStyle};
       background-color: ${bgColor};
       color: ${color ? color : "black"};
     `}
   >
-    <Content>{children}</Content>
+    <Content css={pageStyle} ref={ref}>
+      {children}
+    </Content>
   </div>
 ))
 

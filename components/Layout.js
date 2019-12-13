@@ -2,6 +2,7 @@
 import { jsx, css, Global } from "@emotion/core"
 import { Fragment } from "react"
 import theme from "./theme"
+
 import Sidebar from "./Sidebar"
 
 const sidebarstyle ={
@@ -26,12 +27,16 @@ const Layout = ({ children, names, links }) => (
           padding: 0;
           font-family: Helvetica, Arial, sans-serif;
           font-size: 24px;
+          width: 100%;
+          @media screen and (max-width: 480px) {
+            font-size: 12px;
+          }
           background-color: ${theme.COLORS.sapphire};
         }
       `}
     />
     {children}
-    <Sidebar names = {names} links = {links}></Sidebar>
+    <Sidebar names={names} links={links}></Sidebar>
   </Fragment>
 )
 
