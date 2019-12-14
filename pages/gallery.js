@@ -37,8 +37,8 @@ const Gallery = ({ data }) => {
           </NavOption>
         </Nav>
         <ImageBox>
-          {data[content].map(({ path, title }) => (
-            <Photo path={path} title={title} />
+          {data[content].map(({ path, title }, id) => (
+            <Photo key={id} path={path} title={title} />
           ))}
         </ImageBox>
       </All>

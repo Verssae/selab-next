@@ -34,9 +34,9 @@ export const Content = styled.div`
     font-size: 6pt;
   }
   margin-top: 3%;
-  & div:first-child {
-    /* border: ; */
-  }
+  /* & div:first-child {
+    border: ;
+  } */
 `
 export const Smallmenu = styled.div`
   display: inline-flex;

@@ -18,10 +18,6 @@ import Layout from "../components/Layout"
 import { Container, pageStyle, Content } from "../components/pages/index"
 import Research from "../components/Research"
 
-import {nav_elim} from "./nav_elim"
-
-console.log(nav_elim)
-console.log(nav_elim)
 
 const Index = () => {
   const headerStyleStart = {

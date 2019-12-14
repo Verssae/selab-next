@@ -12,7 +12,7 @@ const Members = () => {
           <h1>Professor</h1>
           <Subject>
             <img src="members/scott.jpg" alt="scott" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Scott Uk-Jin Lee</h3></li>
                 <li>scottlee@hanyang.ac.kr</li>
@@ -23,7 +23,7 @@ const Members = () => {
                 </li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <p>Career</p>
               <ul>
                 <li>11 - &nbsp;&nbsp;&nbsp; : Assistant Professor in CSE Dept. @ Hanyang University, Korea</li>
@@ -40,7 +40,7 @@ const Members = () => {
           <h1>Ph.D.</h1>
           <Subject>
             <img src="members/ph.D/isma.jpg" alt="isma" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Isma Farah</h3></li>
                 <li>isma2012@hanyang.ac.kr</li>
@@ -48,7 +48,7 @@ const Members = () => {
                 <li>PhD scholar From Pakistan on HEC Scholarship</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Software Engineering</li>
@@ -61,7 +61,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/ph.D/photo_(1).jpg" alt="abdul" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Abdul Rahim</h3></li>
                 <li>rahim750413@hanyang.ac.kr</li>
@@ -69,7 +69,7 @@ const Members = () => {
                 <li>Master's leading to Phd scholar from Kuala Lumpur,Malaysia</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Software Engineering</li>
@@ -80,7 +80,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/ph.D/Untitled.jpg" alt="asad" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Asad Abbas</h3></li>
                 <li>asadabbas@hanyang.ac.kr</li>
@@ -89,7 +89,7 @@ const Members = () => {
                   From Pakistan</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Software Engineering</li>
@@ -99,7 +99,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/ph.D/gichan.jpg" alt="Gichan Lee" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Gichan Lee</h3></li>
                 <li>fantasyopy@gmail.com</li>
@@ -108,7 +108,7 @@ const Members = () => {
                   M.E. to Ph.D.</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Software Engineering in practice</li>
@@ -118,7 +118,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/ph.D/mohsin.jpg" alt="Mohsin Javaid" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Mohsin Javaid</h3></li>
                 <li>mohsinjavaid@hanyang.ac.kr</li>
@@ -126,7 +126,7 @@ const Members = () => {
                 <li>Ph.D. Scholar from Pakistan on HEC Scholarship.</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Software Engineering</li>
@@ -139,7 +139,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/ph.D/khan.jpg" alt="khan" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Muhammad Umair Khan</h3></li>
                 <li>mumairkhan@hanyang.ac.kr</li>
@@ -147,7 +147,7 @@ const Members = () => {
                 <li>Ph.D. Scholar from Pakistan on HEC scholarship</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Software Engineering</li>
@@ -161,7 +161,7 @@ const Members = () => {
           <h1>M.E.</h1>
           <Subject>
             <img src="members/M.E/11.jpg" alt="gayeon" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Gayeon Kim</h3></li>
                 <li>gayeonkim91@gmail.com</li>
@@ -169,7 +169,7 @@ const Members = () => {
                 <li>Hi</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Software Engineering</li>
@@ -180,7 +180,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/placeholder.png" alt="no_photo" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Seonwoong Kim</h3></li>
                 <li>oung123@hanmail.net</li>
@@ -188,7 +188,7 @@ const Members = () => {
                 <li>Wussup</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Software Engineering</li>
@@ -199,7 +199,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/M.E/325115318014822206.jpg" alt="wu" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Wu Zhiqiang</h3></li>
                 <li>hhhwwwuuu@hanyang.ac.kr</li>
@@ -207,7 +207,7 @@ const Members = () => {
                 <li>-</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Software Engineering</li>
@@ -218,7 +218,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/M.E/gif.gif" alt="gwanggyu" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Gwanggye Choi</h3></li>
                 <li>gcahmoei@hanyang.ac.kr</li>
@@ -226,7 +226,7 @@ const Members = () => {
                 <li>.</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Software engineering</li>
@@ -236,7 +236,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/M.E/140x175.jpg" alt="hyunglak" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Hyunglak Kim</h3></li>
                 <li>jikuaij@gmail.com</li>
@@ -244,7 +244,7 @@ const Members = () => {
                 <li>Hi</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Software Engineering</li>
@@ -256,7 +256,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/placeholder.png" alt="no_photo" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Youn Guen Ahn</h3></li>
                 <li>frebern@naver.com</li>
@@ -264,7 +264,7 @@ const Members = () => {
                 <li>TBA</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Java, Android</li>
@@ -273,7 +273,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/placeholder.png" alt="no_photo" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Kyojune Hwang</h3></li>
                 <li></li>
@@ -281,7 +281,7 @@ const Members = () => {
                 <li></li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
               </ul>
@@ -289,7 +289,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/placeholder.png" alt="no_photo" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Hakjin Lee</h3></li>
                 <li>gsdjini91@gmail.com</li>
@@ -297,7 +297,7 @@ const Members = () => {
                 <li></li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Smell Detection</li>
@@ -311,7 +311,7 @@ const Members = () => {
           <h1>Intern</h1>
           <Subject>
             <img src="members/Intern/CAM00259.jpg" alt="dahae" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Dahae Sung</h3></li>
                 <li>sdh4513136@hanmail.net</li>
@@ -319,7 +319,7 @@ const Members = () => {
                 <li>:)</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li></li>
@@ -328,7 +328,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/placeholder.png" alt="no_photo" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Yongtaek Oh</h3></li>
                 <li>ka123ak1@gmail.com</li>
@@ -336,7 +336,7 @@ const Members = () => {
                 <li></li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>IoT</li>
@@ -345,7 +345,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/placeholder.png" alt="no_photo" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Namju Park</h3></li>
                 <li>qkrska66@hanyang.ac.kr</li>
@@ -353,7 +353,7 @@ const Members = () => {
                 <li></li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li></li>
@@ -365,7 +365,7 @@ const Members = () => {
           <h1>Alumni</h1>
           <Subject>
             <img src="members/placeholder.png" alt="no_photo" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Jaejin Kim</h3></li>
                 <li>jaejinkim@hanyang.ac.kr</li>
@@ -374,7 +374,7 @@ const Members = () => {
                 <li>2014 - Software Engineer in Cloud Lab. B2B / Samsung Electronics Mobile Communications Business</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>- Access Control in Ubiquitous</li>
@@ -387,7 +387,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/Alumni/1.jpg" alt="jiang" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Jiang Hua</h3></li>
                 <li>jh19880208@163.com</li>
@@ -395,7 +395,7 @@ const Members = () => {
                 <li>0.0</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Requirement Engineering</li>
@@ -404,7 +404,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/Alumni/IMG_2242.jpg" alt="jaeho" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Jaeho Choi</h3></li>
                 <li>jaeho34@hanyang.ac.kr</li>
@@ -412,7 +412,7 @@ const Members = () => {
                 <li>Hi, guys!! I am a crazy boy in this area :-)</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
                 <li>Software Engineering</li>
@@ -425,7 +425,7 @@ const Members = () => {
           </Subject>
           <Subject>
             <img src="members/Alumni/IMG_0889.jpg" alt="geunhwan" />
-            <div class="left_info">
+            <div className="left_info">
               <ul>
                 <li><h3>Geunhwan Park</h3></li>
                 <li>0101d8cf@gmail.com</li>
@@ -433,7 +433,7 @@ const Members = () => {
                 <li>Hi</li>
               </ul>
             </div>
-            <div class="right_info">
+            <div className="right_info">
               <h2>research_interests</h2>
               <ul>
               </ul>

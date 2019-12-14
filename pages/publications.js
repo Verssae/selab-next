@@ -36,8 +36,8 @@ const Publications = ({ data }) => {
           </NavOption>
         </Nav>
         <PublicationBox>
-          {data[content].map(({ path, title }) => (
-            <Publication path={path} title={title} />
+          {data[content].map(({ path, title }, id) => (
+            <Publication key={id} path={path} title={title} />
           ))}
         </PublicationBox>
       </All>
