@@ -46,4 +46,7 @@ export const PostLink = (props) => (
 
 export const StyleLink = styled.a`
   ${linkStyle};
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
 `

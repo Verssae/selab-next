@@ -2,36 +2,35 @@
 import { css, jsx } from "@emotion/core"
 import styled from "@emotion/styled"
 import Header from "./Header"
-import { HomeLink, PostLink, StyleLink } from "./Links"
+import { HomeLink, StyleLink } from "./Links"
 import Link from "next/link"
 import Menu from "react-burger-menu/lib/menus/slide"
-import BurgerIcon from "react-burger-menu"
-import BurgerMenu from "react-burger-menu"
-import { useState } from "react"
-import theme from "./theme"
+import Router from 'next/router'
 
-const CustomHeader = ({ refs, options }) => (
-  <Header refs={refs} options={options}>
-    <HomeLink />
-    <Link href="/courses">
-      <StyleLink>Courses</StyleLink>
-    </Link>
-    <Link href="/notices">
-      <StyleLink>Notices</StyleLink>
-    </Link>
-    <Link href="/gallery">
-      <StyleLink>Gallery</StyleLink>
-    </Link>
-    <Link href="/members">
-      <StyleLink>Members</StyleLink>
-    </Link>
-    <Link href="/publications">
-      <StyleLink>Publications</StyleLink>
-    </Link>
-    <Burger />
-  </Header>
 
-)
+const CustomHeader = ({ refs, options }) => {
+  return (
+    <Header refs={refs} options={options}>
+      <HomeLink />
+      <Link href="/courses">
+        <StyleLink>Courses</StyleLink>
+      </Link>
+      <Link href="/notices">
+        <StyleLink>Notices</StyleLink>
+      </Link>
+      <Link href="/gallery">
+        <StyleLink>Gallery</StyleLink>
+      </Link>
+      <Link href="/members">
+        <StyleLink>Members</StyleLink>
+      </Link>
+      <Link href="/publications">
+        <StyleLink>Publications</StyleLink>
+      </Link>
+      <Burger />
+    </Header>
+  )
+}
 
 const Burger = () => {
   return (
@@ -43,80 +42,81 @@ const Burger = () => {
       customBurgerIcon={<img src="menu.svg" />}
       customCrossIcon={<img src="cross.svg" />}
     >
-      <Link href="/courses">
-        <Anchor>Courses</Anchor>
-      </Link>
-      <Link href="/notices">
-        <Anchor>Notices</Anchor>
-      </Link>
-      <Link href="/gallery">
-        <Anchor>Gallery</Anchor>
-      </Link>
-      <Link href="/members">
-        <Anchor>Members</Anchor>
-      </Link>
-      <Link href="/publications">
-        <Anchor>Publications</Anchor>
-      </Link>
+      
+        <Anchor url={"/"} >Home</Anchor>
+
+  
+        <Anchor url={"courses"} >Courses</Anchor>
+     
+        <Anchor url={"/notices"} >Notices</Anchor>
+     
+        <Anchor url={"/gallery"} >Gallery</Anchor>
+     
+        <Anchor url={"/members"} >Members</Anchor>
+     
+        <Anchor url={"/publications"} >Publications</Anchor>
     </Menu>
   )
 }
 
-const Anchor = styled.a`
-  display: block;
-`
+
+const Anchor = (props) => (
+  <a css={css`display:block;`} onClick={() => Router.push(`${props.url}`)}>
+    {props.children}
+  </a>
+)
+
 
 var styles = {
   bmBurgerButton: {
-    position: 'fixed',
-    width: '36px',
-    height: '30px',
-    right: '36px',
-    top: '36px'
+    position: "fixed",
+    width: "36px",
+    height: "30px",
+    right: "36px",
+    top: "36px"
   },
   bmBurgerBars: {
-    background: '#373a47'
+    background: "#373a47"
   },
   bmBurgerBarsHover: {
-    background: '#a90000'
+    background: "#a90000"
   },
   bmCrossButton: {
-    height: '24px',
-    width: '24px'
+    height: "24px",
+    width: "24px"
   },
   bmCross: {
-    background: 'rgba(0, 0, 0, 0.3)'
+    background: "rgba(0, 0, 0, 0.3)"
   },
   bmMenuWrap: {
-    position: 'fixed',
+    position: "fixed",
     // height: '100%',
     top: 0,
-    right: 0,
-    
+    right: 0
   },
   bmMenu: {
-    background: '#373a47',
-    padding: '2.5em 1.5em 0',
-    fontSize: '1.15em',
-    overflow: 'hidden',
+    background: "#373a47",
+    padding: "2.5em 1.5em 0",
+    fontSize: "1.15em",
+    overflow: "hidden"
   },
   bmMorphShape: {
-    fill: '#373a47',
-    background: "red",
+    fill: "#373a47",
+    background: "red"
   },
   bmItemList: {
-    color: '#b8b7ad',
-    padding: '0.8em'
+    color: "#b8b7ad",
+    padding: "0.8em"
   },
   bmItem: {
-    display: 'inline-block'
+    display: "inline-block"
   },
   bmOverlay: {
-    background: 'rgba(0, 0, 0, 0.3)',
+    background: "rgba(0, 0, 0, 0.3)",
     width: "100vw",
     position: "fixed",
     top: 0,
-    left:0,
+    left: 0
   }
 }
 
