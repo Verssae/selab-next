@@ -1,21 +1,21 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core"
+import { useState } from "react"
+import withApollo from "../lib/apollo"
 import Layout from "../components/Layout"
 import { Title } from "../components/pages/courses"
 import CustomHeader from "../components/CustomHeader"
 
-import withApollo from "../lib/apollo"
-import CourseTable from "../components/CourseTable"
+import QuizList from "../components/QuizList"
 
-const Courses = () => {
+const Quiz = () => {
   return (
     <Layout>
       <CustomHeader />
-      <Title>COURSES</Title>
-      <CourseTable degree="Undergraduate" />
-      <CourseTable degree="Postgraduate" />
+      <Title>QUIZ</Title>
+      <QuizList />
     </Layout>
   )
 }
 
-export default withApollo(Courses)
+export default withApollo(Quiz)
