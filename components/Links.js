@@ -6,13 +6,13 @@ import styled from "@emotion/styled"
 import theme from "./theme"
 
 const linkStyle = css`
-  font-size: 20px;
   margin-left: 1vw;
   margin-right: 1vw;
   font-weight: bold;
 
   &:hover {
-    color: ${theme.COLORS.vanila};
+    /* text-shadow: 2px 2px 2px gray; */
+    opacity: 0.7;
   }
 `
 
@@ -46,7 +46,7 @@ export const PostLink = (props) => (
 
 export const StyleLink = styled.a`
   ${linkStyle};
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 850px) {
     display: none;
   }
 `

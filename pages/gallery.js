@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { All, ImageBox, Image, Nav, NavAnchor } from "../components/pages/publication_gallery"
+import styled from "@emotion/styled"
+import theme from "../components/theme"
 import CustomHeader from "../components/CustomHeader"
 import Layout from "../components/Layout"
 
@@ -18,13 +20,16 @@ const NavOption = ({ number, onClick, content, children }) => (
   </NavAnchor>
 )
 
+
 const Gallery = ({ data }) => {
   const [content, setContent] = useState(0)
   console.log(data)
   return (
     <Layout>
       <CustomHeader />
+      
       <All>
+      <h1>Gallery</h1>
         <Nav>
           <NavOption number={0} onClick={setContent} content={content}>
             Social-Activity

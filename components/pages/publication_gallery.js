@@ -11,6 +11,9 @@ export const All = styled.div`
   margin-left: 10%;
   margin-right: 10%;
   margin-bottom: 10%;
+  & h1 {
+    color: ${theme.COLORS.vanila};
+  }
 `
 export const PublicationBox = styled.div`
   display: flex;

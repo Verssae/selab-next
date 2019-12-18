@@ -9,8 +9,7 @@ import { useState, useEffect } from "react"
 import theme from "../../components/theme"
 import Footer from "../../components/Footer"
 import SlideHeader from "../../components/SlideHeader"
-
-import Sidebar from "../../components/Sidebar"
+import Burger from "../../components/Burger"
 
 const Slide = ({ id }) => {
   const [page, setPage] = useState(0)
@@ -57,6 +56,7 @@ const Slide = ({ id }) => {
       <SlideHeader options={options} callback={setPage} page={page}>
         {options[page]}
       </SlideHeader>
+      <Burger />
       <div>{slides ? <Markdown value={slides[page]} isHeading={true}/> : "Loading"}</div>
       <Footer
         goPrev={goPrev}
@@ -92,7 +92,6 @@ const Layout = ({ children }) => (
       `}
     />
     {children}
-    <Sidebar names = {"quiz"} links = {""}></Sidebar>
   </div>
 )
 

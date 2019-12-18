@@ -36,7 +36,7 @@ const Layout = ({ children, names, links }) => (
       `}
     />
     {children}
-    <Sidebar names={names} links={links}></Sidebar>
+    {/* <Sidebar names={names} links={links}></Sidebar> */}
   </Fragment>
 )
 

@@ -1,4 +1,3 @@
-import { useState } from "react"
 import {All,Bigtitle,Content,List,Smallmenu} from "../components/pages/notices"
 import CustomHeader from "../components/CustomHeader"
 import Layout from "../components/Layout"

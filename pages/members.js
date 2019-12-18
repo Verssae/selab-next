@@ -1,5 +1,5 @@
 import { useState } from "react"
-import {Contents, Section, Subject} from "../components/pages/members"
+import {Contents, Section, Subject, Title} from "../components/pages/members"
 import CustomHeader from "../components/CustomHeader"
 import Layout from "../components/Layout"
 
@@ -8,6 +8,7 @@ const Members = () => {
     <Layout>
       <CustomHeader />
       <Contents>
+        <Title>Members</Title>
         <Section>
           <h1>Professor</h1>
           <Subject>

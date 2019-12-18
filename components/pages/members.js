@@ -1,6 +1,12 @@
 import styled from "@emotion/styled"
 import theme from "../theme"
 
+export const Title = styled.h1`
+  font-size: 48px;
+  color: ${theme.COLORS.vanila};
+  margin: auto;
+`
+
 export const Contents = styled.div`
   display: flex;
   flex-flow: column;

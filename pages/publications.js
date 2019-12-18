@@ -21,6 +21,7 @@ const Publications = ({ data }) => {
     <Layout>
       <CustomHeader />
       <All>
+        <h1>Publications</h1>
         <Nav>
           <NavOption onClick={setContent} number={0} content={content}>
             International Conference

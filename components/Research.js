@@ -44,24 +44,25 @@ const Research = forwardRef(({ bgColor, color }, ref) => {
         <Sticky ref={infoRef}>
           <ScrollBar y={y} />
           <Info>
-            <h2>{`Web & Web security`}</h2>
             <InfoUl isHighlight={isHighlight == 0}>
+              <h2>{`Web & Web security`}</h2>
               <li>Semantic web</li>
               <li>Effective Access Control for Web Data</li>
               <li>Vulnerability Analysis and Detection for HTML5</li>
               <li>JavaScript and Hybrid Application</li>
             </InfoUl>
             <br />
-            <h2>{`Formal Engineering Methods`}</h2>
+
             <InfoUl isHighlight={isHighlight == 1}>
+              <h2>{`Formal Engineering Methods`}</h2>
               <li>Semantic web</li>
               <li>Effective Access Control for Web Data</li>
               <li>Vulnerability Analysis and Detection for HTML5</li>
               <li>JavaScript and Hybrid Application</li>
             </InfoUl>
             <br />
-            <h2>{`Requirement Engineering`}</h2>
             <InfoUl isHighlight={isHighlight == 2}>
+              <h2>{`Requirement Engineering`}</h2>
               <li>Semantic web</li>
               <li>Effective Access Control for Web Data</li>
               <li>Vulnerability Analysis and Detection for HTML5</li>
@@ -83,16 +84,24 @@ const Research = forwardRef(({ bgColor, color }, ref) => {
 
 const Right = styled.div`
   position: absolute;
-  right: 0;
-  width: 60%;
+  left: 50vw;
+  /* width: 60%; */
   height: 2000px;
   top: 10vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   & img {
-    width: 300px;
+    width: 400px;
     /* margin-bottom: 20vh; */
+  }
+
+  @media screen and (max-width: 850px) {
+    & img {
+    display: none;
+    /* margin-bottom: 20vh; */
+  }
   }
   /* padding-top: 3vh; */
 `
@@ -116,16 +125,23 @@ const InfoUl = styled.ul`
 `
 
 const Sticky = styled.div`
+  text-align: left;
+  padding-left: 10vw;
   @supports (position: sticky) or (position: -webkit-sticky) {
     & {
       position: -webkit-sticky; /* 사파리 브라우저 지원 */
       position: sticky;
       top: 100px;
-      width: 40%;
+      width: 50%;
       display: flex;
       flex-direction: row;
       margin-bottom: 200px;
     }
+  }
+
+  @media screen and (max-width: 780px) {
+    width: 100%;
+    margin: auto;
   }
 
   & h2 {
@@ -140,28 +156,22 @@ const Wrapper = styled.div`
   background-color: ${(props) => props.bgColor};
   color: ${(props) => (props.color ? props.color : "black")};
   padding-top: 3vh;
-
+  width: 100%;
   @media screen and (min-width: 1440px) {
     width: 1440px;
     margin: auto;
   }
-  width: 100%;
+  
 `
 const Container = styled.div`
   /* padding-left: 6vw;
   padding-top: 7vh; */
   width: 100%;
+  text-align: center;
   & h1 {
     color: ${theme.COLORS.vanila};
   }
-  @media screen and (max-width: 480px) {
-    padding-left: 10px;
-    padding-top: 10px;
-  }
-  @media screen and (min-width: 1440px) {
-    width: 1440px;
-    margin: auto;
-  }
+
 `
 
 const ScrollBar = styled.div`

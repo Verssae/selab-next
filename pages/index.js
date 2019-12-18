@@ -18,7 +18,6 @@ import Layout from "../components/Layout"
 import { Container, pageStyle, Content } from "../components/pages/index"
 import Research from "../components/Research"
 
-
 const Index = () => {
   const headerStyleStart = {
     defaultBgColor: theme.COLORS.sapphire,
@@ -62,7 +61,7 @@ const Index = () => {
     }
   ]
   return (
-    <Layout names = {"quiz"} links={""}>
+    <Layout >
     
       <Head>
         <title>{"Software Engineering Lab - Home"}</title>
@@ -135,10 +134,5 @@ const Page = forwardRef(({ bgColor, color, children }, ref) => (
   </div>
 ))
 
-const Static = styled.div`
-  width: 100%;
-  height: 100vh;
-  background-color: green;
-`
 
 export default Index
