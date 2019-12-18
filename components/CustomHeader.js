@@ -8,7 +8,7 @@ const CustomHeader = ({ refs, options }) => (
         <Link href="/courses">
           <StyleLink>Courses</StyleLink>
         </Link>
-        <Link href="/quiz">
+        <Link href="/quizList">
             <StyleLink>Quiz</StyleLink>
         </Link>
         <Link href="/notices">

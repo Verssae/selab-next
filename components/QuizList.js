@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import theme from "./theme"
 import styled from "@emotion/styled"
 import gql from 'graphql-tag'
+import Link from "next/link"
 
 import PlusOneIcon from "./icons/PlusOneIcon"
 
@@ -13,8 +14,19 @@ const GET_QUIZ_LIST = gql`
     result: quizzes{
       id
       title
+      course {
+        code
+      }
+      semester {
+        semester
+      }
       content
       createdAt
+      createdBy
+      comments {
+        name
+        content
+      }
     }
   }
 `
@@ -24,8 +36,15 @@ const NEW_QUIZ_SUBSCRIPTION = gql`
     newQuiz {
       id
       title
+      course {
+        code
+      }
+      semester {
+        semester
+      }
       content
       createdAt
+      createdBy
     }
   }
 `
@@ -34,6 +53,7 @@ const QuizLabel = ({ children }) => {
   return (
     <div css={css`
       padding: 10px;
+      border-bottom: 1px solid gray;
       &:hover {
         background-color: #D3D3D3;
       }
@@ -44,7 +64,7 @@ const QuizLabel = ({ children }) => {
   )
 }
 
-function CourseQuiz({ code, semester }) {
+function CourseQuiz() {
   const [quizList, setQuizList] = useState([])
 
   const { data } = useQuery(
@@ -72,22 +92,68 @@ function CourseQuiz({ code, semester }) {
 
   return (
     <Container>
-      {quizList.map(({id, title, content, createdAt}) => (
-        <QuizLabel key={id}>
-          <PlusOneIcon />
-          <div>
-            <QuizLabelTitle>{title}</QuizLabelTitle>
-            <QuizLabelDate>{createdAt}</QuizLabelDate>
-          </div>
-        </QuizLabel>
+      {quizList.map((quiz) => (
+        <QuizItem quiz={quiz}/>
       ))}
     </Container>
   )
 }
 
+function QuizItem(quiz) {
+  const { id, title, createdAt, createdBy, course, content, comments } = quiz.quiz
+  const [isClick, setIsClick] = useState(false)
+  console.log(comments)
+  return (
+    <div>
+      <QuizLabel key={id} >
+        <PlusOneIcon />
+        <div>
+          <QuizLabelTitle>
+            {/* <Link href={`/quiz/${id}`}> */}
+            <a onClick={()=>setIsClick(!isClick)}>
+              <TitleLink>{title}</TitleLink>
+            </a>
+            {/* </Link> */}
+            <Label>{course.code}</Label>
+          </QuizLabelTitle>
+          <QuizLabelDate>opened at {createdAt} by {createdBy}</QuizLabelDate>
+        </div>
+      </QuizLabel>
+      {isClick ? 
+      <>
+        <p>{content}</p>
+        <ul>
+          {comments.map(({name, content}) => (
+            <li>
+              <p>{name}  :  {content}</p>
+            </li>
+          ))}
+        </ul>
+      </>
+      :""}
+    </div>
+  )
+}
+
+const TitleLink = styled.span`
+  &:hover {
+    cursor: pointer;
+    color: #0067A3;
+  }
+`
+
+const Label = styled.div`
+  margin-left: 10px;
+  border-radius: 6px;
+  font-size: 10pt;
+  padding: 5px;
+  background-color: coral;
+  vertical-align: middle;
+`
+
 const Container = styled.div`
   border: 2px solid black;
-  border-radius: 8px;
+  border-radius: 5px;
   overflow: hidden;
   width: 80vw;
   margin: auto;
@@ -97,10 +163,8 @@ const Container = styled.div`
 const QuizLabelTitle = styled.p`
   margin: 0;
   font-weight: bold;
-  &:hover {
-    cursor: pointer;
-    color: #0067A3;
-  }
+  display: flex;
+  vertical-align: middle;
 `
 
 const QuizLabelDate = styled.p`
