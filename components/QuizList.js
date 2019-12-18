@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, css, Global } from "@emotion/core"
 import { useQuery, useSubscription } from '@apollo/react-hooks'
+import { useState, useEffect } from 'react'
 import theme from "./theme"
 import styled from "@emotion/styled"
 import gql from 'graphql-tag'
@@ -21,6 +22,7 @@ const GET_QUIZ_LIST = gql`
 const NEW_QUIZ_SUBSCRIPTION = gql`
   subscription onNewQuiz{
     newQuiz {
+      id
       title
       content
       createdAt
@@ -42,38 +44,34 @@ const QuizLabel = ({ children }) => {
   )
 }
 
-const QuizSubscribe = () => {
-  const { loading, error, data } = useSubscription(
-    NEW_QUIZ_SUBSCRIPTION
-  )
-  if (loading) return <></>
-  if (error || !data) return <div>Error!</div>
-  
-  const { newQuiz } = data
-  return (
-    <QuizLabel>
-      <PlusOneIcon />
-      <div>
-        <QuizLabelTitle>{newQuiz.title}</QuizLabelTitle>
-        <QuizLabelDate>{newQuiz.createdAt}</QuizLabelDate>
-      </div>
-    </QuizLabel>
-  )
-
-}
-
 function CourseQuiz({ code, semester }) {
-  const { loading, error, data } = useQuery(
+  const [quizList, setQuizList] = useState([])
+
+  const { data } = useQuery(
     GET_QUIZ_LIST
   )
   
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error!</p>
-  const quizList = data.result
+  useSubscription(
+    NEW_QUIZ_SUBSCRIPTION,
+    {
+      onSubscriptionData: ({subscriptionData}) => {
+        if (data) {
+          setQuizList((quizList) => [
+            subscriptionData.data.newQuiz, ...quizList
+          ])
+        }
+      }
+    }
+  )
+  
+  useEffect(()=>{
+    if (data) {
+      setQuizList(data.result)
+    }
+  },[data])
 
   return (
     <Container>
-      <QuizSubscribe />
       {quizList.map(({id, title, content, createdAt}) => (
         <QuizLabel key={id}>
           <PlusOneIcon />
