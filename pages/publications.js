@@ -4,14 +4,14 @@ import styled from "@emotion/styled"
 import { useState } from "react"
 import CustomHeader from "../components/CustomHeader"
 import Layout from "../components/Layout"
-import { Whole, LeftP, Left, Right } from "../components/pages/publications"
+import { All, PublicationBox, Nav, NavAnchor } from "../components/pages/publication_gallery"
 
 const Publication = ({ path, title }) => <a href={path}>{title}</a>
 
 const NavOption = ({ number, onClick, content, children }) => (
-  <LeftP onClick={() => onClick(number)} isCurrent={number === content}>
+  <NavAnchor onClick={() => onClick(number)} isCurrent={number === content}>
     {children}
-  </LeftP>
+  </NavAnchor>
 )
 
 const Publications = ({ data }) => {
@@ -20,8 +20,9 @@ const Publications = ({ data }) => {
   return (
     <Layout>
       <CustomHeader />
-      <Whole>
-        <Left>
+      <All>
+        <h1>Publications</h1>
+        <Nav>
           <NavOption onClick={setContent} number={0} content={content}>
             International Conference
           </NavOption>
@@ -34,13 +35,13 @@ const Publications = ({ data }) => {
           <NavOption onClick={setContent} number={3} content={content}>
             Domestic Journal
           </NavOption>
-        </Left>
-        <Right>
-          {data[content].map(({ path, title }) => (
-            <Publication path={path} title={title} />
+        </Nav>
+        <PublicationBox>
+          {data[content].map(({ path, title }, id) => (
+            <Publication key={id} path={path} title={title} />
           ))}
-        </Right>
-      </Whole>
+        </PublicationBox>
+      </All>
     </Layout>
   )
 }

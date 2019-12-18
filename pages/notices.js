@@ -1,5 +1,4 @@
-import { useState } from "react"
-import { All,BigTitle,Outline, Top, Bottom, Middle, In, Title, Name, Date} from "../components/pages/notices"
+import {All,Bigtitle,Content,List,Smallmenu} from "../components/pages/notices"
 import CustomHeader from "../components/CustomHeader"
 import Layout from "../components/Layout"
 
@@ -9,70 +8,32 @@ const Notice = () => {
         <Layout>
             <CustomHeader/>
             <All>
-                <BigTitle>Notice</BigTitle>
-                <br/>
-                <Outline>
-                    <Top>
-                        <Middle>
-                            <Title>
-                                <In>
-                                    <div>Title</div>
-                                </In>
-                            </Title>
-                            <Name>
-                                <In>
-                                    <div>Name</div>
-                                </In>
-                            </Name>
-                            <Date>
-                                <In>
-                                    <div>Date</div>
-                                </In>
-                            </Date>
-                        </Middle>
-                    </Top>    
-                    <Bottom>
-                        <Middle>
-                            <Title>
-                                <In>연구원 모집</In>
-                            </Title>
-                            <Name>
-                                <In>Scott Uk-jin Lee</In>
-                            </Name>
-                            <Date>
-                                <In>29 Aug 2014</In>
-                            </Date>
-                        </Middle>
-                    </Bottom>
+                <Bigtitle>Notice</Bigtitle>
+                <Content>
+                    <Smallmenu>
+                        <div>Title</div>
+                        <div>Name</div>
+                        <div>Date</div>
+                    </Smallmenu>
+                    <List>
+                        <div>연구원 모집</div>
+                        <div>Scott Uk-jin Lee</div>
+                        <div>29 Aug 2014</div>
+                    </List>
+                    <List>
+                        <div>2014 PL-SE First Joint Workshop</div>
+                        <div>Scott Uk-jin Lee</div>
+                        <div>29 Aug 2014</div>
+                    </List>
+                    <List>
+                        <div>Welcome to SELab Homepage!</div>
+                        <div>Scott Uk-jin Lee</div>
+                        <div>29 Aug 2014</div>
 
-                    <Bottom>
-                        <Middle>
-                            <Title>
-                                <In>2014 PL-SE First Joint Workshop</In>
-                            </Title>
-                            <Name>
-                                <In>Scott Uk-jin Lee</In>
-                            </Name>
-                            <Date>
-                                <In>29 Aug 2014</In>
-                            </Date>
-                        </Middle>
-                    </Bottom>    
+                    </List>
+                </Content>
+                  
 
-                    <Bottom>
-                        <Middle>
-                            <Title>
-                                <In>Welcome to SELab Homepage!</In>
-                            </Title>
-                            <Name>
-                                <In>Scott Uk-jin Lee</In>
-                            </Name>
-                            <Date>
-                                <In>29 Aug 2014</In>
-                            </Date>
-                        </Middle>  
-                    </Bottom>  
-                </Outline>
             </All>
         </Layout>
     )

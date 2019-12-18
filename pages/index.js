@@ -61,7 +61,8 @@ const Index = () => {
     }
   ]
   return (
-    <Layout>
+    <Layout >
+    
       <Head>
         <title>{"Software Engineering Lab - Home"}</title>
         <meta
@@ -69,73 +70,69 @@ const Index = () => {
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </Head>
-      <Container bgColor={theme.COLORS.sapphire}>
+
+      <Container id="page-wrap" bgColor={theme.COLORS.sapphire}>
         <CustomHeader refs={refs} />
+          <div>
+            <Page bgColor={theme.COLORS.sapphire} color={"white"}>
+              <div>
+                <Slide left>
+                  <p>{`SELab:`}</p>
+                  <h1>{`Software Engineering Lab`}</h1>
+                  <p>{`Welcome to our homepage!`}</p>
+                </Slide>
+                <LightSpeed right>
+                  <p onClick={() => scrollTo(vanilaStart1)}>{`⬇`}</p>
+                </LightSpeed>
+              </div>
+            </Page>
+            <Page ref={vanilaStart1} bgColor={theme.COLORS.vanila}>
+              <div>
+                {`[채울 내용 확정하기(notice shortcut, contact, ...)]`}
+                {`slide test`}
+                <Link href="/slides/0">
+                  <a>Slide 0</a>
+                </Link>
+                <Link href="/slides/1">
+                  <a>Slide 1</a>
+                </Link>
+              </div>
+            </Page>
+            <Research
+              ref={vanilaEnd1}
+              bgColor={theme.COLORS.sapphire}
+              color={"white"}
+            />
 
-        <div>
-          <Page bgColor={theme.COLORS.sapphire} color={"white"}>
-            <div>
-              <Slide left>
-                <p>{`SELab:`}</p>
-                <h1>{`Software Engineering Lab`}</h1>
-                <p>{`Welcome to our homepage!`}</p>
-              </Slide>
-              <LightSpeed right>
-                <p onClick={() => scrollTo(vanilaStart1)}>{`⬇`}</p>
-              </LightSpeed>
-            </div>
-          </Page>
-          <Page ref={vanilaStart1} bgColor={theme.COLORS.vanila}>
-            <div>
-              {`[채울 내용 확정하기(notice shortcut, contact, ...)]`}
-              {`slide test`}
-              <Link href="/slides/0">
-                <a>Slide 0</a>
-              </Link>
-              <Link href="/slides/1">
-                <a>Slide 1</a>
-              </Link>
-            </div>
-          </Page>
-          <Research
-            ref={vanilaEnd1}
-            bgColor={theme.COLORS.sapphire}
-            color={"white"}
-          />
-
-          <Page ref={vanilaStart2} bgColor={theme.COLORS.vanila}>
-            {`[Prof & members shortcut page]`}
-          </Page>
-          <Page
-            ref={vanilaEnd2}
-            bgColor={theme.COLORS.sapphire}
-            color={"white"}
-          >
-            {`[Courses page]`}
-          </Page>
-        </div>
-      </Container>
+            <Page ref={vanilaStart2} bgColor={theme.COLORS.vanila}>
+              {`[Prof & members shortcut page]`}
+            </Page>
+            <Page
+              ref={vanilaEnd2}
+              bgColor={theme.COLORS.sapphire}
+              color={"white"}
+            >
+              {`[Courses page]`}
+            </Page>
+          </div>
+          
+        </Container>
     </Layout>
   )
 }
 
 const Page = forwardRef(({ bgColor, color, children }, ref) => (
   <div
-    ref={ref}
     css={css`
-      ${pageStyle};
       background-color: ${bgColor};
       color: ${color ? color : "black"};
     `}
   >
-    <Content>{children}</Content>
+    <Content css={pageStyle} ref={ref}>
+      {children}
+    </Content>
   </div>
 ))
 
-const Static = styled.div`
-  width: 100%;
-  height: 100vh;
-  background-color: green;
-`
 
 export default Index
