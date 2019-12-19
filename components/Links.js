@@ -22,7 +22,7 @@ const titleStyle = css`
   ${linkStyle}
   font-size: 30pt;
   font-weight: bold;
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 1060px) {
     margin: auto;
     font-size: 20pt;
   }
@@ -52,7 +52,18 @@ export const PostLink = (props) => (
 
 export const StyleLink = styled.a`
   ${linkStyle};
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 1060px) {
+    display: none;
+  }
+`
+
+export const LoginLink = styled.a`
+  ${linkStyle};
+  font-weight: normal;
+  font-size: 15pt;
+  position: fixed;
+  right: 30px;
+  @media screen and (max-width: 1060px) {
     display: none;
   }
 `

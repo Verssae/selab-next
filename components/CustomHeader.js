@@ -1,5 +1,5 @@
 import Header from "./Header"
-import { HomeLink, StyleLink } from "./Links"
+import { HomeLink, StyleLink, LoginLink } from "./Links"
 import Link from "next/link"
 import HoverMenu from "./HoverMenu"
 import Burger from "./Burger"
@@ -30,6 +30,9 @@ const CustomHeader = ({ refs, options}) => {
       </Link>
       <Link href="/publications">
         <StyleLink>Publications</StyleLink>
+      </Link>
+      <Link href="/login">
+        <LoginLink>Login</LoginLink>
       </Link>
 
       <Burger />
