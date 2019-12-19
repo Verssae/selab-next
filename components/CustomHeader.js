@@ -14,8 +14,10 @@ const CustomHeader = ({ refs, options }) => {
         <Link href="/course">
           <StyleLink>CSE6050 Advanced Software Engineering</StyleLink>
         </Link>
-        
       </HoverMenu>
+      <Link href="/quiz">
+            <StyleLink>Quiz</StyleLink>
+        </Link>
 
       <Link href="/notices">
         <StyleLink>Notices</StyleLink>
