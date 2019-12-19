@@ -58,7 +58,7 @@ export default function() {
         </div>
       </Fade>
       <Button onClick={() => setOpen(!open)}>
-        <img src="icons/quiz.svg" />
+            {open ? <img src="icons/cancel.svg" /> : <img src="icons/quiz.svg" />  }
       </Button>
     </div>
   )
