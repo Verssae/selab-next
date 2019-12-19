@@ -5,26 +5,6 @@ import styled from "@emotion/styled"
 import theme from "./theme"
 import { OptionLink } from "./Option"
 
-const bottom = {
-  position: "fixed",
-  backgroundColor: "#162E7C",
-  top: "auto",
-  bottom: "0",
-  display: "block",
-  width: "100%",
-  zIndex: "5",
-  left: "0",
-  Height: "1.65em",
-  paddingBottom: "2em",
-  paddingTop: "0.5em",
-  paddingLeft: "1em"
-}
-
-const Button = {
-  float: "right",
-  marginTop: "15px",
-  marginRight: "30px"
-}
 const currentSlide = {
   position: "fixed",
   textAlign: "center",
@@ -35,46 +15,69 @@ const currentSlide = {
   bottom: "1em",
   zIndex: "10"
 }
-const navaLink = {
-  textAlign: "right"
-}
-const navaLinks = {
-  color: "#779",
-  border: "none",
-  fontSize: "1.3em",
-  backgroundColor: "#162E7C",
-  margin: "0 0.4em",
-  padding: "0",
-  borderBottom: "2px solid"
-}
 
 import Link from "next/link"
+
+const Container = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  color: #aab;
+  background: ${theme.COLORS.sapphire};
+  & h1 {
+    margin: 5px;
+    font-size: 16pt;
+  }
+  & h2 {
+    margin: 5px;
+    font-size: 14pt;
+  }
+`
+const buttonStyle = css`
+  position: fixed;
+  bottom: 0;
+  color: #aab;
+  border: none;
+  background: transparent;
+  font-size: 20pt;
+  margin: 10px 0px;
+`
+const Prev = styled.button`
+${buttonStyle}
+  left: 45%;
+`
+const Center = styled.button`
+${buttonStyle}
+  left: 48%;
+`
+const Next = styled.button`
+${buttonStyle}
+  right: 45%;
+`
+
 
 const Footer = ({ chapters, children, goPrev, goNext, chapter, max, page }) => {
   const [isOpen, setIsOpen] = useState(false)
   return (
-    <div style={bottom}>
-      <div style={Button} className="controls">
-        <div style={navaLink}>
-          <Link href={`/oneSlide/${chapter}`}>
-            <button style={navaLinks}>HTML</button>
-          </Link>
-          <button style={navaLinks} onClick={goPrev}>
-            «
-          </button>
-          <button style={navaLinks} onClick={goNext}>
-            »
-          </button>
-        </div>
-      </div>
-      {page != 0 ? (
-        <div style={currentSlide}>
-          {page}/{max - 1}
-        </div>
-      ) : (
-        false
-      )}
-      <Popup onClick={() => setIsOpen(!isOpen)}>
+    <Container>
+      
+        <Prev onClick={goPrev}>«</Prev>
+        {page > 0 ? (
+          <Center>
+            {page}/{max - 1}
+          </Center>
+        ) : (
+         ""
+        )}
+        <Next onClick={goNext}>»</Next>
+     
+      {/* <Link href={`/oneSlide/${chapter}`}>
+          <button>MarkDown</button>
+        </Link> */}
+
+      {/* <Popup onClick={() => setIsOpen(!isOpen)}>
         {isOpen
           ? chapters &&
             chapters.map((label, id) => (
@@ -86,12 +89,13 @@ const Footer = ({ chapters, children, goPrev, goNext, chapter, max, page }) => {
               />
             ))
           : ""}
-      </Popup>
+      </Popup> */}
 
-      <div css={bottomContent} onClick={() => setIsOpen(!isOpen)}>
+      {/* <div css={bottomContent} onClick={() => setIsOpen(!isOpen)}>
         {children}
-      </div>
-    </div>
+      </div> */}
+      {children}
+    </Container>
   )
 }
 
@@ -101,7 +105,7 @@ const Popup = styled(`div`)({
   borderStyle: "solid",
   position: "fixed",
   bottom: "90px",
-  padding: 5,
+  padding: 5
 })
 
 const bottomContent = {

@@ -139,10 +139,10 @@ const Sticky = styled.div`
     }
   }
 
-  @media screen and (max-width: 780px) {
+  /* @media screen and (max-width: 780px) {
     width: 100%;
     margin: auto;
-  }
+  } */
 
   & h2 {
     margin-top: 0;

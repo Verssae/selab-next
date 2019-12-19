@@ -1,8 +1,8 @@
 import Header from "./Header"
 import { HomeLink, StyleLink } from "./Links"
 import Link from "next/link"
-import Burger from "./Burger"
 import HoverMenu from "./HoverMenu"
+import Burger from "./Burger"
 const CustomHeader = ({ refs, options }) => {
   return (
     <Header refs={refs} options={options}>

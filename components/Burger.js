@@ -2,49 +2,60 @@
 import { css, jsx } from "@emotion/core"
 import Slide from "react-burger-menu/lib/menus/slide"
 import Router from "next/router"
-import { StyleLink } from "./Links"
+import { linkStyle } from "./Links"
 import HoverMenu from "./HoverMenu"
+import styled from "@emotion/styled"
 
-const Burger = () => {
+const Burger = ({isSlide=false}) => {
   return (
-    <Slide
-      styles={styles}
-      right
-      customBurgerIcon={<img src="menu.svg" />}
-      customCrossIcon={<img src="cross.svg" />}
-    >
-      <Anchor url={"/"}>Home</Anchor>
-      <HoverMenu isBurger={true} title={"Courses"}>
-        <ul>
-          <li>
-            <Anchor url={"/incourse"}>{"CSE326 WebAppDev"}</Anchor>
-          </li>
-          <li>
-            <Anchor url={"/course"}>
-              {"CSE6050 Advanced Software Engineering"}
-            </Anchor>
-          </li>
-        </ul>
-      </HoverMenu>
+    <MenuWrap isSlide={isSlide}>
+      <Slide
+        styles={styles}
+        // customBurgerIcon={<img src="menu.svg" />}
+        // customCrossIcon={<img src="cross.svg" />}
+        pageWrapId={"page-wrap"}
+        outerContainerId={"outer-container"}
+      >
+        <Anchor url={"/"}>Home</Anchor>
+        <HoverMenu isBurger={true} title={"Courses"}>
+          <ul>
+            <li>
+              <Anchor url={"/incourse"}>{"CSE326 WebAppDev"}</Anchor>
+            </li>
+            <li>
+              <Anchor url={"/course"}>
+                {"CSE6050 Advanced Software Engineering"}
+              </Anchor>
+            </li>
+          </ul>
+        </HoverMenu>
 
-      {/* <Anchor url={"/courses"}>Courses</Anchor> */}
-      <Anchor url={"/notices"}>Notices</Anchor>
-      <Anchor url={"/gallery"}>Gallery</Anchor>
-      <Anchor url={"/members"}>Members</Anchor>
-      <Anchor url={"/publications"}>Publications</Anchor>
-    </Slide>
+        {/* <Anchor url={"/courses"}>Courses</Anchor> */}
+        <Anchor url={"/notices"}>Notices</Anchor>
+        <Anchor url={"/gallery"}>Gallery</Anchor>
+        <Anchor url={"/members"}>Members</Anchor>
+        <Anchor url={"/publications"}>Publications</Anchor>
+      </Slide>
+    </MenuWrap>
   )
 }
+const MenuWrap = styled.div`
+
+  @media screen and (min-width: 851px) {
+    ${props => props.isSlide ? "" :"display: none;" }
+  }
+`
 
 const Anchor = (props) => (
-  <StyleLink
+  <a
     css={css`
+    ${linkStyle}
       display: block;
     `}
     onClick={() => Router.push(`${props.url}`)}
   >
     {props.children}
-  </StyleLink>
+  </a>
 )
 
 var styles = {
@@ -52,11 +63,11 @@ var styles = {
     position: "fixed",
     width: "36px",
     height: "30px",
-    right: "36px",
-    top: "36px"
+    left: "10px",
+    top: "18px"
   },
   bmBurgerBars: {
-    background: "#373a47"
+    background: "#fff"
   },
   bmBurgerBarsHover: {
     background: "#a90000"
@@ -70,14 +81,13 @@ var styles = {
   },
   bmMenuWrap: {
     position: "fixed",
-    // height: '100%',
+    height: "100%",
     top: 0,
-    right: 0
+    left: 0
   },
   bmMenu: {
     background: "#373a47",
-    padding: "2.5em 1.5em 0",
-    fontSize: "1.15em",
+    // padding: "2.5em 1.5em 0",
     overflow: "hidden"
   },
   bmMorphShape: {
@@ -85,15 +95,15 @@ var styles = {
     background: "red"
   },
   bmItemList: {
-    color: "#b8b7ad",
-    padding: "0.8em"
+    color: "#b8b7ad"
+    // padding: "0.8em"
   },
   bmItem: {
     display: "inline-block"
   },
   bmOverlay: {
     background: "rgba(0, 0, 0, 0.3)",
-    width: "90%",
+    width: "100%",
     position: "fixed",
     top: 0,
     left: 0
