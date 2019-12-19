@@ -30,7 +30,6 @@ const container = css`
   position: relative;
 `
 
-
 const burgerItems = css`
   width: 100vw;
   /* word-break: keep-all;
@@ -38,15 +37,18 @@ const burgerItems = css`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  font-size: 15px;
   padding: 0;
   padding-top: 10px;
   padding-bottom: 10px;
   margin: 0;
+  & a {
+    font-size: 15pt;
+  }
 `
 
-const Items  = styled.div`
-    ${burgerItems}
-    ${props => props.isBurger ? "width:100%;" : "position: absolute; top: 20px;"}
+const Items = styled.div`
+  ${burgerItems}
+  ${(props) =>
+    props.isBurger ? "width:100%;" : "position: absolute; top: 30px;"}
 `
 export default HoverMenu

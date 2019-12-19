@@ -13,7 +13,7 @@ export const Option = ({ id, label, onClick, selected }) => {
 const StyledOption = styled(`div`)`
   color: ${(props) => (props.selected ? "white" : "#abb")};
   & p {
-    margin: 0;
+    margin: 0px 15px;
   }
 
   &:hover {

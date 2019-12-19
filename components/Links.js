@@ -5,10 +5,12 @@ import { css, jsx } from "@emotion/core"
 import styled from "@emotion/styled"
 import theme from "./theme"
 
-const linkStyle = css`
+export const linkStyle = css`
   margin-left: 1vw;
   margin-right: 1vw;
+  font-size: 20pt;
   font-weight: bold;
+  cursor: pointer;
 
   &:hover {
     /* text-shadow: 2px 2px 2px gray; */
@@ -18,8 +20,12 @@ const linkStyle = css`
 
 const titleStyle = css`
   ${linkStyle}
-  font-size: 40px;
+  font-size: 30pt;
   font-weight: bold;
+  @media screen and (max-width: 850px) {
+    margin: auto;
+    font-size: 20pt;
+  }
 `
 
 export const HomeLink = () => (
