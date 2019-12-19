@@ -7,7 +7,6 @@ import theme from "./theme"
 
 const HoverMenu = ({ title, children, isBurger = false }) => {
   const [hover, setHover] = useState(false)
-  console.log(children)
   return (
     <div
       css={container}

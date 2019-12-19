@@ -33,6 +33,7 @@ function QuizList({ setter }) {
   },[data])
   return (
     <>
+     <Title>QUIZ</Title>
       {quizList.map((quiz) => (
           <QuizItem key={quiz.id} quiz={quiz}  setter={setter}/>
       ))}
@@ -61,6 +62,17 @@ function QuizItem({quiz, setter}) {
    
   )
 }
+const Title = styled.h1`
+  color: black;
+  /* margin-top: 89px; */
+  /* padding-left: 10vw; */
+  /* margin-bottom: 20px; */
+  font-size: 25pt;
+  font-weight: bold;
+  margin: 5px;
+  text-align: center;
+`
+
 
 const QuizLabel = styled.div`
   margin: 20px;
@@ -68,6 +80,7 @@ const QuizLabel = styled.div`
   border-radius: 7px;
   height: 90px;
   overflow: hidden;
+  font-size: 12pt;
 `
 
 const LeftColor = styled.div`
