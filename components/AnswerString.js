@@ -10,7 +10,6 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { ADD_ANSWER } from '../lib/query'
 
 function AnswerString({ quizId }) {
-  // const [content, setContent] = useState('')
   const [addAnswer, { data }] = useMutation(ADD_ANSWER)
   const ref = useRef()
 
@@ -25,7 +24,7 @@ function AnswerString({ quizId }) {
       ref.current.value = ''
     }}>
       <Textarea inputRef={ref} autoFocus placeholder="Input your answer!" rows="2" />
-      <Sumbit/>
+      <Submit/>
     </form>
   )
 }
@@ -38,7 +37,7 @@ const Textarea = styled(TextareaAutosize)`
   border: 1px solid #D0D3D4;
 `
 
-const Sumbit = () => {
+const Submit = () => {
   return (
     <button type="submit">Submit</button>
   )

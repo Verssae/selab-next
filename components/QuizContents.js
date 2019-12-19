@@ -8,6 +8,7 @@ import styled from "@emotion/styled"
 import BackButtonIcon from './icons/BackButtonIcon'
 import { GET_QUIZ_CONTENTS, NEW_ANSWER_SUBSCRIPTION } from '../lib/query'
 import AnswerString from './AnswerString'
+import AnswerSelect from './AnswerSelect'
 
 function QuizContents({ id, setter }) {
   const [answerList, setAnswerList] = useState([])
@@ -42,7 +43,6 @@ function QuizContents({ id, setter }) {
 
   if (loading) return <p>Loading...</p>
   const { quiz } = data
-
   return (
     <Layout>
       <TopState />
@@ -50,6 +50,20 @@ function QuizContents({ id, setter }) {
       <Container>
         <h1>{quiz.title}</h1>
         <p>{quiz.description}</p>
+<<<<<<< HEAD
+        {quiz.content.type == "CHOICE" ?<AnswerSelect quizId={id} content={quiz.content} /> :
+        <>
+          <AnswerString quizId={id} />
+          <ul>
+          {answerList.map(({id, user, content, createdAt}) => (
+            <li key={id}>
+              {user.user_id} - {createdAt}<br/>{content}
+            </li>
+          ))}
+          </ul>
+        </>
+        }
+=======
         <AnswerString quizId={id} />
         <ul>
         {answerList.map(({id, user, content, createdAt}) => (
@@ -58,6 +72,7 @@ function QuizContents({ id, setter }) {
           </li>
         ))}
         </ul>
+>>>>>>> cfb52a341ecb5f0dd4ec6d348f495e06f96f7fe1
       </Container>
     </Layout>
   )

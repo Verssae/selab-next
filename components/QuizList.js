@@ -5,14 +5,15 @@ import { useState, useEffect } from 'react'
 import theme from "./theme"
 import styled from "@emotion/styled"
 
-import  { GET_QUIZ_LIST, NEW_QUIZ_SUBSCRIPTION } from '../lib/query'
+import { GET_QUIZ_LIST, NEW_QUIZ_SUBSCRIPTION } from '../lib/query'
+import CreateButtonIcon from './icons/CreateButtonIcon'
 
-function QuizList({ setter }) {
+function QuizList({ setter, createSetter }) {
   const [quizList, setQuizList] = useState([])
   const { data } = useQuery(
     GET_QUIZ_LIST,
     {
-      fetchPolicy: "no-cache"
+      fetchPolicy: "network-only"
     }
   )
   
@@ -36,7 +37,13 @@ function QuizList({ setter }) {
   },[data])
   return (
     <>
-     <Title>QUIZ</Title>
+      <div css={css`
+        display: flex;
+        justify-content: center;
+      `}>
+        <Title>QUIZ</Title>
+        <CreateButtonIcon onClick={() => createSetter(true)}/>
+      </div>
       {quizList.map((quiz) => (
           <QuizItem key={quiz.id} quiz={quiz}  setter={setter}/>
       ))}
