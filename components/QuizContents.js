@@ -5,16 +5,12 @@ import { useState, useEffect } from 'react'
 import theme from "./theme"
 import styled from "@emotion/styled"
 
-import BackButton from './icons/BackButton'
+import BackButtonIcon from './icons/BackButtonIcon'
 import { GET_QUIZ_CONTENTS } from '../lib/query'
 
 function QuizContents({ id, setter }) {
   const { loading, error, data } = useQuery(
-    GET_QUIZ_CONTENTS, {
-      variables: {
-        id: id
-      }
-    }
+    GET_QUIZ_CONTENTS, { variables: { id: id } }
   )
 
   if (loading) return <p>Loading...</p>
@@ -22,9 +18,7 @@ function QuizContents({ id, setter }) {
 
   return (
     <div>
-      <a onClick={() => setter(false)}>
-        <BackButton />
-      </a>
+      <Back setter={setter}/>
       <h1>{quiz.title}</h1>
       <h2>{quiz.content}</h2>
       <ul>
@@ -35,5 +29,13 @@ function QuizContents({ id, setter }) {
     </div>
   )
 }
+
+const Back = ({ setter }) => (
+  <div css={css`
+    background-color: black;
+  `} onClick={()=>setter(false)}>
+    <BackButtonIcon />
+  </div>
+)
 
 export default QuizContents
