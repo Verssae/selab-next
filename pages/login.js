@@ -13,39 +13,42 @@ const userInfo = [
     password: "1234"
   },
   {
-      id: "onnoo",
-      password: "1111"
+    id: "onnoo",
+    password: "1111"
   }
 ]
 
 const Container = styled.div`
   width: 500px;
-  height: 600px;
+  height: 500px;
   margin: auto;
-  margin-top: 100px;
-  background: white;
+  margin-top: 200px;
+  background: ${theme.COLORS.sapphire};
   border-radius: 7px;
-  box-shadow: " 0px 0px 5px 0.5px #D0D3D4";
+  box-shadow: 0px 0px 5px 0.5px #d0d3d4;
   text-align: center;
+  color: white;
+  padding: 10px;
+  & button {
+    width: 100px;
+    height: 50px;
+    border-radius: 7px;
+    margin: 10px;
+  }
+
+  & button:hover {
+    opacity: 0.8;
+  }
 `
 
-const InputContainer = styled.div`
+const Input = styled.input`
   margin: auto;
-  text-align: left;
-  & label {
-    font-size: 12pt;
-  }
-  & input {
-  }
+  margin-bottom: 10px;
+  width: 300px;
+  display: block;
+  height: 30px;
 `
-const Input = forwardRef(({ label }, ref) => (
-  <InputContainer>
-    <label>
-      {label}
-      <input ref={ref} type="text" />
-    </label>
-  </InputContainer>
-))
+
 const Login = () => {
   const [state, setState] = useState(false)
   const id = useRef()
@@ -55,12 +58,18 @@ const Login = () => {
     let pwValue = pw.current.value
     console.log(idValue)
     console.log(pwValue)
-    let filtered = userInfo.filter(({id, password})=> idValue == id && pwValue == password)
+    let filtered = userInfo.filter(
+      ({ id, password }) => idValue == id && pwValue == password
+    )
     if (filtered.length > 0) {
       console.log("login!")
       sessionStorage.setItem("loginUser", idValue)
       setState(true)
     }
+  }
+  const logout = () => {
+    sessionStorage.removeItem("loginUser")
+    setState(false)
   }
 
   useEffect(() => {
@@ -70,11 +79,20 @@ const Login = () => {
   }, [])
   return (
     <Container>
-      <h1>Login</h1>
-      <Input ref={id} label={"ID"} />
-      <Input ref={pw} label={"PASSWORD"} />
-      <button onClick={login}>login</button>
-      <p>{state ? "is logined" : "need to login"}</p>
+      <h1>Admin Login</h1>
+
+      {state ? (
+        <div>
+          <p>{sessionStorage.getItem("loginUser")} is logined.</p>
+          <button onClick={logout}>logout</button>
+        </div>
+      ) : (
+        <div>
+          <Input type="text" ref={id} placeholder={"ID"} />
+          <Input type="password" ref={pw} placeholder={"PASSWORD"} />
+          <button onClick={login}>login</button>
+        </div>
+      )}
     </Container>
   )
 }

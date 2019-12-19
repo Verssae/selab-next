@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import { css } from "@emotion/core"
+import theme from "../theme"
 
 export const Container = styled.div`
   margin: 0;
@@ -66,4 +67,17 @@ export const Second = styled.div`
   width: 90%;
   display: flex;
   justify-content: space-around;
+
+  
+  & li {
+    list-style-type: square;
+    font-size: 0.7em;
+  }
+ 
+  & h2 {
+    color: ${theme.COLORS.sapphire};
+  }
+  & h2:hover {
+    opacity: 0.7;
+  }
 `

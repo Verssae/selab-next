@@ -2,7 +2,7 @@ import { useState } from "react"
 import {Nav,Left,A,Right,All,Slides,Li,H2,Span} from "../components/pages/incourse"
 import CustomHeader from "../components/CustomHeader"
 import Layout from "../components/Layout"
-
+import Router from "next/router"
 
 const Course_Inpage = () => {
     const[course, setCourse] = useState(0)
@@ -197,11 +197,11 @@ const Course_Inpage = () => {
                         <H2>No.</H2>
                         <H2>Lecture Slides</H2>
                     </Li>
-                    <Li>
+                    <Li onClick={() => Router.push(`/slides/0`)}>
                         <Span>0</Span>
                         <Span>Introduction</Span>
                     </Li>
-                    <Li>
+                    <Li onClick={() => Router.push(`/slides/1`)}>
                         <Span>1</Span>
                         <Span>The Internet & World Wide Web</Span>
                     </Li>

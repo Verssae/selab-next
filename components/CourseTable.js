@@ -25,6 +25,7 @@ const Table = ({children, width}) => (
         td {
           border: 1px solid gray;
           background-color: white;
+          color: black;
           padding: 5px;
         }
         th {
