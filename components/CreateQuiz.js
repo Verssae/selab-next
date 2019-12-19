@@ -20,6 +20,9 @@ function QuizContents({ id, setter }) {
           <Section>
             title:<input type="text"></input>
           </Section>
+          <Section>
+            description:<input type="text"></input>
+          </Section>
         </form>
       </Container>
     </Layout>
