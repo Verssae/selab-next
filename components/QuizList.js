@@ -42,7 +42,7 @@ function QuizList({ setter, createSetter }) {
         justify-content: center;
       `}>
         <Title>QUIZ</Title>
-        <CreateButtonIcon onClick={() => createSetter(true)}/>
+        {sessionStorage.getItem("loginUser") && <CreateButtonIcon onClick={() => createSetter(true)}/>}
       </div>
       {quizList.map((quiz) => (
           <QuizItem key={quiz.id} quiz={quiz}  setter={setter}/>
