@@ -3,22 +3,8 @@ import { jsx, css, Global } from "@emotion/core"
 import { useQuery } from '@apollo/react-hooks'
 import { Fragment } from "react"
 import styled from "@emotion/styled"
-import gql from 'graphql-tag'
 
-const query = gql`
-  query getSemester($degree: String!){
-    semesters {
-      semester
-    }
-    courses(degree: $degree) {
-      code
-      name
-      openedSemester: semesters {
-        semester
-      }
-    }
-  }
-`
+import { GET_COURSE_LIST } from '../lib/query'
 
 const tableStyle = css`
   text-align: center;
@@ -57,7 +43,7 @@ const Table = ({children, width}) => (
 
 function CourseTable({degree}) {
   const { loading, error, data } = useQuery(
-    query, {
+    GET_COURSE_LIST, {
       variables: {
         degree: degree
       }

@@ -8,45 +8,7 @@ import gql from 'graphql-tag'
 
 import PlusOneIcon from "./icons/PlusOneIcon"
 
-const GET_QUIZ_LIST = gql`
-  query getAllQuizzes {
-    result: quizzes{
-      id
-      title
-      course {
-        code
-      }
-      semester {
-        semester
-      }
-      content
-      createdAt
-      createdBy
-      comments {
-        name
-        content
-      }
-    }
-  }
-`
-
-const NEW_QUIZ_SUBSCRIPTION = gql`
-  subscription onNewQuiz{
-    newQuiz {
-      id
-      title
-      course {
-        code
-      }
-      semester {
-        semester
-      }
-      content
-      createdAt
-      createdBy
-    }
-  }
-`
+import  { GET_QUIZ_LIST, NEW_QUIZ_SUBSCRIPTION } from '../lib/query'
 
 function QuizList({ setter }) {
   const [quizList, setQuizList] = useState([])
