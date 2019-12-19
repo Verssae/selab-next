@@ -4,9 +4,6 @@ import { useQuery, useSubscription } from '@apollo/react-hooks'
 import { useState, useEffect } from 'react'
 import theme from "./theme"
 import styled from "@emotion/styled"
-import gql from 'graphql-tag'
-
-import PlusOneIcon from "./icons/PlusOneIcon"
 
 import  { GET_QUIZ_LIST, NEW_QUIZ_SUBSCRIPTION } from '../lib/query'
 
@@ -48,8 +45,9 @@ function QuizItem({quiz, setter}) {
   return (
     <div>
       <QuizLabel key={id} >
-        <PlusOneIcon />
-        <div>
+        <LeftColor />
+        <Right>
+          <div>
           <QuizLabelTitle>
             <a onClick={()=>setter(id)}>
               <TitleLink>{title}</TitleLink>
@@ -57,25 +55,42 @@ function QuizItem({quiz, setter}) {
             <Label>{course.code}</Label>
           </QuizLabelTitle>
           <QuizLabelDate>opened at {createdAt} by {createdBy}</QuizLabelDate>
-        </div>
+          </div>
+        </Right>
       </QuizLabel>
     </div>
   )
 }
 
 const QuizLabel = styled.div`
-  padding: 10px;
-  border-bottom: 1px solid gray;
-  &:hover {
-    background-color: #D3D3D3;
-  }
-  display:flex;
+  margin: 20px;
+  box-shadow: 0px 0px 5px 0.5px #D0D3D4;
+  border-radius: 7px;
+  height: 90px;
+  overflow: hidden;
 `
 
-const TitleLink = styled.span`
+const LeftColor = styled.div`
+  background-color: #007944;
+  width: 15px;
+  height: inherit;
+  float: left;
+  margin-right: 10px;
+`
+
+const Right = styled.div`
+  height: inherit;
+  display: flex;
+  align-items: center;
+`
+
+const TitleLink = styled.div`
+  margin: 0px ;
+  overflow: hidden;
+  text-overflow: ellipsis;
   &:hover {
     cursor: pointer;
-    color: #0067A3;
+    color: #1089ff;
   }
 `
 
@@ -84,29 +99,20 @@ const Label = styled.span`
   border-radius: 6px;
   font-size: 10pt;
   padding: 5px;
-  background-color: coral;
-  vertical-align: middle;
+  background-color: #6bc5d2;
 `
 
-const Container = styled.div`
-  border: 2px solid black;
-  border-radius: 5px;
-  overflow: hidden;
-  width: 80vw;
-  margin: auto;
-  background: white;
-`
-
-const QuizLabelTitle = styled.p`
+const QuizLabelTitle = styled.div`
   margin: 0;
   font-weight: bold;
   display: flex;
-  vertical-align: middle;
+  align-items: center;
 `
 
 const QuizLabelDate = styled.p`
   margin: 0;
   font-size: 12pt;
+  color: #5d5d5d;
 `
 
 export default QuizList
