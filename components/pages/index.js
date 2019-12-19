@@ -30,3 +30,40 @@ export const Content = styled.div`
     margin: auto;
   }
 `
+export const CourseView = styled.div`
+  margin-right: 3%;
+  margin-left: 3%;
+  margin-top: 0;
+  & h1{
+    text-align: center;
+  }
+`
+export const Contact = styled.div`
+  font-size: 20px;
+  @media screen and (max-width: 950px){
+    font-size: 15px;
+    margin: 3%;
+    & img{
+      @media screen and (max-width:950px){
+        width: 320px;
+      }
+    }
+  }
+  & h1{
+    text-align: center;
+  }
+  & div{
+    display: flex;
+  }
+  & ul{
+    margin-left: 5%;
+  }
+  & ul li p:nth-child(2){
+    font-weight: bold;
+  }
+`
+export const Second = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+`
