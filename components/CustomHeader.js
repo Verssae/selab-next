@@ -15,7 +15,7 @@ const CustomHeader = ({ refs, options }) => {
           <StyleLink>CSE6050 Advanced Software Engineering</StyleLink>
         </Link>
       </HoverMenu>
-      <Link href="/quizList">
+      <Link href="/quiz">
             <StyleLink>Quiz</StyleLink>
         </Link>
 
