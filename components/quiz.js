@@ -10,19 +10,10 @@ const Container = styled.div`
   /* border-radius: 5px; */
   /* width: 80vw; */
   width: 100%;
-  padding: 1px 10vw;
-  background: red;
+  /* padding: 1px 10vw; */
   overflow: scroll;
 `
 
-const Title = styled.h1`
-  color: black;
-  margin-top: 89px;
-  padding-left: 10vw;
-  margin-bottom: 20px;
-  font-size: 25pt;
-  font-weight: normal;
-`
 
 const Button = styled.button`
   width: 60px;
@@ -40,13 +31,13 @@ const Button = styled.button`
 `
 export default function() {
   const [quizId, setQuizId] = useState(false)
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
 
   return (
     <div>
       <Fade duration={500} bottom when={open}>
         <div style={styles.wrapper}>
-          <Title>QUIZ</Title>
+         
 
           <Container>
             {quizId ? (
@@ -74,7 +65,7 @@ const styles = {
     right: "30px",
     overflow: "hidden",
     border: "none",
-    borderRadius: "5px",
-    boxShadow: " 3px 3px 3px 3px rgba(0, 0, 0, 0.4)"
+    borderRadius: "7px",
+    boxShadow: " 0px 0px 5px 0.5px #D0D3D4"
   }
 }

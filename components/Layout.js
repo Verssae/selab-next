@@ -4,7 +4,7 @@ import { Fragment } from "react"
 import theme from "./theme"
 
 const Layout = ({ children, styles }) => (
-  <Fragment id="outer-container">
+  <div id="outer-container">
     <Global
       styles={css`
         html,
@@ -27,7 +27,7 @@ const Layout = ({ children, styles }) => (
       `}
     />
     <div id="page-wrap">{children}</div>
-  </Fragment>
+  </div>
 )
 
 export default Layout
