@@ -4,23 +4,17 @@ import { useState } from "react"
 import withApollo from "../lib/apollo"
 import Layout from "../components/Layout"
 import CustomHeader from "../components/CustomHeader"
-import { Title, Container } from "../components/quiz"
 
-import QuizList from "../components/QuizList"
-import QuizContents from "../components/QuizContents"
+import Quiz from "../components/Quiz"
 
-const Quiz = () => {
-  const [quizId, setQuizId] = useState(false)
 
+const QuizPage = () => {
   return (
     <Layout>
       <CustomHeader />
-      <Title>QUIZ</Title>
-      <Container>
-        {quizId ? <QuizContents id={quizId} setter={setQuizId}/> : <QuizList setter={setQuizId} />}
-      </Container>
+     <Quiz />
     </Layout>
   )
 }
 
-export default withApollo(Quiz)
+export default withApollo(QuizPage)

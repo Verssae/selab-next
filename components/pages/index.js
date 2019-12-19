@@ -24,6 +24,7 @@ export const Content = styled.div`
   width: 100%;
   height: 100vh;
   margin: 0;
+  /* padding: 10px; */
   @media screen and (min-width: 1440px) {
     width: 1440px;
     margin: auto;
