@@ -70,7 +70,7 @@ const Block = styled.div`
  
   padding-left: 4vw;
   padding-right: 4vw;
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 1060px) {
     padding: 0;
   }
 `

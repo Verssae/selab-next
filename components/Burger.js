@@ -33,13 +33,14 @@ const Burger = ({isSlide=false}) => {
         <Anchor url={"/gallery"}>Gallery</Anchor>
         <Anchor url={"/members"}>Members</Anchor>
         <Anchor url={"/publications"}>Publications</Anchor>
+        <Anchor url={"/login"}>Login</Anchor>
       </Slide>
     </MenuWrap>
   )
 }
 const MenuWrap = styled.div`
 
-  @media screen and (min-width: 951px) {
+  @media screen and (min-width: 1061px) {
     ${props => props.isSlide ? "" :"display: none;" }
   }
 `

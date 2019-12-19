@@ -20,7 +20,7 @@ const HoverMenu = ({ title, children, isBurger = false }) => {
           ${
             isBurger
               ? ""
-              : `@media screen and (max-width: 950px) {
+              : `@media screen and (max-width: 1060px) {
     display: none;
   }`
           }

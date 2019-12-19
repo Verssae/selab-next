@@ -50,6 +50,7 @@ function QuizContents({ id, setter }) {
       <Container>
         <h1>{quiz.title}</h1>
         <p>{quiz.description}</p>
+<<<<<<< HEAD
         {quiz.content.type == "CHOICE" ?<AnswerSelect quizId={id} content={quiz.content} /> :
         <>
           <AnswerString quizId={id} />
@@ -62,6 +63,16 @@ function QuizContents({ id, setter }) {
           </ul>
         </>
         }
+=======
+        <AnswerString quizId={id} />
+        <ul>
+        {answerList.map(({id, user, content, createdAt}) => (
+          <li key={id}>
+            {user.user_id} - {createdAt}<br/>{content}
+          </li>
+        ))}
+        </ul>
+>>>>>>> cfb52a341ecb5f0dd4ec6d348f495e06f96f7fe1
       </Container>
     </Layout>
   )
