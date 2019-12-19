@@ -13,7 +13,6 @@ const tableStyle = css`
   border-collapse: collapse;
   float: left;
 `
-
 const Table = ({children, width}) => (
   <table
     css={css`
@@ -35,6 +34,11 @@ const Table = ({children, width}) => (
           border: 1px solid gray;
           white-space: nowrap;
         }
+        td,th{
+          @media screen and (max-width: 1000px){
+            font-size: 8pt;
+          }
+        }
       `}
     />
     {children}
@@ -54,7 +58,7 @@ function CourseTable({degree}) {
   const { semesters, courses } = data
   return (
     <>
-      <Table width="45vw">
+      <Table width="40vw">
         <thead>
           <tr>
             <th colSpan="2">{degree} Courses</th>
@@ -70,8 +74,8 @@ function CourseTable({degree}) {
         </tbody>
       </Table>
       <div css={css`
-        width:55vw;
-        overflow: scroll;
+        width:42vw;
+        overflow-y: scroll;
       `}>
         <Table width="65vw">
           <thead>
