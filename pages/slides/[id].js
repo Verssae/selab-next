@@ -8,11 +8,15 @@ import Head from "next/head"
 import { useState, useEffect } from "react"
 import theme from "../../components/theme"
 import Footer from "../../components/Footer"
-import {SlideHeader} from "../../components/SlideHeader"
+import { SlideHeader } from "../../components/SlideHeader"
 import Burger from "../../components/Burger"
 import Layout from "../../components/Layout"
+import withApollo from "../../lib/apollo"
+import Quiz from "../../components/Quiz"
 
-const Slide = ({ id }) => {
+const Slide = () => {
+  const router = useRouter()
+  const [id, setId] = useState(0)
   const [page, setPage] = useState(0)
   const slides = slidesContents[id].contents.split("---")
   const chapters = slidesContents.map(({ title }) => title)
@@ -30,6 +34,9 @@ const Slide = ({ id }) => {
   )
 
   useEffect(() => {
+    if (router.query.id) {
+      setId(router.query.id)
+    }
     const keyDownHandler = ({ key }) => {
       if (key === "ArrowLeft") {
         goPrev()
@@ -41,10 +48,14 @@ const Slide = ({ id }) => {
     return () => {
       window.removeEventListener("keydown", keyDownHandler)
     }
-  }, [])
+  }, [router])
 
   return (
-    <Layout styles={css`background: white;`}>
+    <Layout
+      styles={css`
+        background: white;
+      `}
+    >
       <Head>
         <title>{`Software Engineering Lab - Slide ${id} `}</title>
         <meta
@@ -52,18 +63,14 @@ const Slide = ({ id }) => {
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </Head>
-      <Burger isSlide/>
+      <Burger isSlide />
       <SlideHeader options={options} callback={setPage} page={page}>
         {options[page]}
       </SlideHeader>
       {/* <Burger /> */}
-     
-        {slides ? (
-          <Markdown value={slides[page]} ppt={true} />
-        ) : (
-          "Loading"
-        )}
-      
+
+      {slides ? <Markdown value={slides[page]} ppt={true} /> : "Loading"}
+      <Quiz />
       <Footer
         goPrev={goPrev}
         goNext={goNext}
@@ -79,11 +86,10 @@ const Slide = ({ id }) => {
   )
 }
 
-
-Slide.getInitialProps = async ({ query }) => {
-  const { id } = query
-  return { id }
-}
+// Slide.getInitialProps = async ({ query }) => {
+//   const { id } = query
+//   return { id }
+// }
 
 // const Layout = ({ children }) => (
 //   <div>
@@ -101,4 +107,4 @@ Slide.getInitialProps = async ({ query }) => {
 //   </div>
 // )
 
-export default Slide
+export default withApollo(Slide)
