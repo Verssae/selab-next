@@ -84,8 +84,10 @@ const Right = styled.div`
   align-items: center;
 `
 
-const TitleLink = styled.span`
-  margin: 10px 0px;
+const TitleLink = styled.div`
+  margin: 0px ;
+  overflow: hidden;
+  text-overflow: ellipsis;
   &:hover {
     cursor: pointer;
     color: #1089ff;

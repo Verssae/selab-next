@@ -8,7 +8,7 @@ export default styled(BackButton)`
   width: 40px;
   fill: gray;
   &:hover {
-    fill: blue;
+    fill: black;
   }
   cursor: pointer;
 `
