@@ -8,7 +8,7 @@ import Head from "next/head"
 import { useState, useEffect } from "react"
 import theme from "../../components/theme"
 import Footer from "../../components/Footer"
-import SlideHeader from "../../components/SlideHeader"
+import {SlideHeader} from "../../components/SlideHeader"
 import Burger from "../../components/Burger"
 import Layout from "../../components/Layout"
 
@@ -44,11 +44,7 @@ const Slide = ({ id }) => {
   }, [])
 
   return (
-    <Layout
-      styles={css`
-        background: white;
-      `}
-    >
+    <Layout styles={css`background: white;`}>
       <Head>
         <title>{`Software Engineering Lab - Slide ${id} `}</title>
         <meta
@@ -63,7 +59,7 @@ const Slide = ({ id }) => {
       {/* <Burger /> */}
      
         {slides ? (
-          <Markdown value={slides[page]} isHeading={true} />
+          <Markdown value={slides[page]} ppt={true} />
         ) : (
           "Loading"
         )}

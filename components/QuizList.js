@@ -43,7 +43,7 @@ function QuizList({ setter }) {
 function QuizItem({quiz, setter}) {
   const { id, title, createdAt, createdBy, course } = quiz
   return (
-    <div>
+
       <QuizLabel key={id} >
         <LeftColor />
         <Right>
@@ -58,7 +58,7 @@ function QuizItem({quiz, setter}) {
           </div>
         </Right>
       </QuizLabel>
-    </div>
+   
   )
 }
 

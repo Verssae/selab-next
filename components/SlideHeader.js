@@ -5,7 +5,7 @@ import styled from "@emotion/styled"
 import theme from "./theme"
 import { Option } from "./Option"
 
-const SlideHeader = ({ options, children, callback, page }) => {
+export const SlideHeader = ({ options, children, callback, page }) => {
   const [isOpen, setIsOpen] = useState(false)
   const onClickHandler = (id) => {
     callback(id)
@@ -31,7 +31,7 @@ const SlideHeader = ({ options, children, callback, page }) => {
   )
 }
 
-const StyledHeader = styled(`div`)`
+export const StyledHeader = styled(`div`)`
 font-size: 20px;
   position: fixed;
   top: 0;
@@ -51,4 +51,4 @@ const contentStyle = css`
   padding: 0px;
 `
 
-export default SlideHeader
+// export default SlideHeader

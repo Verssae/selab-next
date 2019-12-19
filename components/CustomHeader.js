@@ -3,7 +3,7 @@ import { HomeLink, StyleLink } from "./Links"
 import Link from "next/link"
 import HoverMenu from "./HoverMenu"
 import Burger from "./Burger"
-const CustomHeader = ({ refs, options }) => {
+const CustomHeader = ({ refs, options, isSlide=false }) => {
   return (
     <Header refs={refs} options={options}>
       <HomeLink />
@@ -32,7 +32,7 @@ const CustomHeader = ({ refs, options }) => {
         <StyleLink>Publications</StyleLink>
       </Link>
 
-      <Burger />
+      <Burger {...isSlide}/>
     </Header>
   )
 }

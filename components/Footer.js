@@ -57,6 +57,11 @@ ${buttonStyle}
   right: 45%;
 `
 
+const PrintPage = styled.button`
+  ${buttonStyle}
+  right: 10%;
+`
+
 
 const Footer = ({ chapters, children, goPrev, goNext, chapter, max, page }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -73,9 +78,9 @@ const Footer = ({ chapters, children, goPrev, goNext, chapter, max, page }) => {
         )}
         <Next onClick={goNext}>»</Next>
      
-      {/* <Link href={`/oneSlide/${chapter}`}>
-          <button>MarkDown</button>
-        </Link> */}
+      <Link href={`/oneSlides/${chapter}`}>
+          <PrintPage>Print</PrintPage>
+        </Link>
 
       {/* <Popup onClick={() => setIsOpen(!isOpen)}>
         {isOpen

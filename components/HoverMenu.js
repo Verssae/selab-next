@@ -2,7 +2,7 @@
 import { css, jsx } from "@emotion/core"
 import styled from "@emotion/styled"
 import { useState, useEffect } from "react"
-import { StyleLink } from "./Links"
+import { linkStyle } from "./Links"
 import theme from "./theme"
 
 const HoverMenu = ({ title, children, isBurger = false }) => {
@@ -14,13 +14,21 @@ const HoverMenu = ({ title, children, isBurger = false }) => {
       onMouseOver={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <StyleLink
+      <a
         css={css`
           ${hover ? "opacity: 0.7;" : ""}
+          ${linkStyle}
+          ${
+            isBurger
+              ? ""
+              : `@media screen and (max-width: 950px) {
+    display: none;
+  }`
+          }
         `}
       >
         {title}
-      </StyleLink>
+      </a>
       {hover ? <Items isBurger={isBurger}>{children}</Items> : ""}
     </div>
   )
