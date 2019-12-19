@@ -10,6 +10,7 @@ import { GET_QUIZ_CONTENTS } from '../lib/query'
 import AnswerString from './AnswerString'
 
 function QuizContents({ id, setter }) {
+  const [state, setState] = useState(true)
   const { loading, error, data } = useQuery(
     GET_QUIZ_CONTENTS, { variables: { id: id } }
   )
@@ -23,11 +24,13 @@ function QuizContents({ id, setter }) {
       <Back setter={setter} />
       <Container>
         <h1>{quiz.title}</h1>
-        <p>{quiz.content}</p>
-        <AnswerString />
+        <p>{quiz.description}</p>
+        <AnswerString quizId={id} setter={setState}/>
         <ul>
-        {quiz.comments.map(({name, content, createdAt}) => (
-          <li>{name} -  {createdAt}<br/>{content}</li>
+        {quiz.answers.map(({id, user, content, createdAt}) => (
+          <li key={id}>
+            {user.user_id} - {createdAt}<br/>{content}
+          </li>
         ))}
         </ul>
       </Container>
