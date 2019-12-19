@@ -10,7 +10,10 @@ import  { GET_QUIZ_LIST, NEW_QUIZ_SUBSCRIPTION } from '../lib/query'
 function QuizList({ setter }) {
   const [quizList, setQuizList] = useState([])
   const { data } = useQuery(
-    GET_QUIZ_LIST
+    GET_QUIZ_LIST,
+    {
+      fetchPolicy: "no-cache"
+    }
   )
   
   useSubscription(

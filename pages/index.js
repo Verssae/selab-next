@@ -15,8 +15,12 @@ import Link from "next/link"
 import theme from "../components/theme"
 import CustomHeader from "../components/CustomHeader"
 import Layout from "../components/Layout"
-import { Container, pageStyle, Content } from "../components/pages/index"
+import { Container, pageStyle, Content, Contact, CourseView, Second } from "../components/pages/index"
 import Research from "../components/Research"
+
+import withApollo from "../lib/apollo"
+import CourseTable from "../components/CourseTable"
+import { Title } from "../components/pages/courses"
 
 const Index = () => {
   const headerStyleStart = {
@@ -62,7 +66,7 @@ const Index = () => {
   ]
   return (
     <Layout >
-    
+
       <Head>
         <title>{"Software Engineering Lab - Home"}</title>
         <meta
@@ -87,16 +91,47 @@ const Index = () => {
               </div>
             </Page>
             <Page ref={vanilaStart1} bgColor={theme.COLORS.vanila}>
-              <div>
-                {`[채울 내용 확정하기(notice shortcut, contact, ...)]`}
-                {`slide test`}
-                <Link href="/slides/0">
-                  <a>Slide 0</a>
-                </Link>
-                <Link href="/slides/1">
-                  <a>Slide 1</a>
-                </Link>
-              </div>
+              <Second>
+                <div>
+                  <h2>Notice</h2>
+                  <ul>
+                    <li>
+                      {`내용 1`}
+                    </li>
+                    <li>
+                      {`내용 2`}
+                    </li>
+                	</ul>
+                </div>
+                <div>
+                	<h2>COURSES</h2>
+                	<ul>
+                    <li>
+                      <Link href="/incourse">
+                        CSE326 Web Application Development
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/course">
+                        CSE6050 Advanced Software Engineering
+                      </Link>
+                    </li>
+                    <li>
+                      {`slide test`}
+                    </li>
+                    <li>
+                      <Link href="/slides/0">
+                        <a>Slide 0</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/slides/1">
+                        <a>Slide 1</a>
+                      </Link>
+                    </li>
+                	</ul>
+                </div>
+              </Second>
             </Page>
             <Research
               ref={vanilaEnd1}
@@ -105,17 +140,37 @@ const Index = () => {
             />
 
             <Page ref={vanilaStart2} bgColor={theme.COLORS.vanila}>
-              {`[Prof & members shortcut page]`}
+              <Contact>
+                <h1>Contact</h1>
+                <div>
+                  <img src="contact_map.png" alt="map_screenshot" />
+                  <ul>
+                    <li>
+                      <p>Engineering Building #3, Room 421</p>
+                      <p>HANYANG UNIVERSITY ERICA CAMPUS</p>
+                      <p>55, Hanyangdaehak-ro, Sangnok-gu, Ansan-si, Gyeonggi-do</p>
+                    </li>
+                    <li>경기도 안산시 상록구 한양대학로 55 제3공학관 421</li>
+                    <li>+82-31-400-4754</li>
+                  </ul>
+                </div>
+              </Contact>
             </Page>
             <Page
               ref={vanilaEnd2}
               bgColor={theme.COLORS.sapphire}
               color={"white"}
             >
-              {`[Courses page]`}
+              <CourseView>
+                <Title>COURSES</Title>
+                <div>
+                  <CourseTable degree="Undergraduate" />
+                  <CourseTable degree="Postgraduate" />
+                </div>
+              </CourseView>
             </Page>
           </div>
-          
+
         </Container>
     </Layout>
   )
@@ -135,4 +190,4 @@ const Page = forwardRef(({ bgColor, color, children }, ref) => (
 ))
 
 
-export default Index
+export default withApollo(Index)
