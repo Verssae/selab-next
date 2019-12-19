@@ -5,15 +5,20 @@ import withApollo from "../lib/apollo"
 import Layout from "../components/Layout"
 import { Title } from "../components/pages/courses"
 import CustomHeader from "../components/CustomHeader"
+import { Container } from "../components/pages/quiz"
 
 import QuizList from "../components/QuizList"
+import QuizContents from "../components/QuizContents"
 
 const Quiz = () => {
+  const [quizId, setQuizId] = useState(false)
   return (
     <Layout>
       <CustomHeader />
       <Title>QUIZ</Title>
-      <QuizList />
+      <Container>
+        {quizId ? <QuizContents id={quizId} setter={setQuizId}/> : <QuizList setter={setQuizId} />}
+      </Container>
     </Layout>
   )
 }

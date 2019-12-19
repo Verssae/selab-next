@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react'
 import theme from "./theme"
 import styled from "@emotion/styled"
 import gql from 'graphql-tag'
-import Link from "next/link"
 
 import PlusOneIcon from "./icons/PlusOneIcon"
 
@@ -49,24 +48,8 @@ const NEW_QUIZ_SUBSCRIPTION = gql`
   }
 `
 
-const QuizLabel = ({ children }) => {
-  return (
-    <div css={css`
-      padding: 10px;
-      border-bottom: 1px solid gray;
-      &:hover {
-        background-color: #D3D3D3;
-      }
-      display:flex;
-    `}>
-      {children}
-    </div>
-  )
-}
-
-function CourseQuiz() {
+function QuizList({ setter }) {
   const [quizList, setQuizList] = useState([])
-
   const { data } = useQuery(
     GET_QUIZ_LIST
   )
@@ -89,51 +72,43 @@ function CourseQuiz() {
       setQuizList(data.result)
     }
   },[data])
-
   return (
-    <Container>
+    <>
       {quizList.map((quiz) => (
-        <QuizItem quiz={quiz}/>
+        <QuizItem quiz={quiz} key={quiz.id} setter={setter}/>
       ))}
-    </Container>
+    </>
   )
 }
 
-function QuizItem(quiz) {
-  const { id, title, createdAt, createdBy, course, content, comments } = quiz.quiz
-  const [isClick, setIsClick] = useState(false)
-  console.log(comments)
+function QuizItem({quiz, setter}) {
+  const { id, title, createdAt, createdBy, course, content, comments } = quiz
   return (
     <div>
       <QuizLabel key={id} >
         <PlusOneIcon />
         <div>
           <QuizLabelTitle>
-            {/* <Link href={`/quiz/${id}`}> */}
-            <a onClick={()=>setIsClick(!isClick)}>
+            <a onClick={()=>setter(id)}>
               <TitleLink>{title}</TitleLink>
             </a>
-            {/* </Link> */}
             <Label>{course.code}</Label>
           </QuizLabelTitle>
           <QuizLabelDate>opened at {createdAt} by {createdBy}</QuizLabelDate>
         </div>
       </QuizLabel>
-      {isClick ? 
-      <>
-        <p>{content}</p>
-        <ul>
-          {comments.map(({name, content}) => (
-            <li>
-              <p>{name}  :  {content}</p>
-            </li>
-          ))}
-        </ul>
-      </>
-      :""}
     </div>
   )
 }
+
+const QuizLabel = styled.div`
+  padding: 10px;
+  border-bottom: 1px solid gray;
+  &:hover {
+    background-color: #D3D3D3;
+  }
+  display:flex;
+`
 
 const TitleLink = styled.span`
   &:hover {
@@ -142,7 +117,7 @@ const TitleLink = styled.span`
   }
 `
 
-const Label = styled.div`
+const Label = styled.span`
   margin-left: 10px;
   border-radius: 6px;
   font-size: 10pt;
@@ -172,4 +147,4 @@ const QuizLabelDate = styled.p`
   font-size: 12pt;
 `
 
-export default CourseQuiz
+export default QuizList
