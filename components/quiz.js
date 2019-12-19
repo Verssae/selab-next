@@ -2,6 +2,7 @@ import styled from "@emotion/styled"
 import { css } from "@emotion/core"
 import QuizContents from "./QuizContents"
 import QuizList from "./QuizList"
+import CreateQuiz from './CreateQuiz'
 import { useState } from "react"
 import {Fade, Slide} from "react-reveal"
 
@@ -32,6 +33,7 @@ const Button = styled.button`
 export default function() {
   const [quizId, setQuizId] = useState(false)
   const [open, setOpen] = useState(true)
+  const [create, setCreate] = useState(false)
 
   return (
     <div>
@@ -40,10 +42,10 @@ export default function() {
          
 
           <Container>
-            {quizId ? (
+            {create ? <CreateQuiz setter={setCreate}/> : quizId ? (
               <QuizContents id={quizId} setter={setQuizId} />
             ) : (
-              <QuizList setter={setQuizId} />
+              <QuizList setter={setQuizId} createSetter={setCreate}/>
             )}
           </Container>
         </div>
