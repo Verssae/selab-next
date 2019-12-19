@@ -34,14 +34,14 @@ function QuizList({ setter }) {
   return (
     <>
       {quizList.map((quiz) => (
-        <QuizItem quiz={quiz} key={quiz.id} setter={setter}/>
+          <QuizItem key={quiz.id} quiz={quiz}  setter={setter}/>
       ))}
     </>
   )
 }
 
 function QuizItem({quiz, setter}) {
-  const { id, title, createdAt, createdBy, course, content, comments } = quiz
+  const { id, title, createdAt, createdBy, course } = quiz
   return (
     <div>
       <QuizLabel key={id} >
@@ -54,7 +54,7 @@ function QuizItem({quiz, setter}) {
             </a>
             <Label>{course.code}</Label>
           </QuizLabelTitle>
-          <QuizLabelDate>opened at {createdAt} by {createdBy}</QuizLabelDate>
+          <QuizLabelDate>opened at {createdAt} by {createdBy.user_id}</QuizLabelDate>
           </div>
         </Right>
       </QuizLabel>
