@@ -97,7 +97,7 @@ const Right = styled.div`
     /* margin-bottom: 20vh; */
   }
 
-  @media screen and (max-width: 850px) {
+  @media screen and (max-width: 950px) {
     & img {
     display: none;
     /* margin-bottom: 20vh; */

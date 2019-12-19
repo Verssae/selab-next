@@ -17,7 +17,7 @@ const Layout = ({ children, styles }) => (
           @media screen and (max-width: 480px) {
             font-size: 12px;
           }
-          @media screen and (max-width: 850px) {
+          @media screen and (max-width: 950px) {
             margin: auto;
             font-size: 16pt;
           }

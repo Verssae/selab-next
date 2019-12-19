@@ -11,8 +11,6 @@ const Burger = ({isSlide=false}) => {
     <MenuWrap isSlide={isSlide}>
       <Slide
         styles={styles}
-        // customBurgerIcon={<img src="menu.svg" />}
-        // customCrossIcon={<img src="cross.svg" />}
         pageWrapId={"page-wrap"}
         outerContainerId={"outer-container"}
       >
@@ -41,7 +39,7 @@ const Burger = ({isSlide=false}) => {
 }
 const MenuWrap = styled.div`
 
-  @media screen and (min-width: 851px) {
+  @media screen and (min-width: 951px) {
     ${props => props.isSlide ? "" :"display: none;" }
   }
 `
@@ -87,7 +85,7 @@ var styles = {
   },
   bmMenu: {
     background: "#373a47",
-    // padding: "2.5em 1.5em 0",
+    padding: "2.5em 1.5em 0",
     overflow: "hidden"
   },
   bmMorphShape: {
@@ -95,8 +93,8 @@ var styles = {
     background: "red"
   },
   bmItemList: {
-    color: "#b8b7ad"
-    // padding: "0.8em"
+    color: "#b8b7ad",
+    padding: "0.8em"
   },
   bmItem: {
     display: "inline-block"

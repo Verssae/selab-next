@@ -22,7 +22,7 @@ const titleStyle = css`
   ${linkStyle}
   font-size: 30pt;
   font-weight: bold;
-  @media screen and (max-width: 850px) {
+  @media screen and (max-width: 950px) {
     margin: auto;
     font-size: 20pt;
   }
@@ -52,7 +52,7 @@ export const PostLink = (props) => (
 
 export const StyleLink = styled.a`
   ${linkStyle};
-  @media screen and (max-width: 850px) {
+  @media screen and (max-width: 950px) {
     display: none;
   }
 `
