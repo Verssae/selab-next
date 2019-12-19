@@ -19,7 +19,7 @@ function AnswerString({ quizId }) {
       e.preventDefault();
       addAnswer({ variables: {
         quizId: quizId,
-        userId: "ck4cwzpm201bm0790454i1uz0",
+        userId: "selab",
         content: ref.current.value
       }})
       ref.current.value = ''
