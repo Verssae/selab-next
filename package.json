@@ -36,6 +36,7 @@
     "react-markdown": "^4.2.2",
     "react-reveal": "^1.2.2",
     "react-syntax-highlighter": "^11.0.2",
+    "react-textarea-autosize": "^7.1.2",
     "subscriptions-transport-ws": "^0.9.16"
   }
 }
