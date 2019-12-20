@@ -48,9 +48,14 @@ function QuizList({ setter, createSetter }) {
         <Title>QUIZ</Title>
         {login && <CreateButtonIcon onClick={() => createSetter(true)}/>}
       </div>
-      {quizList.map((quiz) => (
-          <QuizItem key={quiz.id} quiz={quiz}  setter={setter}/>
-      ))}
+      <div css={css`
+        overflow:scroll;
+        max-height: 550px;
+      `}>
+        {quizList.map((quiz) => (
+            <QuizItem key={quiz.id} quiz={quiz}  setter={setter}/>
+        ))}
+      </div>
     </>
   )
 }
