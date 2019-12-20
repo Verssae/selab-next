@@ -1,45 +1,41 @@
 /** @jsx jsx */
 import { jsx, css, Global } from "@emotion/core"
-import { useQuery, useSubscription } from '@apollo/react-hooks'
-import { useState, useEffect } from 'react'
+import { useQuery, useSubscription } from "@apollo/react-hooks"
+import { useState, useEffect, useRef } from "react"
 import theme from "./theme"
 import styled from "@emotion/styled"
 
-import BackButtonIcon from './icons/BackButtonIcon'
-import { GET_QUIZ_CONTENTS, NEW_ANSWER_SUBSCRIPTION } from '../lib/query'
-import AnswerString from './AnswerString'
-import AnswerSelect from './AnswerSelect'
+import BackButtonIcon from "./icons/BackButtonIcon"
+import { GET_QUIZ_CONTENTS, NEW_ANSWER_SUBSCRIPTION } from "../lib/query"
+import AnswerString from "./AnswerString"
+import AnswerSelect from "./AnswerSelect"
 
 function QuizContents({ id, setter }) {
   const [answerList, setAnswerList] = useState([])
 
-  const { loading, error, data } = useQuery(
-    GET_QUIZ_CONTENTS, {
-      variables: { id: id },
-      fetchPolicy: "no-cache"
-    }
-  )
+  const { loading, error, data } = useQuery(GET_QUIZ_CONTENTS, {
+    variables: { id: id },
+    fetchPolicy: "no-cache"
+  })
 
-  useSubscription(
-    NEW_ANSWER_SUBSCRIPTION,
-    {
-      onSubscriptionData: ({subscriptionData}) => {
-        if (data) {
-          setAnswerList((answerList) => [
-            subscriptionData.data.newAnswer, ...answerList
-          ])
-        }
-      },
-      variables: {
-        quizId: id
+  useSubscription(NEW_ANSWER_SUBSCRIPTION, {
+    onSubscriptionData: ({ subscriptionData }) => {
+      if (data) {
+        setAnswerList((answerList) => [
+          subscriptionData.data.newAnswer,
+          ...answerList
+        ])
       }
+    },
+    variables: {
+      quizId: id
     }
-  )
-  useEffect(()=>{
+  })
+  useEffect(() => {
     if (data) {
       setAnswerList(data.quiz.answers)
     }
-  },[data])
+  }, [data])
 
   if (loading) return <p>Loading...</p>
   const { quiz } = data
@@ -50,18 +46,20 @@ function QuizContents({ id, setter }) {
       <Container>
         <h1>{quiz.title}</h1>
         <p>{quiz.description}</p>
-        {quiz.content.type == "CHOICE" ?<AnswerSelect quizId={id} content={quiz.content} /> :
-        <>
+        {quiz.content.type == "CHOICE" ? (
+          <AnswerSelect quizId={id} content={quiz.content} />
+        ) : (
           <AnswerString quizId={id} />
-          <ul>
-          {answerList.map(({id, user, content, createdAt}) => (
+        )}
+        <ul>
+          {answerList.map(({ id, user, content, createdAt }) => (
             <li key={id}>
-              {user.user_id} - {createdAt}<br/>{content}
+              {user} - {createdAt}
+              <br />
+              {content}
             </li>
           ))}
-          </ul>
-        </>
-        }
+        </ul>
       </Container>
     </Layout>
   )
@@ -74,24 +72,22 @@ const TopState = styled.div`
 `
 
 const Layout = styled.div`
-/* padding: 5px; */
-font-size: 12pt;
-
-
-
+  /* padding: 5px; */
+  font-size: 12pt;
 `
 
 const Container = styled.div`
-  margin:20px;
-
+  margin: 20px;
 `
 
 const Back = ({ setter }) => (
-  <div css={css`
-    margin: 10px;
-    border-bottom: 1px solid #D0D3D4;
-  `}>
-    <BackButtonIcon onClick={()=>setter(false)}/>
+  <div
+    css={css`
+      margin: 10px;
+      border-bottom: 1px solid #d0d3d4;
+    `}
+  >
+    <BackButtonIcon onClick={() => setter(false)} />
   </div>
 )
 

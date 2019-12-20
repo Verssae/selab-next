@@ -12,18 +12,20 @@ import { ADD_ANSWER } from '../lib/query'
 function AnswerString({ quizId }) {
   const [addAnswer, { data }] = useMutation(ADD_ANSWER)
   const ref = useRef()
+  const ref_name = useRef()
 
   return (
     <form onSubmit={e => {
       e.preventDefault();
       addAnswer({ variables: {
         quizId: quizId,
-        userId: "selab",
+        userId: ref_name.current.value,
         content: ref.current.value
       }})
       ref.current.value = ''
     }}>
       <Textarea inputRef={ref} autoFocus placeholder="Input your answer!" rows="2" />
+      <input type="text" placeholder="name" ref={ref_name}/>
       <Submit/>
     </form>
   )

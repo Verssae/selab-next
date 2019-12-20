@@ -40,7 +40,7 @@ export default function() {
     <div>
       <Fade duration={500} bottom when={open}>
         <div style={styles.wrapper}>
-         
+
 
           <Container>
             {create ? <CreateQuiz setter={setCreate}/> : quizId ? (
