@@ -65,7 +65,7 @@ function QuizItem({quiz, setter}) {
             </a>
             <Label>{course.code}</Label>
           </QuizLabelTitle>
-          <QuizLabelDate>opened at {createdAt} by {createdBy.user_id}</QuizLabelDate>
+          <QuizLabelDate>opened at {createdAt} by {createdBy}</QuizLabelDate>
           </div>
         </Right>
       </QuizLabel>

@@ -35,6 +35,7 @@
     "react-dropdown": "^1.6.4",
     "react-markdown": "^4.2.2",
     "react-reveal": "^1.2.2",
+    "react-select": "^3.0.8",
     "react-syntax-highlighter": "^11.0.2",
     "react-textarea-autosize": "^7.1.2",
     "subscriptions-transport-ws": "^0.9.16"
