@@ -44,6 +44,8 @@ function AnswerButton({ quizId, content }) {
               content: answer
             }
           })
+          setAnswer(false)
+          ref_name.current.value = ""
         }}
       >
         Submit
