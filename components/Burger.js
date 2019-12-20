@@ -28,7 +28,6 @@ const Burger = ({isSlide=false}) => {
           </ul>
         </HoverMenu>
 
-        <Anchor url={"/quiz"}>Quiz</Anchor>
         <Anchor url={"/notices"}>Notices</Anchor>
         <Anchor url={"/gallery"}>Gallery</Anchor>
         <Anchor url={"/members"}>Members</Anchor>

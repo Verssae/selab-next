@@ -54,7 +54,7 @@ function QuizContents({ id, setter }) {
         <ul>
           {answerList.map(({ id, user, content, createdAt }) => (
             <li key={id}>
-              {user} - {createdAt}
+              {user} - {createdAt.split('T')[0]} {createdAt.split('T')[1].slice(0,5)}
               <br />
               {content}
             </li>

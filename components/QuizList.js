@@ -69,7 +69,7 @@ function QuizItem({quiz, setter}) {
             </a>
             <Label>{course.code}</Label>
           </QuizLabelTitle>
-          <QuizLabelDate>opened at {createdAt.split('T')[0]} {createdAt.split('T')[1].slice(0,5)} by {createdBy.user_id}</QuizLabelDate>
+          <QuizLabelDate>opened at {createdAt.split('T')[0]} {createdAt.split('T')[1].slice(0,5)} by {createdBy}</QuizLabelDate>
           </div>
         </Right>
       </QuizLabel>
