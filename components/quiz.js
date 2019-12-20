@@ -5,6 +5,8 @@ import QuizList from "./QuizList"
 import CreateQuiz from './CreateQuiz'
 import { useState } from "react"
 import {Fade, Slide} from "react-reveal"
+import QuizButton from "../public/icons/quiz.svg"
+import CancelButton from "../public/icons/cancel.svg"
 
 const Container = styled.div`
   /* border: 2px solid black; */
@@ -17,22 +19,21 @@ const Container = styled.div`
 
 
 const Button = styled.button`
+   z-index: 100;
   width: 60px;
   height: 60px;
   position: fixed;
-  bottom: 20px;
+  bottom: 80px;
   right: 30px;
   border: none;
   background: white;
   border-radius: 50%;
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.4);
-  & img {
-    width: 100%;
-  }
+  
 `
 export default function() {
   const [quizId, setQuizId] = useState(false)
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const [create, setCreate] = useState(false)
 
   return (
@@ -51,7 +52,7 @@ export default function() {
         </div>
       </Fade>
       <Button onClick={() => setOpen(!open)}>
-            {open ? <img src="icons/cancel.svg" /> : <img src="icons/quiz.svg" />  }
+            {open ?  <CancelButton />  : <QuizButton />}
       </Button>
     </div>
   )
@@ -63,7 +64,7 @@ const styles = {
     height: "600px",
     background: "white",
     position: "fixed",
-    bottom: "100px",
+    bottom: "160px",
     right: "30px",
     overflow: "hidden",
     border: "none",

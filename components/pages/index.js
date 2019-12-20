@@ -40,7 +40,7 @@ export const CourseView = styled.div`
   }
 `
 export const Contact = styled.div`
-  font-size: 20px;
+  
   @media screen and (max-width: 950px){
     font-size: 15px;
     margin: 3%;
@@ -52,12 +52,14 @@ export const Contact = styled.div`
   }
   & h1{
     text-align: center;
+    color: ${theme.COLORS.sapphire};
   }
   & div{
     display: flex;
   }
   & ul{
     margin-left: 5%;
+    font-size: 20px;
   }
   & ul li p:nth-child(2){
     font-weight: bold;

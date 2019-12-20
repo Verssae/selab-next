@@ -59,7 +59,7 @@ ${buttonStyle}
 
 const PrintPage = styled.button`
   ${buttonStyle}
-  right: 10%;
+  right: 20px;
 `
 
 

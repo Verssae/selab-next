@@ -4,16 +4,6 @@
 
 [demo]( https://selab-next.tiger2714.now.sh/ )
 
-## About quiz
-* 바뀐 모든 파일들은 커밋 메시지 "quiz"가 있음
-* nav에 있는 모든 항목들에 대해 드래그하여 옆으로 빼면 작은 창을 띄우는 모드로, nav위치로 다시 넣으면 링크로 연결되는 방식으로 만들고 싶었으나, 아직 미완성임
-* react에서 작동하는 [드래그앤 드랍 모듈](https://github.com/atlassian/react-beautiful-dnd)을 찾아 적용시키고 싶었으나, babel을 사용하는 등 연결시킬 것이 많아 일단 보류함
-<img src="/images/Screenshot from 2019-12-09 05-00-10.png" width="450px" height="300px" alt = "main"></img>
-<img src="/images/Screenshot from 2019-12-09 05-00-13.png" width="450px" height="300px" alt = "main"></img>
-<img src="/images/Screenshot from 2019-12-09 05-00-32.png" width="450px" height="300px" alt = "main"></img>
-<img src="/images/Screenshot from 2019-12-09 05-00-42.png" width="450px" height="300px" alt = "slideclosed"></img>
-<img src="/images/Screenshot from 2019-12-09 05-00-46.png" width="450px" height="300px" alt = "slideopen"></img>
-
 ## Members
 
 | Name   | Role (not confirmed) |

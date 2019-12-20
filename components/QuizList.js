@@ -10,6 +10,7 @@ import CreateButtonIcon from './icons/CreateButtonIcon'
 
 function QuizList({ setter, createSetter }) {
   const [quizList, setQuizList] = useState([])
+  const [login, setLogin] = useState(false)
   const { data } = useQuery(
     GET_QUIZ_LIST,
     {
@@ -34,6 +35,9 @@ function QuizList({ setter, createSetter }) {
     if (data) {
       setQuizList(data.result)
     }
+    if(sessionStorage.getItem("loginUser") ) {
+      setLogin(true)
+    }
   },[data])
   return (
     <>
@@ -42,7 +46,7 @@ function QuizList({ setter, createSetter }) {
         justify-content: center;
       `}>
         <Title>QUIZ</Title>
-        <CreateButtonIcon onClick={() => createSetter(true)}/>
+        {login && <CreateButtonIcon onClick={() => createSetter(true)}/>}
       </div>
       {quizList.map((quiz) => (
           <QuizItem key={quiz.id} quiz={quiz}  setter={setter}/>
@@ -65,7 +69,7 @@ function QuizItem({quiz, setter}) {
             </a>
             <Label>{course.code}</Label>
           </QuizLabelTitle>
-          <QuizLabelDate>opened at {createdAt} by {createdBy}</QuizLabelDate>
+          <QuizLabelDate>opened at {createdAt.split('T')[0]} {createdAt.split('T')[1].slice(0,5)} by {createdBy.user_id}</QuizLabelDate>
           </div>
         </Right>
       </QuizLabel>
