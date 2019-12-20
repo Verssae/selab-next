@@ -12,7 +12,7 @@ import { SlideHeader } from "../../components/SlideHeader"
 import Burger from "../../components/Burger"
 import Layout from "../../components/Layout"
 import withApollo from "../../lib/apollo"
-import Quiz from "../../components/Quiz"
+import Quiz from "../../components/quiz"
 
 const Slide = () => {
   const router = useRouter()
