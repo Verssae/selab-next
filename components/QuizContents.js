@@ -51,19 +51,50 @@ function QuizContents({ id, setter }) {
         ) : (
           <AnswerString quizId={id} />
         )}
-        <ul>
-          {answerList.map(({ id, user, content, createdAt }) => (
-            <li key={id}>
-              {user} - {createdAt.split('T')[0]} {createdAt.split('T')[1].slice(0,5)}
-              <br />
-              {content}
-            </li>
-          ))}
-        </ul>
+        <div css={css`
+          padding: 0px 3px;
+          overflow: scroll;
+          max-height: 300px;
+        `}>
+        {answerList.map((answer) => (
+          <Answer answer={answer}/>
+        ))}
+        </div>
       </Container>
     </Layout>
   )
 }
+
+const Answer = ({answer}) => {
+  const { id, user, content, createdAt } = answer
+  return (
+    <AnswerContainer >
+      <p>{user} <span>({createdAt.split('T')[0]} {createdAt.split('T')[1].slice(0,5)})</span></p>
+      <div css={css`
+        height: 1px;
+        width: 100%;
+        background-color: black;
+        margin: 3px 0px;
+      `}></div>
+      <div>
+        {content}
+      </div>
+    </AnswerContainer>
+  )
+}
+
+const AnswerContainer = styled.div`
+  box-shadow: 0px 0px 3px 0.5px #D0D3D4;
+  border-radius: 7px;
+  margin: 10px 0px;
+  padding:5px;
+  & p {
+    font-size: 9pt;
+    color: #111d5e;
+    margin:0;
+    padding:0;
+  }
+`
 
 const TopState = styled.div`
   width: 100%;
